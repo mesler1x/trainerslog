@@ -5,9 +5,9 @@ import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDate;
 
-public record Ticket(@NotNull Student student,
+public record Ticket(@NotNull(message = "Абонемент не может быть создан без студента") Student student,
                      LocalDate startDate,
                      LocalDate endDate,
                      Boolean isExpired,
-                     @Positive @NotNull Integer paidAmount) {
+                     @Positive(message = "Сумма к оплате не может быть отрицательной") @NotNull Integer paidAmount) {
 }
