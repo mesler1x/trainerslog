@@ -15,7 +15,14 @@ import java.util.Map;
 public class StudentEntity {
     Long id;
     TicketEntity ticket;
-    String name;
+    String fullName;
+    String sex;
+    LocalDate birthDate;
+    int age;
+    int q;
+    String phoneNumber;
+    String parentPhoneNumber;
+    String parentFullName;
     CoachEntity coach;
     Map<LocalDate, Boolean> visitedStatistics;
 }

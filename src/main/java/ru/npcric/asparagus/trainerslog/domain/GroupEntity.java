@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -17,5 +17,6 @@ public class GroupEntity {
     Long id;
     String groupName;
     List<StudentEntity> students;
-    List<LocalDate> dates;
+    List<LocalDateTime> dates;
+    String address;
 }
