@@ -1,5 +1,6 @@
 package ru.npcric.asparagus.trainerslog.adapter.web.dto;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
@@ -9,5 +10,5 @@ public record Ticket(@NotNull(message = "Абонемент не может бы
                      LocalDate startDate,
                      LocalDate endDate,
                      Boolean isExpired,
-                     @Positive(message = "Сумма к оплате не может быть отрицательной") @NotNull Integer paidAmount) {
+                     @Min(value = 0, message = "Сумма к оплате не может быть отрицательной") @NotNull Integer paidAmount) {
 }

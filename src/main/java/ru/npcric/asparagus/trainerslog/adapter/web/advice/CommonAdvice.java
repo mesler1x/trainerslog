@@ -1,4 +1,4 @@
-package ru.npcric.asparagus.trainerslog.adapter.web.errors;
+package ru.npcric.asparagus.trainerslog.adapter.web.advice;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import ru.npcric.asparagus.trainerslog.adapter.web.errors.ErrorResponse;
 
 import java.util.List;
 
