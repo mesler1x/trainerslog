@@ -7,7 +7,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.validation.GroupNameConstrain
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record Group(@NotBlank(message = "Имя группы не может быть пустым")
+public record Group(@NotNull @NotBlank(message = "Имя группы не может быть пустым")
                     @GroupNameConstraint
                     String groupName,
                     @NotNull(message = "Группа не может содержать 0 студентов") List<Student> students,
