@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.RegistrationRequest;
-import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.RegistrationService;
 
 @RestController
@@ -18,7 +17,7 @@ import ru.npcric.asparagus.trainerslog.service.RegistrationService;
 public class RegistrationController {
     RegistrationService registrationService;
     @PostMapping("/register")
-    public UserEntity registerEntity(@RequestBody RegistrationRequest registrationRequest) {
-        return registrationService.register(registrationRequest);
+    public void registerEntity(@RequestBody RegistrationRequest registrationRequest) {
+        registrationService.register(registrationRequest);
     }
 }
