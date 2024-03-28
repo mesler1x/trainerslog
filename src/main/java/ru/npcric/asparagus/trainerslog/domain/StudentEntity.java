@@ -24,7 +24,7 @@ public class StudentEntity {
     TicketEntity ticket;
     String fullName;
     String sex;
-    String birthDate;
+    LocalDate birthDate;
     @ManyToOne
     @JsonIgnore
     GroupEntity group;
@@ -34,5 +34,5 @@ public class StudentEntity {
     String parentPhoneNumber;
     String parentFullName;
     @ElementCollection
-    Map<String, Boolean> visitedStatistics;
+    Map<LocalDate, Boolean> visitedStatistics;
 }

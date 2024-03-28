@@ -34,7 +34,7 @@ public class UserEntity implements UserDetails {
         user.username = context.username();
         user.password = context.password;
         List<UserRole> defaultRole = new ArrayList<>();
-        defaultRole.add(UserRole.DEFAULT);
+        defaultRole.add(UserRole.STUDENT);
         user.authorities = defaultRole;
         user.isAccountNonExpired = true;
         user.isCredentialsNonExpired = true;

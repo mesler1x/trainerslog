@@ -11,6 +11,6 @@ public record Group(@NotNull @NotBlank(message = "Имя группы не мо�
                     @GroupNameConstraint
                     String groupName,
                     @NotNull(message = "Группа не может содержать 0 студентов") List<Student> students,
-                    List<String> dates,
+                    List<LocalDateTime> dates,
                     String address) { // даты могут быть Null пока их не заполнили
 }
