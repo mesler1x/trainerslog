@@ -38,5 +38,4 @@ public record Student (@NotNull(message = "Студент не может быт
                        String parentFullName,
                        Coach coach
                        ) {
-
 }
