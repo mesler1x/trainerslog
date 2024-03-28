@@ -1,8 +1,7 @@
-package ru.npcric.asparagus.trainerslog.adapter.web.dto;
+package ru.npcric.asparagus.trainerslog.adapter.web.dto.request;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDate;
 

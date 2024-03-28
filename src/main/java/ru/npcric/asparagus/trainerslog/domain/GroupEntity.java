@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -31,6 +30,6 @@ public class GroupEntity {
     List<StudentEntity> students;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    List<LocalDateTime> dates;
+    List<String> dates;
     String address;
 }

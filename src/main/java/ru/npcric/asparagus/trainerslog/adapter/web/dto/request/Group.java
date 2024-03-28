@@ -1,4 +1,4 @@
-package ru.npcric.asparagus.trainerslog.adapter.web.dto;
+package ru.npcric.asparagus.trainerslog.adapter.web.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

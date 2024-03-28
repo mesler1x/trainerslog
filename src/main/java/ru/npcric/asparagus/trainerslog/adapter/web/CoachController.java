@@ -7,7 +7,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.Coach;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.CoachResponse;
 import ru.npcric.asparagus.trainerslog.service.CoachService;
 

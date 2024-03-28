@@ -1,10 +1,9 @@
-package ru.npcric.asparagus.trainerslog.adapter.web.dto;
+package ru.npcric.asparagus.trainerslog.adapter.web.dto.request;
 
 import jakarta.validation.constraints.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.validation.PeopleNameConstraint;
 
 import java.time.LocalDate;
-import java.util.Map;
 
 public record Student (@NotNull(message = "Студент не может быть без абонемента") Ticket ticket,
                        @NotBlank(message = "ФИО студента не может быть пустым")

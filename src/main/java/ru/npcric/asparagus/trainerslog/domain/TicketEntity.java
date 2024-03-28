@@ -1,9 +1,6 @@
 package ru.npcric.asparagus.trainerslog.domain;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,14 +12,16 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table
 public class TicketEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @OneToOne
+    @OneToOne(mappedBy = "ticket")
     StudentEntity student;
-    LocalDate startDate;
-    LocalDate endDate;
+    String startDate;
+    String endDate;
     Boolean isExpired;
     Integer paidAmount;
 }

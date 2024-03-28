@@ -5,14 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.CoachRepository;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.Coach;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.Group;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.Student;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.CoachResponse;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.GroupResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.GroupsResponse;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
-import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +25,11 @@ public class CoachService {
         List<CoachResponse> coachesResponse = new ArrayList<>();
         for(CoachEntity coachEntity : coachEntities) {
             List<GroupEntity> groupEntities = coachEntity.getGroups();
-            List<GroupResponse> groupsResponse = new ArrayList<>();
+            List<GroupsResponse> groupsResponse = new ArrayList<>();
             for(GroupEntity group : groupEntities) {
-                GroupResponse groupResponse = new GroupResponse(group.getGroupName(), group.getDates());
-                groupsResponse.add(groupResponse);
+                GroupsResponse allGroupsResponseWithCoach =
+                        new GroupsResponse(group.getGroupName(), group.getDates());
+                groupsResponse.add(allGroupsResponseWithCoach);
             }
 
             CoachResponse coach = new CoachResponse(coachEntity.getName(), groupsResponse);
@@ -40,4 +37,9 @@ public class CoachService {
         }
         return coachesResponse;
     }
+
+    public getCoachById(int id) {
+
+    }
+
 }

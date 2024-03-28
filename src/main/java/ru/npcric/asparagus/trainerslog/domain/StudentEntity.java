@@ -14,6 +14,8 @@ import java.util.Map;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table
 public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +25,14 @@ public class StudentEntity {
     String fullName;
     String sex;
     LocalDate birthDate;
+    @ManyToOne
+    @JsonIgnore
+    GroupEntity group;
     int age;
     int q;
     String phoneNumber;
     String parentPhoneNumber;
     String parentFullName;
-    @JsonIgnore
-    @ManyToOne
-    CoachEntity coach;
-    Map<LocalDate, Boolean> visitedStatistics;
+    @ElementCollection
+    Map<String, Boolean> visitedStatistics;
 }
