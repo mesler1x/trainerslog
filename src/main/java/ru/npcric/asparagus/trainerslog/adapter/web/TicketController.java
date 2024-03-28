@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequestMapping("/trainerslog/api/v1")
+@RequestMapping("/trainerslog/api/v1/ticket")
 public class TicketController {
     //todo
 }
