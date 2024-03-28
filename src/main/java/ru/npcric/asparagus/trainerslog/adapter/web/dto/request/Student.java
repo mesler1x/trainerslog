@@ -15,7 +15,7 @@ public record Student (@NotNull(message = "Студент не может быт
                        @Size(max = 1, message = "Пол студента должен быть в формате: м или ж")
                        String sex,
                        @NotNull(message = "Дата рождения студента не может быть пустой")
-                       LocalDate birthDate,
+                       String birthDate,
                        @Positive(message = "Количество лет не может быть отрицательным")
                        @NotNull(message = "Количество лет не может быть пустым")
                        @Min(value = 4, message = "Возраст сутдента не может быть меньше 4-х лет")
@@ -34,7 +34,6 @@ public record Student (@NotNull(message = "Студент не может быт
                        @NotBlank(message = "ФИО родителя не может быть пустым")
                        @Size(min = 5, max = 40, message = "ФИО родителя не может быть меньше 5 или 40 символов")
                        @PeopleNameConstraint
-                       String parentFullName,
-                       Coach coach
+                       String parentFullName
                        ) {
 }

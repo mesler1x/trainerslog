@@ -24,7 +24,7 @@ public class StudentEntity {
     TicketEntity ticket;
     String fullName;
     String sex;
-    LocalDate birthDate;
+    String birthDate;
     @ManyToOne
     @JsonIgnore
     GroupEntity group;
