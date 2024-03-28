@@ -1,5 +1,7 @@
 package ru.npcric.asparagus.trainerslog.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,17 +14,25 @@ import java.util.Map;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table
 public class StudentEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @OneToOne
     TicketEntity ticket;
     String fullName;
     String sex;
-    LocalDate birthDate;
+    String birthDate;
+    @ManyToOne
+    @JsonIgnore
+    GroupEntity group;
     int age;
     int q;
     String phoneNumber;
     String parentPhoneNumber;
     String parentFullName;
-    CoachEntity coach;
-    Map<LocalDate, Boolean> visitedStatistics;
+    @ElementCollection
+    Map<String, Boolean> visitedStatistics;
 }
