@@ -5,8 +5,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.Coach;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.CoachResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.CoachDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.CoachFullResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.CoachSmallResponse;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.service.CoachService;
 
@@ -20,12 +21,12 @@ import java.util.List;
 public class CoachController {
     CoachService coachService;
     @GetMapping("/getAll")
-    public List<CoachResponse> getAllCoaches() {
+    public List<CoachSmallResponse> getAllCoaches() {
         return coachService.findAll();
     }
 
     @PostMapping("/create")
-    public CoachEntity createCoach(@RequestBody Coach coach) {
-        return coachService.create(coach);
+    public CoachFullResponse createCoach(@RequestBody CoachDTO coachDTO) {
+        return coachService.createCoach(coachDTO);
     }
 }

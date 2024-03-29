@@ -2,7 +2,9 @@ package ru.npcric.asparagus.trainerslog.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.CoachDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,4 +18,5 @@ public class CoachEntity {
     String name;
     @OneToMany(mappedBy = "coach")
     List<GroupEntity> groups;
+
 }
