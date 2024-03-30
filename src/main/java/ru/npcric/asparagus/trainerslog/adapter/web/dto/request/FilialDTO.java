@@ -1,4 +1,10 @@
 package ru.npcric.asparagus.trainerslog.adapter.web.dto.request;
 
-public record FilialDTO(String name, String address) {
+import jakarta.validation.constraints.NotBlank;
+
+import java.util.List;
+
+public record FilialDTO(@NotBlank String name,
+                        @NotBlank String address,
+                        List<CoachDTO> coachDTOList) {
 }
