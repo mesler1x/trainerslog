@@ -10,6 +10,4 @@ import java.util.List;
 public abstract class StudentMapper {
     public abstract StudentDTO entityToResponse(StudentEntity studentEntity);
     public abstract StudentEntity responseToEntity(StudentDTO studentDTO);
-    public abstract List<StudentDTO> entityListToREsponseList(List<StudentEntity> studentEntityList);
-    public abstract List<StudentEntity> reponseListToEntityList(List<StudentDTO> studentDTOList);
 }

@@ -10,6 +10,4 @@ import java.util.List;
 public abstract class TrainingMapper {
     public abstract TrainingDTO entityToResponse(TrainingEntity trainingEntity);
     public abstract TrainingEntity responseToEntity(TrainingDTO trainingDTO);
-    public abstract List<TrainingDTO> entityListToResponseList(List<TrainingEntity> trainingEntityList);
-    public abstract List<TrainingEntity> responseListToEntityList(List<TrainingDTO> trainingDTOList);
 }

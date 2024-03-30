@@ -11,6 +11,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.CoachSmallRespon
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.GroupsResponse;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
+import ru.npcric.asparagus.trainerslog.service.mapper.CoachMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,31 +21,18 @@ import java.util.List;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class CoachService {
     CoachRepository coachRepository;
+    CoachMapper coachMapper;
 
     //Метод выводит всех тренеров, а именно, имя тренеров и для каждого тренера его группы
     public List<CoachSmallResponse> findAll() {
         List<CoachEntity> coachEntities = coachRepository.findAll();
-        List<CoachSmallResponse> coachesResponse = new ArrayList<>();
-        for(CoachEntity coachEntity : coachEntities) {
-            List<GroupEntity> groupEntities = coachEntity.getGroups();
-            List<GroupsResponse> groupsResponse = new ArrayList<>();
-            for(GroupEntity group : groupEntities) {
-                GroupsResponse allGroupsResponseWithCoach =
-                        new GroupsResponse(group.getGroupName(), group.getDates());
-                groupsResponse.add(allGroupsResponseWithCoach);
-            }
-
-            CoachSmallResponse coach = new CoachSmallResponse(coachEntity.getName(), groupsResponse);
-            coachesResponse.add(coach);
-        }
-        return coachesResponse;
+        return coachEntities.stream().
+        map(coachMapper::entityToSmallResponse).toList();
     }
 
     public CoachFullResponse createCoach(CoachDTO coachDTO) {
-        CoachEntity coachEntity = new CoachEntity();
-        CoachFullResponse coachFullResponse = new CoachFullResponse(null,null,null);
-        //todo
-
-        return coachFullResponse;
+        CoachEntity coachEntity = coachMapper.smallResponseToEntity(coachDTO);
+        coachRepository.save(coachEntity);
+        return coachMapper.entityToFullResponse(coachEntity);
     }
 }

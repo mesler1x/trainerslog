@@ -10,6 +10,4 @@ import java.util.List;
 public abstract class TicketMapper {
     public abstract TicketDTO entityToResponse(TicketEntity ticketEntity);
     public abstract TicketEntity responseToEntity(TicketDTO ticketDTO);
-    public abstract List<TicketDTO> entityListToReponseList(List<TicketEntity> ticketEntities);
-    public abstract List<TicketEntity> responseListToEnityList(List<TicketDTO> ticketDTOList);
 }
