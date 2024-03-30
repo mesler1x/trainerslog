@@ -16,6 +16,8 @@ public class CoachEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
+    @ManyToOne
+    FilialEntity filial;
     @OneToMany(mappedBy = "coach")
     List<GroupEntity> groups;
 

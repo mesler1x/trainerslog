@@ -19,6 +19,8 @@ public class FilialEntity {
     Long id;
     String filialName;
     String address;
+    @OneToMany(mappedBy = "filial")
+    List<CoachEntity> coachesInFilial;
     @ManyToMany
     @JoinTable(name = "TrainingsAndFilials",
     joinColumns = @JoinColumn(name = "filial_id", referencedColumnName = "id"),
