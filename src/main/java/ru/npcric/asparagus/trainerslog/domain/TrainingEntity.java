@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -21,9 +22,14 @@ public class TrainingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    LocalDate date;
+    LocalDateTime date;
     @ManyToMany
-    @JoinTable(name = "attendance",
+    @JoinTable(name = "TrainingsAndFilials",
+    joinColumns = @JoinColumn(name = "training_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "filial_id", referencedColumnName = "id"))
+    List<FilialEntity> filial;
+    @ManyToMany
+    @JoinTable(name = "attendance",// посещяемость
             joinColumns = @JoinColumn(name = "training_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"))
     List<StudentEntity> studentEntityList;
