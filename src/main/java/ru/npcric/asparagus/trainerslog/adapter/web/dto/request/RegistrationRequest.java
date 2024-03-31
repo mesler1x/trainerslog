@@ -4,6 +4,6 @@ import ru.npcric.asparagus.trainerslog.domain.user.UserRole;
 
 import java.util.List;
 
-public record RegistrationRequest(String login,
+public record RegistrationRequest(String username,
                                   String password) {
 }

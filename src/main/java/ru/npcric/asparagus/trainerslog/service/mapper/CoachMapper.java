@@ -1,10 +1,9 @@
 package ru.npcric.asparagus.trainerslog.service.mapper;
 
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.CoachDTO;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.CoachFullResponse;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.CoachSmallResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.CoachFullResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.CoachSmallResponse;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 
 @Mapper(componentModel = "spring", uses = {GroupMapper.class, FilialMapper.class})

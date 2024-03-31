@@ -16,8 +16,8 @@ import ru.npcric.asparagus.trainerslog.service.RegistrationService;
 @RequestMapping("/trainerslog/api/v1/public")
 public class RegistrationController {
     RegistrationService registrationService;
-    @PostMapping("/register")
-    public void registerEntity(@RequestBody RegistrationRequest registrationRequest) {
-        registrationService.register(registrationRequest);
+    @PostMapping("/registration")
+    public void registration(@RequestBody RegistrationRequest registrationRequest) {
+        registrationService.registerUser(registrationRequest);
     }
 }

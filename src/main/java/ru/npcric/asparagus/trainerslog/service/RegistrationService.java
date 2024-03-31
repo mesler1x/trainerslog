@@ -19,11 +19,12 @@ public class RegistrationService {
     PasswordEncoder passwordEncoder;
     UserRepository userRepository;
 
-    public void register(RegistrationRequest registrationRequest) {
+    public void registerUser(RegistrationRequest registrationRequest) {
+        String encodePass = passwordEncoder.encode(registrationRequest.password());
+
         UserEntity.Context userEntity = new UserEntity.Context(
-            registrationRequest.login(),
-                passwordEncoder.encode(registrationRequest.password())
-        );
+            registrationRequest.username(),
+                encodePass);
 
         UserEntity user = UserEntity.from(userEntity);
         userRepository.save(user);

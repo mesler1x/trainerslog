@@ -5,6 +5,5 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 
 public record FilialDTO(@NotBlank String name,
-                        @NotBlank String address,
-                        List<CoachDTO> coachDTOList) {
+                        @NotBlank String address) {
 }

@@ -32,5 +32,4 @@ public class GroupEntity {
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     List<LocalDate> dates;
-    String address;
 }
