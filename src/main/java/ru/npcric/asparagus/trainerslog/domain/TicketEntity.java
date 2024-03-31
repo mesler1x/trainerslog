@@ -20,8 +20,8 @@ public class TicketEntity {
     Long id;
     @OneToOne(mappedBy = "ticket")
     StudentEntity student;
-    String startDate;
-    String endDate;
+    LocalDate startDate;
+    LocalDate endDate;
     Boolean isExpired;
     Integer paidAmount;
 }

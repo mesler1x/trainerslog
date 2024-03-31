@@ -4,18 +4,16 @@ import jakarta.annotation.security.RolesAllowed;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.npcric.asparagus.trainerslog.service.StudentService;
+import ru.npcric.asparagus.trainerslog.service.FilialService;
 
-@Validated
 @RestController
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequestMapping("/trainerslog/api/v1/student")
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@RequestMapping("/trainerslog/api/v1/filial")
 @RolesAllowed("DEFAULT")
-public class StudentController {
-    StudentService studentService;
-    //todo
+public class FilialController {
+    FilialService filialService;
+
 }

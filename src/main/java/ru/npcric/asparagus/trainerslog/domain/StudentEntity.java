@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -15,7 +16,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name = "student")
 public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,15 +25,17 @@ public class StudentEntity {
     TicketEntity ticket;
     String fullName;
     String sex;
-    String birthDate;
+    LocalDate birthDate;
     @ManyToOne
-    @JsonIgnore
     GroupEntity group;
     int age;
     int q;
     String phoneNumber;
     String parentPhoneNumber;
     String parentFullName;
-    @ElementCollection
-    Map<String, Boolean> visitedStatistics;
+    @ManyToMany
+    @JoinTable(name = "attendance",
+    joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "training_id", referencedColumnName = "id"))
+    List<TrainingEntity> trainingEntityList;
 }
