@@ -26,4 +26,14 @@ public class FilialEntity {
     joinColumns = @JoinColumn(name = "filial_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "training_id",referencedColumnName = "id"))
     List<TrainingEntity> training;
+    public FilialEntity(FilialContext context) {
+        filialName = context.name;
+        address = context.address;
+        coachesInFilial = null;
+        training = null;
+    }
+    public record FilialContext(String name, String address) {
+
+    }
+
 }

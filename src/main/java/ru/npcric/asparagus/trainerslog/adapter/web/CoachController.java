@@ -19,18 +19,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping("/trainerslog/api/v1/coach")
-@RolesAllowed("ADMIN")
+@RolesAllowed("DEFAULT")
 public class CoachController {
     CoachService coachService;
-    @GetMapping("/getAll")
-    public List<CoachSmallResponse> getAllCoaches() {
-        return coachService.findAll();
-    }
+
 
     @PostMapping("/createCoach")
     public CoachFullResponse createCoach(@RequestBody @Valid CoachDTO coachDTO) {
         return coachService.createCoach(coachDTO);
     }
-
-
 }
