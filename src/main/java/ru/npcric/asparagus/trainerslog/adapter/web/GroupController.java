@@ -24,7 +24,7 @@ import ru.npcric.asparagus.trainerslog.service.GroupService;
 public class GroupController {
     GroupService groupService;
     @PostMapping("/createGroup")
-    public GroupSmallResponse createGroup(@RequestBody @Valid GroupDTO groupDTO) {
+    public GroupFullResponse createGroup(@RequestBody @Valid GroupDTO groupDTO) {
         return groupService.createGroup(groupDTO);
     }
 }

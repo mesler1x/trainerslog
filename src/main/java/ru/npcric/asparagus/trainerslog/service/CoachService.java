@@ -10,6 +10,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.CoachDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.CoachFullResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.CoachSmallResponse;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
+import ru.npcric.asparagus.trainerslog.service.factory.CoachFactory;
 import ru.npcric.asparagus.trainerslog.service.mapper.CoachMapper;
 
 import java.util.List;
@@ -17,10 +18,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-@Transactional
 public class CoachService {
     CoachRepository coachRepository;
     CoachMapper coachMapper;
+
+    CoachFactory coachFactory;
 
 
     public List<CoachSmallResponse> findAll() {
@@ -30,8 +32,8 @@ public class CoachService {
     }
 
     public CoachFullResponse createCoach(CoachDTO coachDTO) {
-        CoachEntity coachEntity = coachMapper.smallResponseToEntity(coachDTO);
-        coachRepository.save(coachEntity);
+        CoachEntity.CoachContext cntx = coachFactory.createContext(coachDTO);
+        CoachEntity coachEntity = coachRepository.save(new CoachEntity(cntx));
         return coachMapper.entityToFullResponse(coachEntity);
     }
 }
