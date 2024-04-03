@@ -7,7 +7,7 @@ import ru.npcric.asparagus.trainerslog.domain.FilialEntity;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {CoachMapper.class, TrainingMapper.class})
-public abstract class FilialMapper {
+public interface FilialMapper {
     public abstract FilialEntity reposeToEntity(FilialDTO filialDTO);
     public abstract FilialDTO entityToResponse(FilialEntity filialEntity);
 }

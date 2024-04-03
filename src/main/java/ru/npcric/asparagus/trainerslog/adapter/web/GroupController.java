@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.GroupDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupSmallResponse;
 import ru.npcric.asparagus.trainerslog.service.GroupService;
 
 @Validated
@@ -23,7 +24,7 @@ import ru.npcric.asparagus.trainerslog.service.GroupService;
 public class GroupController {
     GroupService groupService;
     @PostMapping("/createGroup")
-    public GroupFullResponse createGroup(@RequestBody @Valid GroupDTO groupDTO) {
+    public GroupSmallResponse createGroup(@RequestBody @Valid GroupDTO groupDTO) {
         return groupService.createGroup(groupDTO);
     }
 }

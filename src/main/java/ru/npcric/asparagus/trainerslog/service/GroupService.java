@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.GroupRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.GroupDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupSmallResponse;
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
 import ru.npcric.asparagus.trainerslog.service.mapper.GroupMapper;
 
@@ -17,9 +18,9 @@ public class GroupService {
     GroupRepository groupRepository;
     GroupMapper groupMapper;
 
-    public GroupFullResponse createGroup(GroupDTO groupDTO) {
+    public GroupSmallResponse createGroup(GroupDTO groupDTO) {
         GroupEntity groupEntity = groupMapper.responseToEntity(groupDTO);
         GroupEntity group = groupRepository.save(groupEntity);
-        return groupMapper.entityToFullResponse(group);
+        return groupMapper.entityToSmallResponse(group);
     }
 }
