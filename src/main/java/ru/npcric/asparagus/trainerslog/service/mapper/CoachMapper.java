@@ -7,8 +7,8 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.CoachSmall
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 
 @Mapper(componentModel = "spring", uses = {StudentListMapper.class, GroupListMapper.class})
-public interface CoachMapper {
-    CoachFullResponse entityToFullResponse(CoachEntity coachEntity);
-    CoachEntity smallResponseToEntity(CoachDTO coachDTO);
-    CoachSmallResponse entityToSmallResponse(CoachEntity coachEntity);
+public abstract class CoachMapper {
+    public abstract CoachFullResponse entityToFullResponse(CoachEntity coachEntity);
+    public abstract CoachEntity smallResponseToEntity(CoachDTO coachDTO);
+    public abstract CoachSmallResponse entityToSmallResponse(CoachEntity coachEntity);
 }

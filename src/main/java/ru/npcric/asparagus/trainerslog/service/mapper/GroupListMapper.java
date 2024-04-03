@@ -9,8 +9,8 @@ import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = GroupMapper.class)
-public interface GroupListMapper {
-    List<GroupEntity> responseToEntity(List<GroupDTO> dloList);
-    List<GroupSmallResponse> entityToSmallResponse(List<GroupEntity> modelList);
-    List<GroupFullResponse> entityToFullResponse(List<GroupEntity> modelList);
+public abstract class GroupListMapper {
+    public abstract  List<GroupEntity> responseToEntity(List<GroupDTO> dloList);
+    public abstract  List<GroupSmallResponse> entityToSmallResponse(List<GroupEntity> modelList);
+    public abstract  List<GroupFullResponse> entityToFullResponse(List<GroupEntity> modelList);
 }

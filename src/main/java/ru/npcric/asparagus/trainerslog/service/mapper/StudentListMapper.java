@@ -11,8 +11,8 @@ import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = StudentMapper.class)
-public interface StudentListMapper {
-    List<StudentEntity> responseToEntity(List<StudentDTO> dloList);
-    List<StudentEntity> entityToSmallResponse(List<GroupEntity> modelList);
-    List<GroupFullResponse> entityToFullResponse(List<GroupEntity> modelList);
+public abstract class StudentListMapper {
+    public abstract List<StudentEntity> responseToEntity(List<StudentDTO> dloList);
+    public abstract List<StudentEntity> entityToSmallResponse(List<GroupEntity> modelList);
+    public abstract List<GroupFullResponse> entityToFullResponse(List<GroupEntity> modelList);
 }

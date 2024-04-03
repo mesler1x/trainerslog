@@ -7,7 +7,7 @@ import ru.npcric.asparagus.trainerslog.domain.TrainingEntity;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {StudentMapper.class, FilialMapper.class})
-public interface TrainingMapper {
-    TrainingDTO entityToResponse(TrainingEntity trainingEntity);
-    TrainingEntity responseToEntity(TrainingDTO trainingDTO);
+public abstract class TrainingMapper {
+    public abstract TrainingDTO entityToResponse(TrainingEntity trainingEntity);
+    public abstract TrainingEntity responseToEntity(TrainingDTO trainingDTO);
 }

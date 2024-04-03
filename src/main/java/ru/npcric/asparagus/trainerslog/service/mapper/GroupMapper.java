@@ -7,7 +7,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupSmall
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
 
 @Mapper(componentModel = "spring", uses = {StudentMapper.class, CoachMapper.class})
-public interface GroupMapper {
+public abstract class GroupMapper {
     public abstract GroupSmallResponse entityToSmallResponse(GroupEntity groupEntity);
     public abstract GroupEntity responseToEntity(GroupDTO groupDTO);
     public abstract GroupFullResponse entityToFullResponse(GroupEntity groupEntity);
