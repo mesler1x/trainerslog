@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table
 public class CoachEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +22,13 @@ public class CoachEntity {
     @OneToMany(mappedBy = "coach")
     List<GroupEntity> groups;
 
+    public CoachEntity(CoachContext coachContext) {
+        name = coachContext.name;
+        filial = coachContext.filial;
+        groups = null;
+    }
+
+    public record CoachContext(String name, FilialEntity filial){
+
+    }
 }

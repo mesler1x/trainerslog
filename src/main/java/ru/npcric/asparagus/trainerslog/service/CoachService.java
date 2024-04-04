@@ -9,7 +9,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.CoachDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.CoachFullResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.CoachSmallResponse;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
-import ru.npcric.asparagus.trainerslog.service.mapper.CoachMapper;
+import ru.npcric.asparagus.trainerslog.service.factory.CoachFactory;
 
 import java.util.List;
 
@@ -18,18 +18,15 @@ import java.util.List;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class CoachService {
     CoachRepository coachRepository;
-    CoachMapper coachMapper;
+    CoachFactory coachFactory;
 
-
-    public List<CoachSmallResponse> findAll() {
-        List<CoachEntity> coachEntities = coachRepository.findAll();
-        return coachEntities.stream().
-        map(coachMapper::entityToSmallResponse).toList();
-    }
 
     public CoachFullResponse createCoach(CoachDTO coachDTO) {
-        CoachEntity coachEntity = coachMapper.smallResponseToEntity(coachDTO);
-        coachRepository.save(coachEntity);
-        return coachMapper.entityToFullResponse(coachEntity);
+        CoachEntity.CoachContext coachContext = coachFactory.createContext(coachDTO);
+        CoachEntity coachEntity = new CoachEntity(coachContext);
+        CoachEntity coachEntityWithId = coachRepository.save(coachEntity);
+        return new CoachFullResponse(coachEntityWithId.getId(),
+                coachEntityWithId.getName(),
+                coachDTO.filialDTO());
     }
 }
