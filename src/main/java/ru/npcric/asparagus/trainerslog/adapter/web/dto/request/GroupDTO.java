@@ -11,6 +11,6 @@ import java.util.List;
 public record GroupDTO(@NotNull @NotBlank(message = "Имя группы не может быть пустым")
                     @GroupNameConstraint
                     String groupName,
-                       @Nullable List<StudentDTO> studentDTOS,
+                       @NotNull List<String> studentLogins,
                        @Nullable List<LocalDateTime> dates) { // даты могут быть Null пока их не заполнили
 }

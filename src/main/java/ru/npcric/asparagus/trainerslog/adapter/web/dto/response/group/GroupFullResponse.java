@@ -8,7 +8,6 @@ import java.util.List;
 
 public record GroupFullResponse(Long id,
                                 String groupName,
-                                List<StudentDTO> studentDTOS,
-                                List<LocalDateTime> dates,
-                                String address) {
+                                List<String> studentNames,
+                                List<LocalDateTime> dates) {
 }
