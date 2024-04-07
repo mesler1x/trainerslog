@@ -1,7 +1,9 @@
 package ru.npcric.asparagus.trainerslog.domain;
 
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.CoachDTO;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class CoachEntity {
     @ManyToOne
     FilialEntity filial;
     @OneToMany(mappedBy = "coach")
+
     List<GroupEntity> groups;
 
     public CoachEntity(CoachContext coachContext) {
