@@ -27,12 +27,6 @@ public class CommonAdvice extends ResponseEntityExceptionHandler {
                         new ErrorResponse(VALIDATION_ERROR, fieldError.getField(), fieldError.getDefaultMessage())).
                 toList();
 
-        List<ErrorResponse> result = ex.getBindingResult().
-                getGlobalErrors().
-                stream().map(e -> new ErrorResponse(VALIDATION_ERROR, e.getDefaultMessage()))
-                .toList();
-
-        errors.addAll(result);
         return ResponseEntity.badRequest()
                 .body(errors);
     }

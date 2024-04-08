@@ -1,5 +1,6 @@
 package ru.npcric.asparagus.trainerslog.service;
 
+import jakarta.annotation.security.RolesAllowed;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -19,12 +20,13 @@ public class GroupService {
     GroupRepository groupRepository;
     GroupFactory groupFactory;
 
+    //@RolesAllowed("COACH")
     public GroupFullResponse createGroup(GroupDTO groupDTO, UserEntity user) {
         GroupEntity.GroupContext context = groupFactory.createContext(groupDTO, user);
         GroupEntity groupEntity = new GroupEntity(context);
         GroupEntity groupEntityWithId = groupRepository.save(groupEntity);
 
-        //todo убрать в маппер
+        //todo - убрать в маппер
         return new GroupFullResponse(groupEntityWithId.getId(),
                 groupEntityWithId.getGroupName(),
                 groupEntity.getStudents().stream().map(StudentEntity::getFullName).toList(),

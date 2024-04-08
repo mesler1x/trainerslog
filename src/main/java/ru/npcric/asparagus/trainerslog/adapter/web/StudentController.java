@@ -1,6 +1,7 @@
 package ru.npcric.asparagus.trainerslog.adapter.web;
 
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,7 +21,7 @@ import ru.npcric.asparagus.trainerslog.service.StudentService;
 @RolesAllowed("DEFAULT")
 public class StudentController {
     StudentService studentService;
-    public StudentCreateResponse createStudent(@RequestBody StudentDTO studentDTO) {
+    public StudentCreateResponse createStudent(@RequestBody @Valid StudentDTO studentDTO) {
         return studentService.createStudent(studentDTO);
     }
 }

@@ -12,5 +12,7 @@ public record GroupDTO(@NotNull @NotBlank(message = "Имя группы не м
                     @GroupNameConstraint
                     String groupName,
                        @NotNull List<String> studentUsernames,
+
                        @Nullable List<LocalDateTime> dates) { // даты могут быть Null пока их не заполнили
+                        // Даты только на неделе!
 }
