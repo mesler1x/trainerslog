@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.GroupDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullResponse;
+import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.GroupService;
 
 @Validated
@@ -23,7 +25,8 @@ import ru.npcric.asparagus.trainerslog.service.GroupService;
 public class GroupController {
     GroupService groupService;
     @PostMapping("/createGroup")
-    public GroupFullResponse createGroup(@RequestBody @Valid GroupDTO groupDTO) {
-        return groupService.createGroup(groupDTO);
+    public GroupFullResponse createGroup(@RequestBody @Valid GroupDTO groupDTO,
+                                         @AuthenticationPrincipal UserEntity user) {
+        return groupService.createGroup(groupDTO, user);
     }
 }

@@ -11,5 +11,6 @@ public record CoachDTO(@NotBlank(message = "ФИО тренера не може�
                        @Size(min = 5, max = 40, message = "ФИО тренера не может быть меньше 5 или 40 символов")
                        @PeopleNameConstraint
                        String name,
-                       FilialDTO filialDTO) {
+                       FilialDTO filialDTO,
+                       String username) {
 }

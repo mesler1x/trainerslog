@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.FilialDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.filial.FilialFullResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.filial.FilialSmallResponse;
+import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.FilialService;
 
 @RestController

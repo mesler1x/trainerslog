@@ -22,6 +22,7 @@ import ru.npcric.asparagus.trainerslog.domain.user.UserRole;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class SecurityConfig {
+    // временное решение, позже переделать
     public static String[] PERMITTED_URI = {
             "/**"
     };

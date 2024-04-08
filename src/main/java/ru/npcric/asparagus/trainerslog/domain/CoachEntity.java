@@ -1,13 +1,11 @@
 package ru.npcric.asparagus.trainerslog.domain;
 
-import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Type;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.CoachDTO;
+import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -24,14 +22,18 @@ public class CoachEntity {
     @OneToMany(mappedBy = "coach")
 
     List<GroupEntity> groups;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    UserEntity user;
 
     public CoachEntity(CoachContext coachContext) {
         name = coachContext.name;
         filial = coachContext.filial;
+        user = coachContext.user;
         groups = null;
     }
 
-    public record CoachContext(String name, FilialEntity filial){
+    public record CoachContext(String name, FilialEntity filial, UserEntity user){
 
     }
 }

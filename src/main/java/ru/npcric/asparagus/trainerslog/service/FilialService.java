@@ -6,10 +6,9 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.FilialRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.FilialDTO;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.filial.FilialFullResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.filial.FilialSmallResponse;
-import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.FilialEntity;
+import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.factory.FilialFactory;
 
 @Service

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.StudentDTO;
+import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,13 +36,13 @@ public class GroupEntity {
     @Column(columnDefinition = "jsonb")
     List<LocalDateTime> dates;
 
+
     public GroupEntity(GroupContext groupContext) {
         groupName = groupContext.groupName;
         students = groupContext.students;
         dates = groupContext.dates;
-        coach = null; // todo - назначить авторизованного
-
+        coach = groupContext.coach;
     }
-    public record GroupContext(String groupName, List<StudentEntity> students, List<LocalDateTime> dates) {
+    public record GroupContext(String groupName, List<StudentEntity> students, List<LocalDateTime> dates, CoachEntity coach) {
     }
 }
