@@ -14,6 +14,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.FilialDTO;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.FilialEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
+import ru.npcric.asparagus.trainerslog.domain.user.UserRole;
 
 import java.util.Optional;
 
@@ -33,6 +34,8 @@ public class CoachFactory {
         if (user.isEmpty()) throw new UsernameNotFoundException("User not found");
 
         UserEntity userEntity = user.get();
+        userEntity.getAuthorities().add(UserRole.COACH);
+        userEntity.getAuthorities().remove(UserRole.DEFAULT);
         FilialEntity filialEntity = filialRepository.findByAddress(filialDTO.address());
 
         CoachEntity.CoachContext context = new CoachEntity.CoachContext(coachDTO.name(), filialEntity, userEntity);

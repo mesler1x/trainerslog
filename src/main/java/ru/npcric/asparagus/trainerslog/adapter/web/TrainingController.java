@@ -12,7 +12,7 @@ import ru.npcric.asparagus.trainerslog.service.TrainingService;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequestMapping("/trainerslog/api/v1/training")
-@RolesAllowed("DEFAULT")
+//@RolesAllowed("DEFAULT")
 public class TrainingController {
     TrainingService trainingService;
 }

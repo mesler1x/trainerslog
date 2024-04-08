@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +19,10 @@ import ru.npcric.asparagus.trainerslog.service.StudentService;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping("/trainerslog/api/v1/student")
-@RolesAllowed("DEFAULT")
+//@RolesAllowed("DEFAULT")
 public class StudentController {
     StudentService studentService;
+    @PostMapping("/create")
     public StudentCreateResponse createStudent(@RequestBody @Valid StudentDTO studentDTO) {
         return studentService.createStudent(studentDTO);
     }

@@ -21,9 +21,10 @@ import ru.npcric.asparagus.trainerslog.service.GroupService;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping("/trainerslog/api/v1/group")
-@RolesAllowed("DEFAULT")
+//@RolesAllowed("DEFAULT")
 public class GroupController {
     GroupService groupService;
+    //@RolesAllowed("COACH")
     @PostMapping("/createGroup")
     public GroupFullResponse createGroup(@RequestBody @Valid GroupDTO groupDTO,
                                          @AuthenticationPrincipal UserEntity user) {

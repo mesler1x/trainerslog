@@ -22,7 +22,7 @@ import ru.npcric.asparagus.trainerslog.service.FilialService;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequestMapping("/trainerslog/api/v1/filial")
-@RolesAllowed("DEFAULT")
+//@RolesAllowed("DEFAULT")
 public class FilialController {
     FilialService filialService;
 

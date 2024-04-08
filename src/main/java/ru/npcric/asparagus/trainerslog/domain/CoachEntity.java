@@ -1,11 +1,12 @@
 package ru.npcric.asparagus.trainerslog.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -20,7 +21,6 @@ public class CoachEntity {
     @ManyToOne
     FilialEntity filial;
     @OneToMany(mappedBy = "coach")
-
     List<GroupEntity> groups;
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -33,7 +33,7 @@ public class CoachEntity {
         groups = null;
     }
 
-    public record CoachContext(String name, FilialEntity filial, UserEntity user){
+    public record CoachContext(String name, FilialEntity filial, UserEntity user) {
 
     }
 }
