@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.UserRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.auth.UserResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.user.UserSmallResponse;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
 import java.util.ArrayList;
@@ -53,5 +54,11 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
 
         return person.get();
+    }
+
+    public List<UserSmallResponse> getAllUsers() {
+        List<UserEntity> userEntities = userRepository.findAll();
+        return userEntities.stream()
+                .map(userEntity -> new UserSmallResponse(userEntity.getId(),userEntity.getUsername())).toList();
     }
 }

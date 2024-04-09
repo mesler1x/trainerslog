@@ -1,16 +1,14 @@
 package ru.npcric.asparagus.trainerslog.service.factory;
 
-import jakarta.annotation.security.RolesAllowed;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import ru.npcric.asparagus.trainerslog.adapter.repository.CoachRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.FilialRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.UserRepository;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.CoachDTO;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.FilialDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.FilialEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;

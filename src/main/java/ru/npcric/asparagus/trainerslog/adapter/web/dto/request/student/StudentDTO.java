@@ -1,7 +1,9 @@
-package ru.npcric.asparagus.trainerslog.adapter.web.dto.request;
+package ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.*;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.GroupDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.ticket.TicketDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.validation.PeopleNameConstraint;
 
 import java.time.LocalDate;

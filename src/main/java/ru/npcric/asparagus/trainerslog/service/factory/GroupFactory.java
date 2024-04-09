@@ -6,17 +6,13 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
 import ru.npcric.asparagus.trainerslog.adapter.repository.CoachRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.StudentRepository;
-import ru.npcric.asparagus.trainerslog.adapter.repository.UserRepository;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.GroupDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.GroupDTO;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor

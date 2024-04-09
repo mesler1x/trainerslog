@@ -9,10 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.StudentDTO;
-import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 

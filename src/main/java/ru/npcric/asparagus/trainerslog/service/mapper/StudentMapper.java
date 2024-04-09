@@ -2,6 +2,7 @@ package ru.npcric.asparagus.trainerslog.service.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentCreateResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentWithGroupSmallResponse;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 
 @Component
@@ -16,5 +17,8 @@ public class StudentMapper {
                 studentEntity.getPhoneNumber(),
                 studentEntity.getParentPhoneNumber(),
                 studentEntity.getParentFullName());
+    }
+    public StudentWithGroupSmallResponse entityToSmallResponse(StudentEntity studentEntity){
+        return new StudentWithGroupSmallResponse(studentEntity.getId(), studentEntity.getFullName(), studentEntity.getGroup().getGroupName());
     }
 }

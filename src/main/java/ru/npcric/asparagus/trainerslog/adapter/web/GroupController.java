@@ -1,6 +1,5 @@
 package ru.npcric.asparagus.trainerslog.adapter.web;
 
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.GroupDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.GroupDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullResponse;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.GroupService;
@@ -30,4 +29,6 @@ public class GroupController {
                                          @AuthenticationPrincipal UserEntity user) {
         return groupService.createGroup(groupDTO, user);
     }
+
+
 }

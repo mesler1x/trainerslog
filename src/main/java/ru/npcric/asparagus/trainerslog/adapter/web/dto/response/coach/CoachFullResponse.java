@@ -1,9 +1,6 @@
 package ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach;
 
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.FilialDTO;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullResponse;
-
-import java.util.List;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 
 public record CoachFullResponse (Long id, String name, FilialDTO filialDTO, String username) {
 }

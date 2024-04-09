@@ -7,4 +7,5 @@ import ru.npcric.asparagus.trainerslog.domain.FilialEntity;
 @Repository
 public interface FilialRepository extends JpaRepository<FilialEntity, Long> {
     FilialEntity findByAddress(@NotBlank String address);
+    void deleteByAddress(String address);
 }

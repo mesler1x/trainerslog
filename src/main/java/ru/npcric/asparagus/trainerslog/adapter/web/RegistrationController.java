@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.RegistrationRequest;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.common.RegistrationRequest;
 import ru.npcric.asparagus.trainerslog.service.RegistrationService;
 
 @RestController

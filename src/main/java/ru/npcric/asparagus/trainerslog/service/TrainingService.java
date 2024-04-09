@@ -11,4 +11,5 @@ import ru.npcric.asparagus.trainerslog.adapter.repository.TrainingRepository;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class TrainingService {
     TrainingRepository trainingRepository;
+    // todo - тренер начинает тренировку и отмечает учеников по именам
 }

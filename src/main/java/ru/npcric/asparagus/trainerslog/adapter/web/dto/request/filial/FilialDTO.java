@@ -1,8 +1,6 @@
-package ru.npcric.asparagus.trainerslog.adapter.web.dto.request;
+package ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial;
 
 import jakarta.validation.constraints.NotBlank;
-
-import java.util.List;
 
 public record FilialDTO(@NotBlank String name,
                         @NotBlank String address) {

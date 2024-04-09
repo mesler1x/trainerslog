@@ -1,12 +1,11 @@
 package ru.npcric.asparagus.trainerslog.service;
 
-import jakarta.annotation.security.RolesAllowed;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.GroupRepository;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.GroupDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.GroupDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullResponse;
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;

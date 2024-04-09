@@ -1,7 +1,8 @@
-package ru.npcric.asparagus.trainerslog.adapter.web.dto.request;
+package ru.npcric.asparagus.trainerslog.adapter.web.dto.request.ticket;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentDTO;
 
 public record TicketDTO(@NotNull(message = "Абонемент не может быть создан без студента") StudentDTO studentDTO,
                         String startDate,
