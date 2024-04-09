@@ -6,7 +6,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.validation.PeopleNameConstrai
 
 import java.time.LocalDate;
 
-public record StudentDTO(TicketDTO ticketDTO,
+public record StudentDTO(@Nullable TicketDTO ticketDTO,
                          @NotBlank(message = "ФИО студента не может быть пустым")
                          @Size(min = 5, max = 40, message = "ФИО студента не может быть меньше 5 или 40 символов")
                          @PeopleNameConstraint
@@ -19,7 +19,7 @@ public record StudentDTO(TicketDTO ticketDTO,
                          LocalDate birthDate,
                          @Positive(message = "Кю не может быть отрицательным")
                          @Nullable
-                         int q,// уровень владения айкидо
+                         Integer q,// уровень владения айкидо
                          @NotBlank
                          @Pattern(regexp = "\\+79\\d{9}",
                                  message = "Номер телефона студента должен быть в формате: +79623881729")
@@ -32,6 +32,8 @@ public record StudentDTO(TicketDTO ticketDTO,
                          @Size(min = 5, max = 40, message = "ФИО родителя не может быть меньше 5 или 40 символов")
                          @PeopleNameConstraint
                          String parentFullName,
-                         GroupDTO group
+                         @Nullable
+                         GroupDTO group,
+                         String username
 ) {
 }

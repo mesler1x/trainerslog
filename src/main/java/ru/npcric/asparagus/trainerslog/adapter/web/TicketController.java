@@ -14,7 +14,7 @@ import ru.npcric.asparagus.trainerslog.service.TicketService;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping("/trainerslog/api/v1/ticket")
-@RolesAllowed("DEFAULT")
+//@RolesAllowed("DEFAULT")
 public class TicketController {
     TicketService ticketService;
     //todo

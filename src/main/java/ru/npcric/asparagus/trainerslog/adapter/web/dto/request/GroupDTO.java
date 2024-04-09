@@ -11,8 +11,8 @@ import java.util.List;
 public record GroupDTO(@NotNull @NotBlank(message = "Имя группы не может быть пустым")
                     @GroupNameConstraint
                     String groupName,
-                       @NotNull // потому что тренер сам создает группу
-                       CoachDTO coachDTO,
-                       @Nullable List<StudentDTO> studentDTOS,
+                       @NotNull List<String> studentUsernames,
+
                        @Nullable List<LocalDateTime> dates) { // даты могут быть Null пока их не заполнили
+                        // Даты только на неделе!
 }

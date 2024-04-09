@@ -5,5 +5,5 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullR
 
 import java.util.List;
 
-public record CoachFullResponse (Long id, String name, FilialDTO filialDTO) {
+public record CoachFullResponse (Long id, String name, FilialDTO filialDTO, String username) {
 }

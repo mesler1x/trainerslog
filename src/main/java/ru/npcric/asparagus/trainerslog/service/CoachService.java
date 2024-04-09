@@ -20,13 +20,13 @@ public class CoachService {
     CoachRepository coachRepository;
     CoachFactory coachFactory;
 
-
+    //@RolesAllowed("ADMIN") включить при настройке security
     public CoachFullResponse createCoach(CoachDTO coachDTO) {
         CoachEntity.CoachContext coachContext = coachFactory.createContext(coachDTO);
         CoachEntity coachEntity = new CoachEntity(coachContext);
         CoachEntity coachEntityWithId = coachRepository.save(coachEntity);
         return new CoachFullResponse(coachEntityWithId.getId(),
                 coachEntityWithId.getName(),
-                coachDTO.filialDTO());
+                coachDTO.filialDTO(), coachDTO.username());
     }
 }
