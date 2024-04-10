@@ -1,5 +1,6 @@
 package ru.npcric.asparagus.trainerslog.service.common;
 
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -23,6 +24,7 @@ import java.util.Optional;
 
 @Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@Transactional
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;

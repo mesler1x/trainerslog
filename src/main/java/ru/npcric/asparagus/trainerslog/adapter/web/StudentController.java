@@ -6,11 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.GroupNameRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.AddStudentInGroupRequest;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.GroupDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentDTO;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentDeleteFromGroupRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentCreateResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentWithGroupSmallResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentsInGroupResponse;
@@ -37,12 +34,14 @@ public class StudentController {
 
 
     @GetMapping("/getStudentsInGroup")
-    public StudentsInGroupResponse getStudentsInGroup(@RequestBody GroupNameRequest groupNameRequest){
+    public StudentsInGroupResponse getStudentsInGroup(@RequestParam("groupName") String groupNameRequest){
         return studentService.getStudentsInGroup(groupNameRequest);
     }
 
     @DeleteMapping("/deleteStudentFromGroup")
-    public void deleteStudentFromGroup(@RequestBody StudentDeleteFromGroupRequest request) {
-        studentService.deleteStudentFromGroup(request);
+    public void deleteStudentFromGroup(@RequestParam("studentUsername") String studentUsername) {
+        studentService.deleteStudentFromGroup(studentUsername);
     }
+
+    //todo deleteStudent
 }

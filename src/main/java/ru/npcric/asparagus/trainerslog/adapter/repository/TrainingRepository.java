@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.npcric.asparagus.trainerslog.domain.TrainingEntity;
 @Repository
 public interface TrainingRepository extends JpaRepository<TrainingEntity, Long> {
+
 }

@@ -1,5 +1,6 @@
 package ru.npcric.asparagus.trainerslog.service;
 
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -24,6 +25,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@Transactional
 public class CoachService {
     CoachRepository coachRepository;
     CoachFactory coachFactory;

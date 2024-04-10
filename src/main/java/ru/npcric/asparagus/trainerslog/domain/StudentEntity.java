@@ -20,7 +20,7 @@ public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     TicketEntity ticket;
     String fullName;
     String sex;
