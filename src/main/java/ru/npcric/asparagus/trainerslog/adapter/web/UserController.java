@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.auth.UserResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.user.UserSmallResponse;
 import ru.npcric.asparagus.trainerslog.service.common.UserService;
 
@@ -23,5 +24,10 @@ public class UserController {
     @GetMapping("/getAllUsers")
     public List<UserSmallResponse> getAllUsers(){
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/get")
+    public UserResponse getAuth() {
+        return userService.getCurrentUser();
     }
 }
