@@ -8,7 +8,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDTO;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDeleteRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.*;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
@@ -56,7 +55,7 @@ public class CoachController {
     }
 
     @DeleteMapping("/deleteCoach")
-    public void deleteCoach(@RequestBody CoachDeleteRequest coachDeleteRequest) {
-        coachService.deleteCoach(coachDeleteRequest);
+    public void deleteCoach(@RequestBody String username) {
+        coachService.deleteCoach(username);
     }
 }

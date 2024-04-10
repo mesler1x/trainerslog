@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.CoachRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.FilialRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDTO;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDeleteRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupIdAndNameResponse;
@@ -74,10 +73,12 @@ public class CoachService {
                 );
     }
 
-    //!!! ВЫЯСНИТЬ НУЖНО ЛИ ЧИСТИТЬ ПОЛЬЗОВАТЕЛЯ ПОСЛЕ УДАЛЕНИЯ ПРИВЯЗАННОГО К НЕМУ КОУЧА
-    public void deleteCoach(CoachDeleteRequest coachDeleteRequest) {
-        CoachEntity coachEntity = coachRepository.findByUser_Username(coachDeleteRequest.username());
+    //настроидь Cacadetype
+    public void deleteCoach(String username) {
+        CoachEntity coachEntity = coachRepository.findByUser_Username(username);
+
         UserEntity user = coachEntity.getUser();
+
         coachRepository.delete(coachEntity);
         user.getAuthorities().remove(UserRole.COACH);
         user.getAuthorities().add(UserRole.DEFAULT);

@@ -7,7 +7,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDeleteByAddressRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.filial.FilialSmallResponse;
 import ru.npcric.asparagus.trainerslog.service.FilialService;
 
@@ -35,7 +34,7 @@ public class FilialController {
 
 
     @DeleteMapping("deleteByAddress")
-    public void deleteFilialByAddress(FilialDeleteByAddressRequest request){
-        filialService.deleteFilialByAddress(request);
+    public void deleteFilialByAddress(@RequestBody String address){
+        filialService.deleteFilialByAddress(address);
     }
 }

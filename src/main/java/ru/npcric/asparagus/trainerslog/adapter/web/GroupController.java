@@ -30,5 +30,5 @@ public class GroupController {
         return groupService.createGroup(groupDTO, user);
     }
 
-
+    //todo - delete group
 }
