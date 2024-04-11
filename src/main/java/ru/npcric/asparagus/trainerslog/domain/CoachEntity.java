@@ -20,7 +20,7 @@ public class CoachEntity {
     String name;
     @ManyToOne
     FilialEntity filial;
-    @OneToMany(mappedBy = "coach")
+    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
     List<GroupEntity> groups;
     @OneToOne
     @JoinColumn(name = "user_id")

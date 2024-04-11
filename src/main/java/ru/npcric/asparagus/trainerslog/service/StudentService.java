@@ -1,15 +1,14 @@
 package ru.npcric.asparagus.trainerslog.service;
 
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.GroupRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.StudentRepository;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.GroupNameRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.AddStudentInGroupRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentDTO;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentDeleteFromGroupRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentCreateResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentWithGroupSmallResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentsInGroupResponse;
@@ -23,6 +22,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@Transactional
 public class StudentService {
     StudentRepository studentRepository;
     StudentFactory studentFactory;
@@ -51,9 +51,7 @@ public class StudentService {
 
         return studentMapper.entityToSmallResponse(studentEntity);
     }
-
-    public StudentsInGroupResponse getStudentsInGroup(GroupNameRequest groupNameRequest) {
-        String groupName = groupNameRequest.groupName();
+    public StudentsInGroupResponse getStudentsInGroup(String groupName) {
         //todo - исправить потом что бы группу искало не только по имени
         GroupEntity groupEntity = groupRepository.findByGroupName(groupName);
         List<String> studentNames = groupEntity.getStudents().stream().map(StudentEntity::getFullName).toList();
@@ -61,10 +59,8 @@ public class StudentService {
         return new StudentsInGroupResponse(groupName, groupCoach, studentNames);
     }
 
-    public void deleteStudentFromGroup(StudentDeleteFromGroupRequest request) {
+    public void deleteStudentFromGroup(String studentUsername) {
         //todo - исправить потом что бы группу искало не только по имени
-        GroupEntity groupEntity = groupRepository.findByGroupName(request.groupName());
-        StudentEntity studentToRemove = studentRepository.findByUser_Username(request.studentUserName());
-        groupEntity.getStudents().remove(studentToRemove);
+        studentRepository.findByUser_Username(studentUsername).setGroup(null);
     }
 }

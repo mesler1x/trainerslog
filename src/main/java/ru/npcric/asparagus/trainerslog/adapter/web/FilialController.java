@@ -27,14 +27,14 @@ public class FilialController {
     }
 
 
-    @GetMapping("getAll")
+    @GetMapping("/getAll")
     public List<FilialSmallResponse> getAllFilial(){
         return filialService.getAll();
     }
 
-
-    @DeleteMapping("deleteByAddress")
-    public void deleteFilialByAddress(@RequestBody String address){
+    //настроить каскадирование
+    @DeleteMapping("/deleteByAddress")
+    public void deleteFilialByAddress(@RequestParam("address") String address){
         filialService.deleteFilialByAddress(address);
     }
 }

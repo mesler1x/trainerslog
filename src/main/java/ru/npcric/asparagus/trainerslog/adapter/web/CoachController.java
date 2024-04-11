@@ -54,6 +54,7 @@ public class CoachController {
         return coachService.getCoachStudents(userCoach);
     }
 
+    //настроить касскадирование
     @DeleteMapping("/deleteCoach")
     public void deleteCoach(@RequestBody String username) {
         coachService.deleteCoach(username);

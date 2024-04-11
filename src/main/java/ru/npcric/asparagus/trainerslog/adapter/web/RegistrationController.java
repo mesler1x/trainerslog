@@ -19,6 +19,7 @@ import ru.npcric.asparagus.trainerslog.service.RegistrationService;
 @Validated
 public class RegistrationController {
     RegistrationService registrationService;
+    //проблема что можно создать одинаковых юзеров
     @PostMapping("/registration")
     public void registration(@RequestBody @Valid RegistrationRequest registrationRequest) {
         registrationService.registerUser(registrationRequest);

@@ -23,11 +23,11 @@ public class TrainingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     LocalDateTime date;
-    @ManyToMany
+    @ManyToOne
     @JoinTable(name = "TrainingsAndFilials",
     joinColumns = @JoinColumn(name = "training_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "filial_id", referencedColumnName = "id"))
-    List<FilialEntity> filial;
+    FilialEntity filial;
     @ManyToMany
     @JoinTable(name = "attendance",// посещяемость
             joinColumns = @JoinColumn(name = "training_id", referencedColumnName = "id"),

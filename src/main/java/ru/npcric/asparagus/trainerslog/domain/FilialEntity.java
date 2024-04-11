@@ -21,9 +21,9 @@ public class FilialEntity {
     Long id;
     String filialName;
     String address;
-    @OneToMany(mappedBy = "filial")
+    @OneToMany(mappedBy = "filial", cascade = CascadeType.ALL)
     List<CoachEntity> coachesInFilial;
-    @ManyToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "TrainingsAndFilials",
     joinColumns = @JoinColumn(name = "filial_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "training_id",referencedColumnName = "id"))

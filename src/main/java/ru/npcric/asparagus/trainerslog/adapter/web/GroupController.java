@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.GroupDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullResponse;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
@@ -23,11 +20,17 @@ import ru.npcric.asparagus.trainerslog.service.GroupService;
 //@RolesAllowed("DEFAULT")
 public class GroupController {
     GroupService groupService;
+
     //@RolesAllowed("COACH")
     @PostMapping("/createGroup")
     public GroupFullResponse createGroup(@RequestBody @Valid GroupDTO groupDTO,
                                          @AuthenticationPrincipal UserEntity user) {
         return groupService.createGroup(groupDTO, user);
+    }
+
+    @GetMapping("/getById")
+    public GroupFullResponse getGroupByID(@RequestParam("groupName") String groupName) {//можно убрать если не надо, писал чтобы проверить
+        return groupService.getGroupByName(groupName);
     }
 
     //todo - delete group
