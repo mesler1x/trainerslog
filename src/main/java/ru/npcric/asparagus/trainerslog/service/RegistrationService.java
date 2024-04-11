@@ -4,11 +4,10 @@ import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.apache.catalina.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.UserRepository;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.RegistrationRequest;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.common.RegistrationRequest;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
 @Service

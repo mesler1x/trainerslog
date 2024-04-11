@@ -1,5 +1,6 @@
 package ru.npcric.asparagus.trainerslog.service.common;
 
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.UserRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.auth.UserResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.user.UserSmallResponse;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import java.util.Optional;
 
 @Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@Transactional
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -53,5 +56,11 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
 
         return person.get();
+    }
+
+    public List<UserSmallResponse> getAllUsers() {
+        List<UserEntity> userEntities = userRepository.findAll();
+        return userEntities.stream()
+                .map(userEntity -> new UserSmallResponse(userEntity.getId(),userEntity.getUsername())).toList();
     }
 }

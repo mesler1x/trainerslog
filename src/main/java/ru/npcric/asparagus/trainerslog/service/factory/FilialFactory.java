@@ -4,9 +4,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.FilialDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 import ru.npcric.asparagus.trainerslog.domain.FilialEntity;
-import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
 @Component
 @RequiredArgsConstructor

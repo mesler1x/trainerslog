@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.TicketDTO;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
 import java.time.LocalDate;
@@ -21,7 +20,7 @@ public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     TicketEntity ticket;
     String fullName;
     String sex;

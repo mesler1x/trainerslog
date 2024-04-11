@@ -1,4 +1,4 @@
-package ru.npcric.asparagus.trainerslog.adapter.web.dto.request;
+package ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;

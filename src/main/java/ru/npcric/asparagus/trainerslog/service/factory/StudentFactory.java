@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import ru.npcric.asparagus.trainerslog.adapter.repository.UserRepository;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.StudentDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentDTO;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserRole;

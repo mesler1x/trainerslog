@@ -4,5 +4,5 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupSmall
 
 import java.util.List;
 
-public record CoachSmallResponse(String name, List<GroupSmallResponse> groups ) {
+public record CoachWithNameAndGroupsResponse(String name, List<GroupSmallResponse> groups ) {
 }
