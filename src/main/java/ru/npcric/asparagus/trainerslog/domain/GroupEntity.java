@@ -18,28 +18,25 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name = "group")
 public class GroupEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String groupName;
-    @JsonIgnore
     @ManyToOne
     CoachEntity coach;
     @OneToMany(mappedBy = "group")
     List<StudentEntity> students;
-    @Type(JsonType.class)
-    @Column(columnDefinition = "jsonb")
-    List<LocalDateTime> dates;
-
+    @OneToMany(mappedBy = "group")
+    List<TrainingEntity> trainingEntities;
 
     public GroupEntity(GroupContext groupContext) {
         groupName = groupContext.groupName;
         students = groupContext.students;
-        dates = groupContext.dates;
         coach = groupContext.coach;
+        trainingEntities = null;
     }
-    public record GroupContext(String groupName, List<StudentEntity> students, List<LocalDateTime> dates, CoachEntity coach) {
+    public record GroupContext(String groupName, List<StudentEntity> students, CoachEntity coach) {
     }
 }

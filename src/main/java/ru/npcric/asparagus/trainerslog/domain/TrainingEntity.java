@@ -24,10 +24,7 @@ public class TrainingEntity {
     Long id;
     LocalDateTime date;
     @ManyToOne
-    @JoinTable(name = "TrainingsAndFilials",
-    joinColumns = @JoinColumn(name = "training_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "filial_id", referencedColumnName = "id"))
-    FilialEntity filial;
+    GroupEntity group;
     @ManyToMany
     @JoinTable(name = "attendance",// посещяемость
             joinColumns = @JoinColumn(name = "training_id", referencedColumnName = "id"),

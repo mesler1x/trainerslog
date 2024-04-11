@@ -34,15 +34,13 @@ public class GroupService {
         //todo - убрать в маппер
         return new GroupFullResponse(groupEntityWithId.getId(),
                 groupEntityWithId.getGroupName(),
-                groupEntity.getStudents().stream().map(StudentEntity::getFullName).toList(),
-                groupEntity.getDates());
+                groupEntity.getStudents().stream().map(StudentEntity::getFullName).toList());
     }
 
     public GroupFullResponse getGroupByName(String groupName){
         GroupEntity groupEntity = groupRepository.findByGroupName(groupName);
         return new GroupFullResponse(groupEntity.getId(),
                 groupEntity.getGroupName(),
-                groupEntity.getStudents().stream().map(StudentEntity::getFullName).toList(),
-                groupEntity.getDates());
+                groupEntity.getStudents().stream().map(StudentEntity::getFullName).toList());
     }
 }
