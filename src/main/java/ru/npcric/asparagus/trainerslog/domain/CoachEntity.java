@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name = "coach")
 public class CoachEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +20,9 @@ public class CoachEntity {
     String name;
     @ManyToOne
     FilialEntity filial;
-    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "coach")
     List<GroupEntity> groups;
     @OneToOne
-    @JoinColumn(name = "user_id")
     UserEntity user;
 
     public CoachEntity(CoachContext coachContext) {

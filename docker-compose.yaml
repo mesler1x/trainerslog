@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  trainers-log-backend:
+    container_name: trainers_log_backend
+    build:
+      dockerfile: Dockerfile
+    image: trainers-log-backend:latest
+    hostname: trainers_log_backend
+    ports:
+      - "8080:8080"
+    networks:
+      - trainers-log-network
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    hostname: trainers_log_postgres
+    volumes:
+      - ./database-scripts/init:/docker-entrypoint-initdb.d
+    ports:
+      - "6432:5432"
+    networks:
+      - trainers-log-network
+
+networks:
+  trainers-log-network:
+    driver: bridge

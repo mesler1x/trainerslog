@@ -1,0 +1,2 @@
+CREATE DATABASE trainerslog;
+GRANT ALL PRIVILEGES ON DATABASE trainerslog TO postgres;

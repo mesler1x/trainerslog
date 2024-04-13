@@ -5,6 +5,5 @@ import java.util.List;
 
 public record GroupFullResponse(Long id,
                                 String groupName,
-                                List<String> studentNames,
-                                List<LocalDateTime> dates) {
+                                List<String> studentNames) {
 }

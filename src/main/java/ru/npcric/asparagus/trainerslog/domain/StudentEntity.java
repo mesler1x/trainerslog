@@ -26,6 +26,7 @@ public class StudentEntity {
     String sex;
     LocalDate birthDate;
     @ManyToOne
+    @JoinColumn(name = "group_id")
     GroupEntity group;
     int age;
     int q;

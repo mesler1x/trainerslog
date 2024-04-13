@@ -13,13 +13,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name = "ticket")
 public class TicketEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @OneToOne(mappedBy = "ticket")
-    StudentEntity student;
     LocalDate startDate;
     LocalDate endDate;
     Boolean isExpired;

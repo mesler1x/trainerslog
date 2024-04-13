@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2024-04-11-18-43" author="MeslerRA" context="test">
+        <comment>INITIALIZE</comment>
+
+        <createTable tableName="user_info">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="user_pk"/>
+            </column>
+
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="authorities" type="jsonb">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="account_non_expired" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="account_non_locked" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="credentials_non_expired" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="enabled" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="filial">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="filial_pk"/>
+            </column>
+
+            <column name="filial_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="address" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="coach">
+
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="coach_pk"/>
+            </column>
+
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="filial_id" type="bigint">
+                <constraints nullable="false"
+                             referencedTableName="filial"
+                             referencedColumnNames="id"
+                             foreignKeyName="coach_filial_fk"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"
+                             referencedTableName="user_info"
+                             referencedColumnNames="id"
+                             foreignKeyName="coach_user_info_fk"/>
+            </column>
+        </createTable>
+
+
+        <createTable tableName="group">
+            
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="group_pk"/>
+            </column>
+            
+            <column name="group_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="coach_id" type="bigint">
+                <constraints nullable="true"
+                             referencedTableName="coach"
+                             referencedColumnNames="id"
+                             foreignKeyName="group_coach_fk"/>
+            </column>
+        </createTable>
+        <createTable tableName="ticket">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="ticket_pk"/>
+            </column>
+
+            <column name="start_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="end_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="is_expired" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="paid_amount" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="student">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="student_pk"/>
+            </column>
+
+            <column name="ticket_id" type="bigint">
+                <constraints nullable="true"
+                             referencedTableName="ticket"
+                             referencedColumnNames="id"
+                             foreignKeyName="student_ticket_fk"/>
+            </column>
+
+            <column name="full_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+
+            <column name="sex" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="birth_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="group_id" type="bigint">
+                <constraints nullable="true"
+                             referencedTableName="group"
+                             referencedColumnNames="id"
+                             foreignKeyName="student_group_fk"/>
+            </column>
+
+            <column name="age" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="q" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="phone_number" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="parent_phone_number" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="parent_full_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"
+                             referencedTableName="user_info"
+                             referencedColumnNames="id"
+                             foreignKeyName="student_user_info_fk"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="training">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="training_pk"/>
+            </column>
+
+            <column name="date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="group_id" type="bigint">
+                <constraints nullable="false"
+                             referencedTableName="group"
+                             referencedColumnNames="id"
+                             foreignKeyName="ticket_group_fk"/>
+            </column>
+        </createTable>
+        <createTable tableName="attendance">
+            <column name="student_id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="attendance_pk"
+                             foreignKeyName="attendance_student_fk"
+                             referencedTableName="student"
+                             referencedColumnNames="id"/>
+            </column>
+
+            <column name="training_id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="attendance_pk"
+                             foreignKeyName="attendance_training_fk"
+                             referencedTableName="training"
+                             referencedColumnNames="id"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

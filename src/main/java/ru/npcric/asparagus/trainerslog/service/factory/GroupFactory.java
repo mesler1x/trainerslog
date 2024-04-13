@@ -27,7 +27,7 @@ public class GroupFactory {
         CoachEntity coachEntity = coachRepository.findByUser(user);
 
         return new GroupEntity.GroupContext(
-                groupDTO.groupName(), studentEntities, groupDTO.dates(), coachEntity
+                groupDTO.groupName(), studentEntities, coachEntity
         );
     }
 }
