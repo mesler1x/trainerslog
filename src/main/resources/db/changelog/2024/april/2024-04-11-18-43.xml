@@ -171,7 +171,7 @@
             </column>
 
             <column name="user_id" type="bigint">
-                <constraints nullable="true"
+                <constraints nullable="false"
                              referencedTableName="user_info"
                              referencedColumnNames="id"
                              foreignKeyName="student_user_info_fk"/>
