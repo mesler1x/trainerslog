@@ -30,6 +30,7 @@ public class UserEntity implements UserDetails {
     boolean credentialsNonExpired;
     boolean enabled;
     boolean accountNonLocked;
+
     //нужно спросить на счет связи потому что user не получится удалить
     public static UserEntity from(Context context) {
         UserEntity user = new UserEntity();
@@ -46,7 +47,7 @@ public class UserEntity implements UserDetails {
     }
 
     public record Context(String username,
-                          String password){
+                          String password) {
 
     }
 

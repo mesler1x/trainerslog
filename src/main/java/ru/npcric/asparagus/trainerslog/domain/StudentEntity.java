@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
 import java.time.LocalDate;
@@ -16,10 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "student")
-public class StudentEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class StudentEntity extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     TicketEntity ticket;
     String fullName;

@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
+import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,10 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "group")
-public class GroupEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class GroupEntity extends BaseEntity {
     String groupName;
     @ManyToOne
     CoachEntity coach;

@@ -5,11 +5,14 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+
     <changeSet id="2024-04-11-18-43" author="MeslerRA" context="test">
         <comment>INITIALIZE</comment>
 
+        <createSequence sequenceName="hibernate_sequence" incrementBy="1"/>
+
         <createTable tableName="user_info">
-            <column name="id" type="bigint">
+            <column name="id" autoIncrement="true" type="bigint">
                 <constraints primaryKey="true" primaryKeyName="user_pk"/>
             </column>
 
@@ -81,15 +84,15 @@
 
 
         <createTable tableName="group">
-            
+
             <column name="id" type="bigint">
                 <constraints primaryKey="true" primaryKeyName="group_pk"/>
             </column>
-            
+
             <column name="group_name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            
+
             <column name="coach_id" type="bigint">
                 <constraints nullable="true"
                              referencedTableName="coach"

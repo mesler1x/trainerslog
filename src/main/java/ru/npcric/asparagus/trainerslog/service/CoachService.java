@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.CoachRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.FilialRepository;
+import ru.npcric.asparagus.trainerslog.adapter.repository.GroupRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.*;
@@ -14,12 +15,14 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupIdAnd
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentWithGroupSmallResponse;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.FilialEntity;
+import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserRole;
 import ru.npcric.asparagus.trainerslog.service.factory.CoachFactory;
 import ru.npcric.asparagus.trainerslog.service.mapper.CoachMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,6 +33,7 @@ public class CoachService {
     CoachRepository coachRepository;
     CoachFactory coachFactory;
     FilialRepository filialRepository;
+    GroupRepository groupRepository;
     CoachMapper coachMapper;
 
     //@RolesAllowed("ADMIN") включить при настройке security
@@ -75,10 +79,9 @@ public class CoachService {
                 );
     }
 
-    //настроидь Cacadetype
+
     public void deleteCoach(String username) {
         CoachEntity coachEntity = coachRepository.findByUser_Username(username);
-
         UserEntity user = coachEntity.getUser();
 
         coachRepository.delete(coachEntity);

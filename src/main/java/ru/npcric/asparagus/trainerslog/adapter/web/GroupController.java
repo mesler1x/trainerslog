@@ -22,10 +22,11 @@ public class GroupController {
     GroupService groupService;
 
     //@RolesAllowed("COACH")
+    //todo - поменять на просто create
     @PostMapping("/createGroup")
     public GroupFullResponse createGroup(@RequestBody @Valid GroupDTO groupDTO,
-                                         @AuthenticationPrincipal UserEntity user) {
-        return groupService.createGroup(groupDTO, user);
+                                         @AuthenticationPrincipal UserEntity coach) {
+        return groupService.createGroup(groupDTO, coach);
     }
 
     @GetMapping("/getById")

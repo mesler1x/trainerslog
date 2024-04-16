@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,10 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TrainingEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class TrainingEntity extends BaseEntity {
     LocalDateTime date;
     @ManyToOne
     GroupEntity group;
