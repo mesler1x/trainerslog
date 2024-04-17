@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
-import ru.npcric.asparagus.trainerslog.domain.common.HibernateSeq;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,7 +19,7 @@ public class CoachEntity extends BaseEntity {
     String name;
     @ManyToOne
     FilialEntity filial;
-    @OneToMany(mappedBy = "coach", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "coach")
     List<GroupEntity> groups;
     @OneToOne
     UserEntity user;

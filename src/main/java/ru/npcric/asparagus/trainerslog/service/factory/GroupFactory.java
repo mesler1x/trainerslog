@@ -20,7 +20,7 @@ import java.util.List;
 public class GroupFactory {
     StudentRepository studentRepository;
     CoachRepository coachRepository;
-    public GroupEntity.GroupContext createContext(GroupDTO groupDTO, UserEntity user) {
+    public GroupEntity.GroupContext createContext(GroupDTO groupDTO , UserEntity user) {
         List<String> studentUsernames = groupDTO.studentUsernames();
         List<StudentEntity> studentEntities = studentRepository.findAllByUser_UsernameIn(studentUsernames);
 

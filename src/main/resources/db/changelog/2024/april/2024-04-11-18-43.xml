@@ -83,13 +83,13 @@
         </createTable>
 
 
-        <createTable tableName="group">
+        <createTable tableName="sgroup">
 
             <column name="id" type="bigint">
-                <constraints primaryKey="true" primaryKeyName="group_pk"/>
+                <constraints primaryKey="true" primaryKeyName="sgroup_pk"/>
             </column>
 
-            <column name="group_name" type="varchar(255)">
+            <column name="sgroup_name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
 
@@ -97,7 +97,7 @@
                 <constraints nullable="true"
                              referencedTableName="coach"
                              referencedColumnNames="id"
-                             foreignKeyName="group_coach_fk"/>
+                             foreignKeyName="sgroup_coach_fk"/>
             </column>
         </createTable>
         <createTable tableName="ticket">
@@ -146,11 +146,11 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="group_id" type="bigint">
+            <column name="sgroup_id" type="bigint">
                 <constraints nullable="true"
-                             referencedTableName="group"
+                             referencedTableName="sgroup"
                              referencedColumnNames="id"
-                             foreignKeyName="student_group_fk"/>
+                             foreignKeyName="student_sgroup_fk"/>
             </column>
 
             <column name="age" type="integer">
@@ -190,9 +190,9 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="group_id" type="bigint">
+            <column name="sgroup_id" type="bigint">
                 <constraints nullable="false"
-                             referencedTableName="group"
+                             referencedTableName="sgroup"
                              referencedColumnNames="id"
                              foreignKeyName="ticket_group_fk"/>
             </column>

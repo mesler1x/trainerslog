@@ -1,17 +1,13 @@
 package ru.npcric.asparagus.trainerslog.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -19,8 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "group")
+@Table(name = "sgroup")
 public class GroupEntity extends BaseEntity {
+    @Column(name = "sgroup_name")
     String groupName;
     @ManyToOne
     CoachEntity coach;
@@ -35,6 +32,7 @@ public class GroupEntity extends BaseEntity {
         coach = groupContext.coach;
         trainingEntities = null;
     }
+
     public record GroupContext(String groupName, List<StudentEntity> students, CoachEntity coach) {
     }
 }

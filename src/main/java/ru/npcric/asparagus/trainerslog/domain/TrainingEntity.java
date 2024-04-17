@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,6 +21,7 @@ import java.util.List;
 public class TrainingEntity extends BaseEntity {
     LocalDateTime date;
     @ManyToOne
+    @JoinColumn(name = "sgroup_id")
     GroupEntity group;
     @ManyToMany
     @JoinTable(name = "attendance",// посещяемость

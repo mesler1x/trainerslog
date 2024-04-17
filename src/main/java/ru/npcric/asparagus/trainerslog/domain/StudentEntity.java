@@ -24,7 +24,7 @@ public class StudentEntity extends BaseEntity {
     String sex;
     LocalDate birthDate;
     @ManyToOne
-    @JoinColumn(name = "group_id")
+    @JoinColumn(name = "sgroup_id")
     GroupEntity group;
     int age;
     int q;

@@ -15,14 +15,12 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupIdAnd
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentWithGroupSmallResponse;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.FilialEntity;
-import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserRole;
 import ru.npcric.asparagus.trainerslog.service.factory.CoachFactory;
 import ru.npcric.asparagus.trainerslog.service.mapper.CoachMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
