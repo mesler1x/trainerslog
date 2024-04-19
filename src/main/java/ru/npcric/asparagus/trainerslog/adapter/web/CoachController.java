@@ -56,7 +56,7 @@ public class CoachController {
 
 
     @DeleteMapping("/deleteCoach")
-    public void deleteCoach(@RequestBody String username) {
+    public void deleteCoach(@RequestParam String username) {
         coachService.deleteCoach(username);
     }
 }

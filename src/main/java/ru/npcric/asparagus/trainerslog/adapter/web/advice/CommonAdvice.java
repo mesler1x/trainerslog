@@ -12,6 +12,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.npcric.asparagus.trainerslog.adapter.web.errors.ErrorResponse;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestControllerAdvice
@@ -26,7 +27,6 @@ public class CommonAdvice extends ResponseEntityExceptionHandler {
                 .getFieldErrors().stream().map(fieldError ->
                         new ErrorResponse(VALIDATION_ERROR, fieldError.getField(), fieldError.getDefaultMessage())).
                 toList();
-
         return ResponseEntity.badRequest()
                 .body(errors);
     }
