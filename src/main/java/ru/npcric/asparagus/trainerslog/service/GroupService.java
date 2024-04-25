@@ -33,17 +33,22 @@ public class GroupService {
         GroupEntity groupEntity = new GroupEntity(context);
 
         GroupEntity groupEntityWithId = groupRepository.save(groupEntity);
+
+        /*
         for (String studentUsername: groupDTO.studentUsernames()) {
             studentService.addStudentInGroup(new AddStudentInGroupRequest(studentUsername,groupDTO.groupName()));
         }
-        //todo - убрать в маппер
+         */
         List<StudentEntity> studentsInGroup = groupEntity.getStudents();
+        for(StudentEntity student : studentsInGroup){
+            student.setGroup(groupEntity);
+        }
+
+        //todo - убрать в маппер
         List<String> studentNames = new ArrayList<>();
-        //почему то дублирует имена
         for(StudentEntity s : studentsInGroup) {
             studentNames.add(s.getFullName());
         }
-
 
         return new GroupFullResponse(groupEntityWithId.getId(),
                 groupEntityWithId.getGroupName(),

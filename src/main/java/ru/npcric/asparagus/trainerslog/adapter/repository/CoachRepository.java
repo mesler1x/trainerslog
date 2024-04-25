@@ -15,7 +15,7 @@ public interface CoachRepository extends JpaRepository<CoachEntity, Long> {
     CoachEntity findByUser_Username(String username);
 
     @Modifying
-    @Query("UPDATE sgroup g SET g.coach = null WHERE g.coach.id = :trainerId")
+    @Query("UPDATE GroupEntity g SET g.coach = null WHERE g.coach.id = :trainerId")
     void updateGroupsSetTrainerToNull(@Param("trainerId") Long trainerId);
 
     void deleteById(Long id);
