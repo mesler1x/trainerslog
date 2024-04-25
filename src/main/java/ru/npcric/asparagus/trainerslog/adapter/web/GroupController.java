@@ -8,6 +8,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.GroupDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.UpdateCoachInGroupRequest;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupAndCoachNameResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullResponse;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.GroupService;
@@ -37,6 +39,11 @@ public class GroupController {
     @DeleteMapping("/deleteGroup")
     public void deleteGroup(@RequestParam("groupName") String groupName) {
         groupService.deleteGroup(groupName);
+    }
+
+    @PutMapping("/updateGroup")
+    public GroupAndCoachNameResponse updateCoachOfGroup(@RequestBody UpdateCoachInGroupRequest request){
+        return groupService.updateCoachOfGroup(request);
     }
 
     //todo - delete group

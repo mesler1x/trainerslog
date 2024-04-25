@@ -7,8 +7,11 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.CoachRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.GroupRepository;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.GroupDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.UpdateCoachInGroupRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.AddStudentInGroupRequest;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupAndCoachNameResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullResponse;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
@@ -72,4 +75,20 @@ public class GroupService {
     }
 
     //todo - добавить тренера в существующую группу в которой тренера уволили (null coach) --> точно тут реализовывать?
+    public GroupAndCoachNameResponse updateCoachOfGroup(UpdateCoachInGroupRequest request) {
+        String coachUsername = request.username();
+        String groupName = request.groupName();
+        CoachEntity coachEntity = coachRepository.findByUser_Username(coachUsername);
+        GroupEntity groupEntity = groupRepository.findByGroupName(groupName);
+        groupEntity.setCoach(coachEntity);
+
+        List<StudentEntity> studentsInGroup = groupEntity.getStudents();
+        List<String> studentNames = new ArrayList<>();
+        for(StudentEntity s : studentsInGroup) {
+            studentNames.add(s.getFullName());
+        }
+        return new GroupAndCoachNameResponse(groupEntity.getId(), groupName, coachEntity.getName(), studentNames);
+    }
+
+
 }
