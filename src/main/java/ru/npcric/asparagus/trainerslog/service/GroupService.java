@@ -5,10 +5,12 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+import ru.npcric.asparagus.trainerslog.adapter.repository.CoachRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.GroupRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.GroupDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.AddStudentInGroupRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullResponse;
+import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
@@ -24,7 +26,7 @@ import java.util.List;
 public class GroupService {
     GroupRepository groupRepository;
     GroupFactory groupFactory;
-    StudentService studentService;
+    CoachRepository coachRepository;
 
     //@RolesAllowed("COACH")
     @Transactional
@@ -60,6 +62,13 @@ public class GroupService {
         return new GroupFullResponse(groupEntity.getId(),
                 groupEntity.getGroupName(),
                 groupEntity.getStudents().stream().map(StudentEntity::getFullName).toList());
+    }
+
+    public void deleteGroup(String groupName){
+        GroupEntity groupEntity = groupRepository.findByGroupName(groupName);
+        Long groupId = groupEntity.getId();
+        groupRepository.updateStudentsSetGroupToNull(groupId);
+        groupRepository.deleteByGroupName(groupName);
     }
 
     //todo - добавить тренера в существующую группу в которой тренера уволили (null coach) --> точно тут реализовывать?

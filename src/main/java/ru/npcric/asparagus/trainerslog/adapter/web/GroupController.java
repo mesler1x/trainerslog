@@ -34,5 +34,10 @@ public class GroupController {
         return groupService.getGroupByName(groupName);
     }
 
+    @DeleteMapping("/deleteGroup")
+    public void deleteGroup(@RequestParam("groupName") String groupName) {
+        groupService.deleteGroup(groupName);
+    }
+
     //todo - delete group
 }
