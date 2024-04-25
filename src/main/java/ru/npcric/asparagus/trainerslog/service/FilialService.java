@@ -38,7 +38,9 @@ public class FilialService {
     }
 
     public void deleteFilialByAddress(String address) {
+        FilialEntity filialEntity = filialRepository.findByAddress(address);
+        Long id = filialEntity.getId();
+        filialRepository.updateCoachesSetFilialToNull(id);
         filialRepository.deleteByAddress(address);
-
     }
 }

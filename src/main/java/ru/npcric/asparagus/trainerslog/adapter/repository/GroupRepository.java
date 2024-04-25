@@ -1,5 +1,6 @@
 package ru.npcric.asparagus.trainerslog.adapter.repository;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +13,7 @@ public interface GroupRepository extends JpaRepository<GroupEntity, Long> {
     GroupEntity findByGroupName(String groupName);
     //void deleteGroupIn(List<GroupEntity> groupEntityList);
 
+    @Transactional
     @Modifying
     @Query("UPDATE StudentEntity s SET s.group = null WHERE s.group.id = :groupId")
     void updateStudentsSetGroupToNull(@Param("groupId") Long groupId);
