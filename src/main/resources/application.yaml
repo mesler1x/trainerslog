@@ -5,9 +5,9 @@ spring:
       ddl-auto: validate
   datasource:
     #jdbc:postgresql://localhost:5433/trainerslog
-    url: jdbc:postgresql://localhost:5432/trainerslog #jdbc:postgresql://${DB_HOST:trainers_log_postgres}:${DB_PORT:5432}/${DB_NAME:trainerslog}
-    username: postgres #${DB_USERNAME:postgres}
-    password: Yessirskiii666 #${DB_PASSWORD:postgres}
+    url: jdbc:postgresql://${DB_HOST:trainers_log_postgres}:${DB_PORT:5432}/${DB_NAME:trainerslog}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
