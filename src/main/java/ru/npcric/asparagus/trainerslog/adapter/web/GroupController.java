@@ -8,6 +8,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.GroupDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.group.UpdateCoachInGroupRequest;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupAndCoachNameResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullResponse;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.GroupService;
@@ -22,15 +24,26 @@ public class GroupController {
     GroupService groupService;
 
     //@RolesAllowed("COACH")
+    //todo - поменять на просто create
     @PostMapping("/createGroup")
     public GroupFullResponse createGroup(@RequestBody @Valid GroupDTO groupDTO,
-                                         @AuthenticationPrincipal UserEntity user) {
-        return groupService.createGroup(groupDTO, user);
+                                         @AuthenticationPrincipal UserEntity coach) {
+        return groupService.createGroup(groupDTO, coach);
     }
 
     @GetMapping("/getById")
     public GroupFullResponse getGroupByID(@RequestParam("groupName") String groupName) {//можно убрать если не надо, писал чтобы проверить
         return groupService.getGroupByName(groupName);
+    }
+
+    @DeleteMapping("/deleteGroup")
+    public void deleteGroup(@RequestParam("groupName") String groupName) {
+        groupService.deleteGroup(groupName);
+    }
+
+    @PutMapping("/updateGroup")
+    public GroupAndCoachNameResponse updateCoachOfGroup(@RequestBody UpdateCoachInGroupRequest request){
+        return groupService.updateCoachOfGroup(request);
     }
 
     //todo - delete group

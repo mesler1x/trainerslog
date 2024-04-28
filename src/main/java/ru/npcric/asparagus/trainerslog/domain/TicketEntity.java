@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 
 import java.time.LocalDate;
 
@@ -14,10 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "ticket")
-public class TicketEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class TicketEntity extends BaseEntity {
     LocalDate startDate;
     LocalDate endDate;
     Boolean isExpired;

@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.CoachRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.FilialRepository;
+import ru.npcric.asparagus.trainerslog.adapter.repository.GroupRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.*;
@@ -30,7 +31,6 @@ public class CoachService {
     CoachRepository coachRepository;
     CoachFactory coachFactory;
     FilialRepository filialRepository;
-    CoachMapper coachMapper;
 
     //@RolesAllowed("ADMIN") включить при настройке security
     public CoachFullResponse createCoach(CoachDTO coachDTO) {
@@ -75,13 +75,14 @@ public class CoachService {
                 );
     }
 
-    //настроидь Cacadetype
+
     public void deleteCoach(String username) {
         CoachEntity coachEntity = coachRepository.findByUser_Username(username);
-
         UserEntity user = coachEntity.getUser();
+        Long coachId = coachEntity.getId();
+        coachRepository.updateGroupsSetTrainerToNull(coachId);
 
-        coachRepository.delete(coachEntity);
+        coachRepository.deleteById(coachId);
         user.getAuthorities().remove(UserRole.COACH);
         user.getAuthorities().add(UserRole.DEFAULT);
     }

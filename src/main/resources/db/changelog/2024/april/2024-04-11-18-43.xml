@@ -5,11 +5,14 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+
     <changeSet id="2024-04-11-18-43" author="MeslerRA" context="test">
         <comment>INITIALIZE</comment>
 
+        <createSequence sequenceName="hibernate_sequence" incrementBy="1"/>
+
         <createTable tableName="user_info">
-            <column name="id" type="bigint">
+            <column name="id" autoIncrement="true" type="bigint">
                 <constraints primaryKey="true" primaryKeyName="user_pk"/>
             </column>
 
@@ -80,21 +83,21 @@
         </createTable>
 
 
-        <createTable tableName="group">
-            
+        <createTable tableName="sgroup">
+
             <column name="id" type="bigint">
-                <constraints primaryKey="true" primaryKeyName="group_pk"/>
+                <constraints primaryKey="true" primaryKeyName="sgroup_pk"/>
             </column>
-            
-            <column name="group_name" type="varchar(255)">
+
+            <column name="sgroup_name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            
+
             <column name="coach_id" type="bigint">
                 <constraints nullable="true"
                              referencedTableName="coach"
                              referencedColumnNames="id"
-                             foreignKeyName="group_coach_fk"/>
+                             foreignKeyName="sgroup_coach_fk"/>
             </column>
         </createTable>
         <createTable tableName="ticket">
@@ -143,11 +146,11 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="group_id" type="bigint">
+            <column name="sgroup_id" type="bigint">
                 <constraints nullable="true"
-                             referencedTableName="group"
+                             referencedTableName="sgroup"
                              referencedColumnNames="id"
-                             foreignKeyName="student_group_fk"/>
+                             foreignKeyName="student_sgroup_fk"/>
             </column>
 
             <column name="age" type="integer">
@@ -187,9 +190,9 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="group_id" type="bigint">
+            <column name="sgroup_id" type="bigint">
                 <constraints nullable="false"
-                             referencedTableName="group"
+                             referencedTableName="sgroup"
                              referencedColumnNames="id"
                              foreignKeyName="ticket_group_fk"/>
             </column>
