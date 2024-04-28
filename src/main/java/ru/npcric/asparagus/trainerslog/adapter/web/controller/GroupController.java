@@ -1,5 +1,7 @@
 package ru.npcric.asparagus.trainerslog.adapter.web.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -19,32 +21,37 @@ import ru.npcric.asparagus.trainerslog.service.GroupService;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping("/trainerslog/api/v1/group")
+@Tag(name = "Контроллер группы", description = "Контроллер для управления группами в филиалах")
 //@RolesAllowed("DEFAULT")
 public class GroupController {
     GroupService groupService;
 
     //@RolesAllowed("COACH")
     //todo - поменять на просто create
+    @Operation(
+            summary = "Создание группы тренером",
+            description = "Создание группы, авторизованным тренером"
+    )
     @PostMapping("/createGroup")
     public GroupFullResponse createGroup(@RequestBody @Valid GroupDTO groupDTO,
                                          @AuthenticationPrincipal UserEntity coach) {
         return groupService.createGroup(groupDTO, coach);
     }
 
-    @GetMapping("/getById")
-    public GroupFullResponse getGroupByID(@RequestParam("groupName") String groupName) {//можно убрать если не надо, писал чтобы проверить
-        return groupService.getGroupByName(groupName);
-    }
-
+    @Operation(
+            summary = "Удаление группы по её имени",
+            description = "У всех учеников после удаления их группы, будут ссылки на null"
+    )
     @DeleteMapping("/deleteGroup")
     public void deleteGroup(@RequestParam("groupName") String groupName) {
         groupService.deleteGroup(groupName);
     }
 
+    @Operation(
+            summary = "Обновление тренера группы"
+    )
     @PutMapping("/updateGroup")
     public GroupAndCoachNameResponse updateCoachOfGroup(@RequestBody UpdateCoachInGroupRequest request){
         return groupService.updateCoachOfGroup(request);
     }
-
-    //todo - delete group
 }

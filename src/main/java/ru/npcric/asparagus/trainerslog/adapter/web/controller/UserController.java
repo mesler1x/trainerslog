@@ -1,5 +1,7 @@
 package ru.npcric.asparagus.trainerslog.adapter.web.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -14,16 +16,23 @@ import java.util.List;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 @RequestMapping("/trainerslog/api/v1/user")
+@Tag(name = "Контроллер пользователей")
 //@RolesAllowed("ADMIN")
 public class UserController {
     //проверено
     UserService userService;
 
+    @Operation(
+            summary = "Просмотр всех пользователей системы"
+    )
     @GetMapping("/getAllUsers")
     public List<UserSmallResponse> getAllUsers(){
         return userService.getAllUsers();
     }
 
+    @Operation(
+            summary = "Просмотр аутентифицированного пользователя"
+    )
     @GetMapping("/getCurrent")
     public UserResponse getAuth() {
         return userService.getCurrentUser();

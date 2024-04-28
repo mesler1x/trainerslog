@@ -1,5 +1,7 @@
 package ru.npcric.asparagus.trainerslog.adapter.web.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +19,13 @@ import ru.npcric.asparagus.trainerslog.service.RegistrationService;
 @RequiredArgsConstructor
 @RequestMapping("/trainerslog/api/v1/public")
 @Validated
+@Tag(name = "Контроллер регистрации пользователей")
 public class RegistrationController {
     RegistrationService registrationService;
-    //проблема что можно создать одинаковых юзеров
+    //todo - исправить проблему создания одинаковых юзеров
+    @Operation(
+            summary = "Регистрация пользователей"
+    )
     @PostMapping("/registration")
     public void registration(@RequestBody @Valid RegistrationRequest registrationRequest) {
         registrationService.registerUser(registrationRequest);
