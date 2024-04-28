@@ -31,8 +31,6 @@ public class CoachService {
     CoachRepository coachRepository;
     CoachFactory coachFactory;
     FilialRepository filialRepository;
-    GroupRepository groupRepository;
-    CoachMapper coachMapper;
 
     //@RolesAllowed("ADMIN") включить при настройке security
     public CoachFullResponse createCoach(CoachDTO coachDTO) {
@@ -81,8 +79,10 @@ public class CoachService {
     public void deleteCoach(String username) {
         CoachEntity coachEntity = coachRepository.findByUser_Username(username);
         UserEntity user = coachEntity.getUser();
+        Long coachId = coachEntity.getId();
+        coachRepository.updateGroupsSetTrainerToNull(coachId);
 
-        coachRepository.delete(coachEntity);
+        coachRepository.deleteById(coachId);
         user.getAuthorities().remove(UserRole.COACH);
         user.getAuthorities().add(UserRole.DEFAULT);
     }

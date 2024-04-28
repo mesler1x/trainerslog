@@ -26,7 +26,5 @@ public class FilialEntity extends BaseEntity {
         coachesInFilial = null;
     }
     public record FilialContext(String name, String address) {
-
     }
-
 }
