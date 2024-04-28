@@ -1,6 +1,5 @@
-package ru.npcric.asparagus.trainerslog.adapter.web;
+package ru.npcric.asparagus.trainerslog.adapter.web.controller;
 
-import jakarta.annotation.security.RolesAllowed;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

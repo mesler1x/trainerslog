@@ -1,4 +1,4 @@
-package ru.npcric.asparagus.trainerslog.adapter.web;
+package ru.npcric.asparagus.trainerslog.adapter.web.controller;
 
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
