@@ -6,7 +6,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,14 +30,8 @@ public class RegistrationController {
             summary = "Регистрация пользователей"
     )
     @PostMapping("/registration")
-<<<<<<< HEAD
     public ResponseEntity<RegistrationResponse> registration(@RequestBody @Valid RegistrationRequest registrationRequest) {
         RegistrationResponse registrationResponse = registrationService.registerUser(registrationRequest);
         return ResponseEntity.ok().body(registrationResponse);
-=======
-    public ResponseEntity<?> registration(@RequestBody @Valid RegistrationRequest registrationRequest) {
-        registrationService.registerUser(registrationRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
->>>>>>> 88f017c6ab0061fae487b760307e0184cd427a96
     }
 }
