@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -33,9 +35,9 @@ public class GroupController {
             description = "Создание группы, авторизованным тренером"
     )
     @PostMapping("/createGroup")
-    public GroupFullResponse createGroup(@RequestBody @Valid GroupDTO groupDTO,
-                                         @AuthenticationPrincipal UserEntity coach) {
-        return groupService.createGroup(groupDTO, coach);
+    public ResponseEntity<GroupFullResponse> createGroup(@RequestBody @Valid GroupDTO groupDTO,
+                                                        @AuthenticationPrincipal UserEntity coach) {
+        return ResponseEntity.ok().body(groupService.createGroup(groupDTO, coach));
     }
 
     @Operation(
@@ -43,15 +45,16 @@ public class GroupController {
             description = "У всех учеников после удаления их группы, будут ссылки на null"
     )
     @DeleteMapping("/deleteGroup")
-    public void deleteGroup(@RequestParam("groupName") String groupName) {
+    public ResponseEntity<?> deleteGroup(@RequestParam("groupName") String groupName) {
         groupService.deleteGroup(groupName);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Operation(
             summary = "Обновление тренера группы"
     )
     @PutMapping("/updateGroup")
-    public GroupAndCoachNameResponse updateCoachOfGroup(@RequestBody UpdateCoachInGroupRequest request){
-        return groupService.updateCoachOfGroup(request);
+    public ResponseEntity<GroupAndCoachNameResponse> updateCoachOfGroup(@RequestBody UpdateCoachInGroupRequest request){
+        return ResponseEntity.ok().body(groupService.updateCoachOfGroup(request));
     }
 }
