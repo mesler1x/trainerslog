@@ -9,12 +9,15 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.filial.FilialSmallResponse;
 import ru.npcric.asparagus.trainerslog.service.FilialService;
 
 import java.util.List;
 
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -43,14 +46,30 @@ public class FilialControllerTest {
     @DisplayName("GET /trainerslog/api/v1/filial/getAll проверяет наличие всех филиалов")
     void getAllFilial_ValidatingList_ReturnsValidResponseEntity() {
         //given
-        var filialSmallResponses = List.of(new FilialSmallResponse(1L, "Юго Западный филиал", "Фурманова 125"),
+        List<FilialSmallResponse> expectedResponse = List.of(new FilialSmallResponse(1L, "Юго Западный филиал", "Фурманова 125"),
                 new FilialSmallResponse(2L, "Академический филиал", "Павла Шаманова 6"));
-        Mockito.doReturn(filialSmallResponses).when(this.filialService).getAll();
+        Mockito.doReturn(expectedResponse).when(this.filialService).getAll();
         //when
         var responseEntity = this.filialController.getAllFilial();
         //then
+
+        List<FilialSmallResponse> actualResponse = responseEntity.getBody();
+
+        assertThat(actualResponse).hasSameSizeAs(expectedResponse).containsExactlyInAnyOrderElementsOf(expectedResponse);
         assertNotNull(responseEntity);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(filialSmallResponses, responseEntity.getBody());
+        assertEquals(expectedResponse, responseEntity.getBody());
+    }
+
+    @Test
+    @DisplayName("DELETE /trainerslog/api/v1/filial/deleteByAddress проверяет удаление филиала по адресу")
+    void deleteFilialByAddress_ChecksValidDeleting_ReturnsOkStatusCode() {
+        //given
+        String address = "Павла Шаманова 6";
+
+        ResponseEntity<?> responseEntity = filialController.deleteFilialByAddress(address);
+        Mockito.verify(filialService).deleteFilialByAddress(address);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
 }
