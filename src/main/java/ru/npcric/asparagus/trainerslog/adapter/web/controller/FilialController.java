@@ -6,6 +6,9 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
@@ -30,8 +33,8 @@ public class FilialController {
             description = "Создание нового филиала администрацией федерации айкидо"
     )
     @PostMapping("/create")
-    public FilialSmallResponse createFilial(@Valid @RequestBody FilialDTO filialDTO) {
-        return filialService.create(filialDTO);
+    public ResponseEntity<FilialSmallResponse> createFilial(@Valid @RequestBody FilialDTO filialDTO) {
+        return ResponseEntity.ok().body(filialService.create(filialDTO));
     }
 
     @Operation(
@@ -39,8 +42,8 @@ public class FilialController {
             description = "Получение id, именён и адресов всех филиалов федерации"
     )
     @GetMapping("/getAll")
-    public List<FilialSmallResponse> getAllFilial(){
-        return filialService.getAll();
+    public ResponseEntity<List<FilialSmallResponse>> getAllFilial(){
+        return ResponseEntity.ok().body(filialService.getAll());
     }
 
     @Operation(
@@ -48,7 +51,8 @@ public class FilialController {
             description = "Филиалы тренеров, учеников после удаления их филиала будут ссылаться на null"
     )
     @DeleteMapping("/deleteByAddress")
-    public void deleteFilialByAddress(@RequestParam("address") String address){
+    public ResponseEntity<?> deleteFilialByAddress(@RequestParam("address") String address){
         filialService.deleteFilialByAddress(address);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
