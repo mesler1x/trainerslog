@@ -6,12 +6,15 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.common.RegistrationRequest;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.auth.RegistrationResponse;
 import ru.npcric.asparagus.trainerslog.service.RegistrationService;
 
 @RestController
@@ -27,7 +30,8 @@ public class RegistrationController {
             summary = "Регистрация пользователей"
     )
     @PostMapping("/registration")
-    public void registration(@RequestBody @Valid RegistrationRequest registrationRequest) {
-        registrationService.registerUser(registrationRequest);
+    public ResponseEntity<RegistrationResponse> registration(@RequestBody @Valid RegistrationRequest registrationRequest) {
+        RegistrationResponse registrationResponse = registrationService.registerUser(registrationRequest);
+        return ResponseEntity.ok().body(registrationResponse);
     }
 }

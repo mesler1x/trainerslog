@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +38,8 @@ public class CoachController {
 
     )
     @PostMapping("/createCoach")
-    public CoachFullResponse createCoach(@RequestBody @Valid CoachDTO coachDTO) {
-        return coachService.createCoach(coachDTO);
+    public ResponseEntity<CoachFullResponse> createCoach(@RequestBody @Valid CoachDTO coachDTO) {
+        return ResponseEntity.ok().body(coachService.createCoach(coachDTO));
     }
 
     @Operation(
@@ -45,8 +47,8 @@ public class CoachController {
             description = "Получение имён всех тренеров в филиале, по указанному адресу"
     )
     @GetMapping("/getCoachesInFilial")
-    public AllCoachesInFilialResponse getCoachesInFilial(@RequestBody @Valid FilialDTO filialDTO) {
-        return coachService.getCoachesInFilial(filialDTO);
+    public ResponseEntity<AllCoachesInFilialResponse> getCoachesInFilial(@RequestBody @Valid FilialDTO filialDTO) {
+        return ResponseEntity.ok().body(coachService.getCoachesInFilial(filialDTO));
     }
 
 
@@ -54,8 +56,8 @@ public class CoachController {
             summary = "Получение всех тренеров во всех филиалах"
     )
     @GetMapping("/getAllCoaches")
-    public List<CoachWithFilialNameResponse> getAllCoaches() {
-        return coachService.getAllCoaches();
+    public ResponseEntity<List<CoachWithFilialNameResponse>> getAllCoaches() {
+        return ResponseEntity.ok().body(coachService.getAllCoaches());
     }
 
 
@@ -64,8 +66,8 @@ public class CoachController {
             description = "Получение групп авторизованного тренера"
     )
     @GetMapping("/getCoachGroups")
-    public CoachGroupsResponse getCoachGroups(@AuthenticationPrincipal UserEntity userCoach) {
-        return coachService.getCoachGroups(userCoach);
+    public ResponseEntity<CoachGroupsResponse> getCoachGroups(@AuthenticationPrincipal UserEntity userCoach) {
+        return ResponseEntity.ok().body(coachService.getCoachGroups(userCoach));
     }
 
     @Operation(
@@ -73,8 +75,8 @@ public class CoachController {
             description = "Получение всех студентов авторизованного тренера"
     )
     @GetMapping("/getAllCoachStudents")
-    public CoachStudentsResponse getAllCoachStudents(@AuthenticationPrincipal UserEntity userCoach) {
-        return coachService.getCoachStudents(userCoach);
+    public ResponseEntity<CoachStudentsResponse> getAllCoachStudents(@AuthenticationPrincipal UserEntity userCoach) {
+        return ResponseEntity.ok().body(coachService.getCoachStudents(userCoach));
     }
 
     @Operation(
@@ -84,7 +86,8 @@ public class CoachController {
                     "все студенты аналогично перестают иметь тренера"
     )
     @DeleteMapping("/deleteCoach")
-    public void deleteCoach(@RequestParam String username) {
+    public ResponseEntity<?> deleteCoach(@RequestParam String username) {
         coachService.deleteCoach(username);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

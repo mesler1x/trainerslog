@@ -97,6 +97,7 @@
                 <version>2.10</version>
                 <configuration>
                     <useFile>false</useFile>
+                    <argLine>-XX:+EnableDynamicAgentLoading</argLine>
                 </configuration>
             </plugin>
 
