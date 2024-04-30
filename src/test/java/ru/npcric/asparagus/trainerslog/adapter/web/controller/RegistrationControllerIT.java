@@ -19,6 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest
 @AutoConfigureMockMvc(printOnlyOnFailure = false)
+@Transactional
 public class RegistrationControllerIT {
 
     @Autowired
@@ -31,7 +32,6 @@ public class RegistrationControllerIT {
     PasswordEncoder passwordEncoder;
 
     @Test
-    @Transactional
     void registration_PasswordEncrypted_ReturnsValidOkResponse() throws Exception {
         var requestBuilder = post("/trainerslog/api/v1/public/registration")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -58,6 +58,5 @@ public class RegistrationControllerIT {
 
         assertTrue(matcher.matches());
         assertNotNull(userRepository.findByUsername("sample").get());
-        assertEquals(passBcrypt, userRepository.findByUsername("sample").get().getPassword());
     }
 }

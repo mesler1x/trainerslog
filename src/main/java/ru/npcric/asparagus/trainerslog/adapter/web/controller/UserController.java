@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.auth.UserResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.user.UserSmallResponse;
@@ -26,8 +27,8 @@ public class UserController {
             summary = "Просмотр всех пользователей системы"
     )
     @GetMapping("/getAllUsers")
-    public List<UserSmallResponse> getAllUsers(){
-        return userService.getAllUsers();
+    public ResponseEntity<List<UserSmallResponse>> getAllUsers(){
+        return ResponseEntity.ok().body(userService.getAllUsers());
     }
 
     @Operation(

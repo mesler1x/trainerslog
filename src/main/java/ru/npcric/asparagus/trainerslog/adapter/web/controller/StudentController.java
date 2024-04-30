@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.AddStudentInGroupRequest;
@@ -24,12 +26,13 @@ import ru.npcric.asparagus.trainerslog.service.StudentService;
 //@RolesAllowed("DEFAULT")
 public class StudentController {
     StudentService studentService;
+
     @Operation(
             summary = "Создание студента"
     )
     @PostMapping("/create")
-    public StudentCreateResponse createStudent(@RequestBody @Valid StudentDTO studentDTO) {
-        return studentService.createStudent(studentDTO);
+    public ResponseEntity<StudentCreateResponse> createStudent(@RequestBody @Valid StudentDTO studentDTO) {
+        return ResponseEntity.ok().body(studentService.createStudent(studentDTO));
     }
 
 
@@ -37,16 +40,16 @@ public class StudentController {
             summary = "Добавление студента в существующую группу"
     )
     @PutMapping("/addStudentInExistingGroup")
-    public StudentWithGroupSmallResponse addStudentInExistingGroup(@RequestBody AddStudentInGroupRequest request){
-        return studentService.addStudentInGroup(request);
+    public ResponseEntity<StudentWithGroupSmallResponse> addStudentInExistingGroup(@RequestBody AddStudentInGroupRequest request) {
+        return ResponseEntity.ok().body(studentService.addStudentInGroup(request));
     }
 
     @Operation(
             summary = "Просмотр всех студентов по имени группы"
     )
     @GetMapping("/getStudentsInGroup")
-    public StudentsInGroupResponse getStudentsInGroup(@RequestParam("groupName") String groupNameRequest){
-        return studentService.getStudentsInGroup(groupNameRequest);
+    public ResponseEntity<StudentsInGroupResponse> getStudentsInGroup(@RequestParam("groupName") String groupNameRequest) {
+        return ResponseEntity.ok().body(studentService.getStudentsInGroup(groupNameRequest));
     }
 
     @Operation(
@@ -54,9 +57,8 @@ public class StudentController {
             description = "При удалении студента в базе данных у этого пользователя удаляется роль студента"
     )
     @DeleteMapping("/deleteStudentFromGroup")
-    public void deleteStudentFromGroup(@RequestParam("studentUsername") String studentUsername) {
+    public ResponseEntity<?> deleteStudentFromGroup(@RequestParam("studentUsername") String studentUsername) {
         studentService.deleteStudentFromGroup(studentUsername);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    //todo deleteStudent
 }
