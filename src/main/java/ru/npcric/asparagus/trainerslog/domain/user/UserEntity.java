@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "user_info")
 @NoArgsConstructor
