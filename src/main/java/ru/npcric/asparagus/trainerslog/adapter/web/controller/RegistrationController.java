@@ -30,8 +30,14 @@ public class RegistrationController {
             summary = "Регистрация пользователей"
     )
     @PostMapping("/registration")
+<<<<<<< HEAD
     public ResponseEntity<RegistrationResponse> registration(@RequestBody @Valid RegistrationRequest registrationRequest) {
         RegistrationResponse registrationResponse = registrationService.registerUser(registrationRequest);
         return ResponseEntity.ok().body(registrationResponse);
+=======
+    public ResponseEntity<?> registration(@RequestBody @Valid RegistrationRequest registrationRequest) {
+        registrationService.registerUser(registrationRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+>>>>>>> 88f017c6ab0061fae487b760307e0184cd427a96
     }
 }

@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+<<<<<<< HEAD
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.common.RegistrationRequest;
@@ -19,6 +20,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+=======
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.common.RegistrationRequest;
+import ru.npcric.asparagus.trainerslog.service.RegistrationService;
+
+import static org.mockito.Mockito.doReturn;
+>>>>>>> 88f017c6ab0061fae487b760307e0184cd427a96
 
 @ExtendWith(MockitoExtension.class)
 public class RegistrationControllerTest {

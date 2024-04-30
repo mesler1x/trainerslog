@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.UserRepository;
@@ -21,7 +23,11 @@ public class RegistrationService {
     PasswordEncoder passwordEncoder;
     UserRepository userRepository;
 
+<<<<<<< HEAD
     public RegistrationResponse registerUser(RegistrationRequest registrationRequest) {
+=======
+    public ResponseEntity<?> registerUser(RegistrationRequest registrationRequest) {
+>>>>>>> 88f017c6ab0061fae487b760307e0184cd427a96
         String encodePass = passwordEncoder.encode(registrationRequest.password());
 
         UserEntity.Context userEntity = new UserEntity.Context(
@@ -30,7 +36,11 @@ public class RegistrationService {
 
         UserEntity user = UserEntity.from(userEntity);
         userRepository.save(user);
+<<<<<<< HEAD
         List<String> userRoles = user.getAuthorities().stream().map(Enum::name).toList();
         return new RegistrationResponse(user.getUsername(), user.getPassword(), userRoles);
+=======
+        return new ResponseEntity<>(HttpStatus.OK);
+>>>>>>> 88f017c6ab0061fae487b760307e0184cd427a96
     }
 }
