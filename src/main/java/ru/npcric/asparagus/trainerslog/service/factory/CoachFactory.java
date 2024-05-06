@@ -3,12 +3,15 @@ package ru.npcric.asparagus.trainerslog.service.factory;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import ru.npcric.asparagus.trainerslog.adapter.repository.FilialRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.UserRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.errors.AlreadyExistException;
+import ru.npcric.asparagus.trainerslog.adapter.web.errors.UserNotFoundException;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.FilialEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
@@ -29,7 +32,10 @@ public class CoachFactory {
         String username = coachDTO.username();
 
         Optional<UserEntity> user = userRepository.findByUsername(username);
-        if (user.isEmpty()) throw new UsernameNotFoundException("User not found");
+        if (user.isEmpty()) throw new UserNotFoundException(username);
+        else if(user.get().getAuthorities().contains(UserRole.COACH)){
+            throw new AlreadyExistException("Coach");
+        }
 
         UserEntity userEntity = user.get();
         userEntity.getAuthorities().add(UserRole.COACH);
