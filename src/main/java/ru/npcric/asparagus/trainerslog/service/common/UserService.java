@@ -2,9 +2,9 @@ package ru.npcric.asparagus.trainerslog.service.common;
 
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.UserRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.auth.UserResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.user.UserSmallResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.errors.UserNotFoundException;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class UserService implements UserDetailsService {
         Optional<UserEntity> person = userRepository.findByUsername(username);
 
         if (person.isEmpty())
-            throw new UsernameNotFoundException("User not found");
+            throw new UserNotFoundException(username);
 
         return person.get();
     }
