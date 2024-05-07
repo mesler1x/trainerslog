@@ -41,7 +41,7 @@ public class StudentEntity extends BaseEntity {
     UserEntity user;
 
     public StudentEntity(StudentContext context) {
-        ticket = null;
+        ticket = context.ticket;
         fullName = context.fullName;
         sex = context.sex;
         birthDate = context.birthDate;
@@ -54,6 +54,7 @@ public class StudentEntity extends BaseEntity {
     }
 
     public record StudentContext(
+            TicketEntity ticket,
             String fullName,
             String sex,
             LocalDate birthDate,
