@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.UserRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.common.RegistrationRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.auth.RegistrationResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.errors.AlreadyExistException;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
@@ -26,6 +28,10 @@ public class RegistrationService {
 
     public RegistrationResponse registerUser(RegistrationRequest registrationRequest) {
         String encodePass = passwordEncoder.encode(registrationRequest.password());
+        Optional<UserEntity> checkUsername = userRepository.findByUsername(registrationRequest.username());
+        if (checkUsername.isPresent()) {
+            throw new AlreadyExistException("User");
+        }
 
         UserEntity.Context userEntity = new UserEntity.Context(
             registrationRequest.username(),
