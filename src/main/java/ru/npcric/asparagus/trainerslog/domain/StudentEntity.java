@@ -1,10 +1,12 @@
 package ru.npcric.asparagus.trainerslog.domain;
 
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
@@ -23,6 +25,7 @@ public class StudentEntity extends BaseEntity {
     String fullName;
     String sex;
     LocalDate birthDate;
+
     @ManyToOne
     @JoinColumn(name = "sgroup_id")
     GroupEntity group;
@@ -31,14 +34,20 @@ public class StudentEntity extends BaseEntity {
     String phoneNumber;
     String parentPhoneNumber;
     String parentFullName;
+
     @ManyToMany
     @JoinTable(name = "attendance",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "training_id", referencedColumnName = "id"))
     List<TrainingEntity> trainingEntityList;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     UserEntity user;
+
+    @Type(JsonType.class)
+    @Column(columnDefinition = "jsonb", name = "link_to_cheques")
+    List<String> linkToCheques;
 
     public StudentEntity(StudentContext context) {
         ticket = context.ticket;
@@ -51,6 +60,7 @@ public class StudentEntity extends BaseEntity {
         parentFullName = context.parentFullName;
         group = null;
         user = context.user;
+        linkToCheques = null;
     }
 
     public record StudentContext(

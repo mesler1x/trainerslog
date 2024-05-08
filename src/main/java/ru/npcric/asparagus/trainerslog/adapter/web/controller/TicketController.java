@@ -24,6 +24,7 @@ import ru.npcric.asparagus.trainerslog.service.TicketService;
 public class TicketController {
     TicketService ticketService;
 
+    //todo - scheduler
     @PatchMapping("/monthlyUpdate")
     public ResponseEntity<?> monthlyUpdateTicketForStudent(@RequestBody TicketValidationRequest ticketValidationRequest) {
         ticketService.updateValidTicketToDefault(ticketValidationRequest);

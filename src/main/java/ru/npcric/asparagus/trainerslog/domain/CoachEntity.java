@@ -1,9 +1,11 @@
 package ru.npcric.asparagus.trainerslog.domain;
 
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
