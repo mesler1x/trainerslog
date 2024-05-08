@@ -42,17 +42,16 @@ public class StudentService {
         String studentUserName = request.studentUserName();
         String groupName = request.groupName();
 
-        //todo - исправить потом что бы группу искало не только по имени
         GroupEntity group = groupRepository.findByGroupName(groupName);
         StudentEntity studentEntity = studentRepository.findByUser_Username(studentUserName);
 
         studentEntity.setGroup(group);
         group.getStudents().add(studentEntity);
 
+
         return studentMapper.entityToSmallResponse(studentEntity);
     }
     public StudentsInGroupResponse getStudentsInGroup(String groupName) {
-        //todo - исправить потом что бы группу искало не только по имени
         GroupEntity groupEntity = groupRepository.findByGroupName(groupName);
         List<String> studentNames = groupEntity.getStudents().stream().map(StudentEntity::getFullName).toList();
         String groupCoach = groupEntity.getCoach().getName();
@@ -60,7 +59,6 @@ public class StudentService {
     }
 
     public void deleteStudentFromGroup(String studentUsername) {
-        //todo - исправить потом что бы группу искало не только по имени
         studentRepository.findByUser_Username(studentUsername).setGroup(null);
     }
 }

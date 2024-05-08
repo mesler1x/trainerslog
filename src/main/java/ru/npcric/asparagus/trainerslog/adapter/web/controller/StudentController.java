@@ -39,7 +39,7 @@ public class StudentController {
     @Operation(
             summary = "Добавление студента в существующую группу"
     )
-    @PutMapping("/addStudentInExistingGroup")
+    @PatchMapping("/addStudentInExistingGroup")
     public ResponseEntity<StudentWithGroupSmallResponse> addStudentInExistingGroup(@RequestBody AddStudentInGroupRequest request) {
         return ResponseEntity.ok().body(studentService.addStudentInGroup(request));
     }
