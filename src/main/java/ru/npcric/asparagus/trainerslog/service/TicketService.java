@@ -27,6 +27,7 @@ public class TicketService {
         Long ticketId = studentEntity.getTicket().getId();
         studentRepository.updateStudentByIdSetTicketToNull(studentEntity.getId());
         ticketRepository.deleteById(ticketId);
+
         TicketEntity newTicket = getDefaultTicket();
         studentEntity.setTicket(newTicket);
     }
