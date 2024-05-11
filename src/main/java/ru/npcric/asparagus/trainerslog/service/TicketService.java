@@ -12,6 +12,7 @@ import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 import ru.npcric.asparagus.trainerslog.domain.TicketEntity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PUBLIC)

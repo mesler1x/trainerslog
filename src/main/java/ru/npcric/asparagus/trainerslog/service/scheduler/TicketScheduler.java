@@ -1,5 +1,6 @@
 package ru.npcric.asparagus.trainerslog.service.scheduler;
 
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -31,16 +32,18 @@ public class TicketScheduler {
 
 
     @SchedulerLock(name = "UpdateAllTicketsStatus")
-    @Scheduled(cron = "* */2 * * * *")
+    @Scheduled(cron = "0 */10 * * * *")
     @SneakyThrows
+    @Transactional
     public void autoUpdateAllTicketsStatus() {
         log.info("Scheduler updateAllTicketsStatus start");
         List<StudentEntity> students = studentRepository.findStudentsWithExpiredTickets(LocalDate.now());
         for (StudentEntity student : students) {
-            Long ticketId = student.getTicket().getId();
+            TicketEntity ticket = student.getTicket();
             TicketEntity newTicket = ticketService.getDefaultTicket();
             student.setTicket(newTicket);
-            ticketRepository.deleteById(ticketId);
+            studentRepository.save(student);
+            ticketRepository.delete(ticket);
         }
 
         log.info("Scheduler updateAllTicketsStatus end");
