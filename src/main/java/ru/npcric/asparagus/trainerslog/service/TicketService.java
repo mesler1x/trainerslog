@@ -14,7 +14,7 @@ import ru.npcric.asparagus.trainerslog.domain.TicketEntity;
 import java.time.LocalDate;
 
 @Service
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@FieldDefaults(makeFinal = true, level = AccessLevel.PUBLIC)
 @RequiredArgsConstructor
 public class TicketService {
     TicketRepository ticketRepository;
@@ -37,7 +37,7 @@ public class TicketService {
         return ticketEntity;
     }
 
-    private TicketEntity getDefaultTicket() {
+    public TicketEntity getDefaultTicket() {
         TicketEntity ticketEntity = ticketRepository.save(new TicketEntity(LocalDate.now(),
                 LocalDate.now().plusMonths(1), true, INITIAL_COST));
         return ticketEntity;
