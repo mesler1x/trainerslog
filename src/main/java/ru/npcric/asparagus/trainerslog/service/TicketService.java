@@ -33,6 +33,15 @@ public class TicketService {
         studentEntity.setTicket(newTicket);
     }
 
+    @Transactional
+    public void updateToPaidTicket(TicketValidationRequest ticketValidationRequest) {
+        StudentEntity studentEntity = studentRepository.findByUser_Username(ticketValidationRequest.username());
+        TicketEntity ticket = studentEntity.getTicket();
+        ticket.setPaidAmount(0);
+        ticket.setIsExpired(false);
+        ticketRepository.save(ticket);
+    }
+
     public TicketEntity createTicketForNewStudent() {
         TicketEntity ticketEntity = getDefaultTicket();
         return ticketEntity;

@@ -30,4 +30,10 @@ public class TicketController {
         ticketService.updateValidTicketToDefault(ticketValidationRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PatchMapping("/updateToPaid")
+    public ResponseEntity<?> updateTicketToPaid(@RequestBody TicketValidationRequest ticketValidationRequest) {
+        ticketService.updateToPaidTicket(ticketValidationRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

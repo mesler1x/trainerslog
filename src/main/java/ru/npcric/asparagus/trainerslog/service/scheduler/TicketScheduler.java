@@ -32,6 +32,7 @@ public class TicketScheduler {
 
 
     @SchedulerLock(name = "UpdateAllTicketsStatus")
+    //Каждые 10 минут
     @Scheduled(cron = "0 */10 * * * *")
     @SneakyThrows
     @Transactional
