@@ -8,6 +8,7 @@ import lombok.Setter;
 import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter

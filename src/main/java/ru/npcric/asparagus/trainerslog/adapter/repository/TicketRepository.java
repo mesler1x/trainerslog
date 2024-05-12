@@ -1,6 +1,7 @@
 package ru.npcric.asparagus.trainerslog.adapter.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 import ru.npcric.asparagus.trainerslog.domain.TicketEntity;
 
