@@ -35,7 +35,7 @@ public class StudentEntity extends BaseEntity {
     String parentPhoneNumber;
     String parentFullName;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(name = "attendance",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "training_id", referencedColumnName = "id"))
