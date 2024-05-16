@@ -2,7 +2,8 @@ version: "3.9"
 services:
   trainers-log-backend:
     container_name: trainers_log_backend
-    image: mesler1x/trainerslog:01
+    build:
+      dockerfile: Dockerfile
     hostname: trainers_log_backend
     ports:
       - "8080:8080"
