@@ -8,9 +8,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.training.TrainingDTO;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.CoachFullResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.training.TrainingCreateResponse;
 import ru.npcric.asparagus.trainerslog.service.TrainingService;
 
