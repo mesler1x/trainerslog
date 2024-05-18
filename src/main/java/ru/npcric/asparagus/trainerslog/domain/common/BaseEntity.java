@@ -16,9 +16,9 @@ import static jakarta.persistence.GenerationType.*;
 @FieldNameConstants(innerTypeName = "BaseFields")
 public abstract class BaseEntity {
     @Id
-    @SequenceGenerator(name = HibernateSequence.NAME, sequenceName = HibernateSequence.NAME,
-            allocationSize = HibernateSequence.ALLOCATION_SIZE, initialValue = 20)
-    @GeneratedValue(strategy = SEQUENCE, generator = HibernateSequence.NAME)
+    @SequenceGenerator(name = "MY_SEQ", sequenceName = "MY_SEQ",
+            allocationSize = 1, initialValue = 20)
+    @GeneratedValue(strategy = SEQUENCE, generator = "MY_SEQ")
     Long id;
 
     @Override

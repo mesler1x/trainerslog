@@ -9,7 +9,7 @@
     <changeSet id="2024-04-11-18-43" author="MeslerRA" context="test">
         <comment>INITIALIZE</comment>
 
-        <createSequence sequenceName="hibernate_sequence" incrementBy="30" startValue="30"/>
+        <createSequence sequenceName="MY_SEQ" incrementBy="1" startValue="20"/>
 
         <createTable tableName="user_info">
             <column name="id" type="bigint">
