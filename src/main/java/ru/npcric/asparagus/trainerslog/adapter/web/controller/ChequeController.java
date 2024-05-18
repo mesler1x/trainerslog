@@ -8,7 +8,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.cheque.UsernameAndLinkRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.cheque.StudentWithChequesResponse;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.ChequeService;

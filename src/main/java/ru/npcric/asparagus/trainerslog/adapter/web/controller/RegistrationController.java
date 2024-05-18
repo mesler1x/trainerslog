@@ -9,10 +9,7 @@ import lombok.experimental.FieldDefaults;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.common.RegistrationRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.auth.RegistrationResponse;
 import ru.npcric.asparagus.trainerslog.service.RegistrationService;
@@ -25,7 +22,7 @@ import ru.npcric.asparagus.trainerslog.service.RegistrationService;
 @Tag(name = "Контроллер регистрации пользователей")
 public class RegistrationController {
     RegistrationService registrationService;
-    //todo - исправить проблему создания одинаковых юзеров
+
     @Operation(
             summary = "Регистрация пользователей"
     )
