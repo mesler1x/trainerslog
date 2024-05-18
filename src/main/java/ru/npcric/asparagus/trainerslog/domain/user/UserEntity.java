@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.Type;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class UserEntity implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class UserEntity extends BaseEntity implements UserDetails {
     String username;
     String password;
     @Type(JsonType.class)

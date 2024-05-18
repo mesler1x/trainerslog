@@ -9,10 +9,10 @@
     <changeSet id="2024-04-11-18-43" author="MeslerRA" context="test">
         <comment>INITIALIZE</comment>
 
-        <createSequence sequenceName="hibernate_sequence" incrementBy="1"/>
+        <createSequence sequenceName="hibernate_sequence" incrementBy="30" startValue="30"/>
 
         <createTable tableName="user_info">
-            <column name="id" autoIncrement="true" type="bigint">
+            <column name="id" type="bigint">
                 <constraints primaryKey="true" primaryKeyName="user_pk"/>
             </column>
 
@@ -212,5 +212,14 @@
                              referencedColumnNames="id"/>
             </column>
         </createTable>
+
+        <addAutoIncrement tableName="user_info" columnName="id" columnDataType="bigint" incrementBy="1"/>
+        <addAutoIncrement tableName="filial" columnName="id" columnDataType="bigint" incrementBy="1"/>
+        <addAutoIncrement tableName="coach" columnName="id" columnDataType="bigint" incrementBy="1"/>
+        <addAutoIncrement tableName="sgroup" columnName="id" columnDataType="bigint" incrementBy="1"/>
+        <addAutoIncrement tableName="ticket" columnName="id" columnDataType="bigint" incrementBy="1"/>
+        <addAutoIncrement tableName="student" columnName="id" columnDataType="bigint" incrementBy="1"/>
+        <addAutoIncrement tableName="training" columnName="id" columnDataType="bigint" incrementBy="1"/>
+
     </changeSet>
 </databaseChangeLog>

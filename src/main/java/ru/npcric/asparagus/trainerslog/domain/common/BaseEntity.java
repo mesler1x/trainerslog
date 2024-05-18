@@ -4,16 +4,21 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.FieldNameConstants;
 
 import java.util.Objects;
+
+import static jakarta.persistence.GenerationType.*;
 
 @Getter
 @MappedSuperclass
 @FieldDefaults(level = AccessLevel.PROTECTED)
+@FieldNameConstants(innerTypeName = "BaseFields")
 public abstract class BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = HibernateSeq.NAME)
-    @SequenceGenerator(name = HibernateSeq.NAME, allocationSize = HibernateSeq.ALLOCATION_SIZE)
+    @SequenceGenerator(name = HibernateSequence.NAME, sequenceName = HibernateSequence.NAME,
+            allocationSize = HibernateSequence.ALLOCATION_SIZE, initialValue = 20)
+    @GeneratedValue(strategy = SEQUENCE, generator = HibernateSequence.NAME)
     Long id;
 
     @Override
