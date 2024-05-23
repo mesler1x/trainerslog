@@ -17,6 +17,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.auth.UserRespons
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.user.UserSmallResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.errors.UserNotFoundException;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
+import ru.npcric.asparagus.trainerslog.domain.user.UserRole;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -63,5 +64,11 @@ public class UserService implements UserDetailsService {
         List<UserEntity> userEntities = userRepository.findAll();
         return userEntities.stream()
                 .map(userEntity -> new UserSmallResponse(userEntity.getId(),userEntity.getUsername())).toList();
+    }
+
+    public UserResponse addAdminRoleToExistingUser(String username) {
+        UserEntity user = (UserEntity) loadUserByUsername(username);
+        user.getAuthorities().add(UserRole.ADMIN);
+        return new UserResponse(user.getUsername(), user.getAuthorities().stream().map(Enum::name).toList());
     }
 }

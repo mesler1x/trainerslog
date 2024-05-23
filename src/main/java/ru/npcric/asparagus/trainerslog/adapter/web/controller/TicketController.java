@@ -1,6 +1,8 @@
 package ru.npcric.asparagus.trainerslog.adapter.web.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.RolesAllowed;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,17 +19,24 @@ import ru.npcric.asparagus.trainerslog.service.TicketService;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping("/trainerslog/api/v1/ticket")
 @Tag(name = "Контроллер абонемента", description = "Контроллер для управления абонементами учеников, федерации айкидо")
-//@RolesAllowed("DEFAULT")
 public class TicketController {
     TicketService ticketService;
 
-    //todo - scheduler
+    @Operation(
+            summary = "Обновляет абонемент каждый месяц",
+            description = "Обновление абонемента на дефолтный, 1000р - задолженность"
+    )
+    @RolesAllowed("ADMIN")
     @PatchMapping("/monthlyUpdate")
     public ResponseEntity<?> monthlyUpdateTicketForStudent(@RequestBody TicketValidationRequest ticketValidationRequest) {
         ticketService.updateValidTicketToDefault(ticketValidationRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "Обновление абонемента, при его оплате"
+    )
+    @RolesAllowed({"ADMIN","COACH"})
     @PatchMapping("/updateToPaid")
     public ResponseEntity<?> updateTicketToPaid(@RequestBody TicketValidationRequest ticketValidationRequest) {
         ticketService.updateToPaidTicket(ticketValidationRequest);

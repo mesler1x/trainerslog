@@ -1,6 +1,8 @@
 package ru.npcric.asparagus.trainerslog.adapter.web.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -20,15 +22,22 @@ import ru.npcric.asparagus.trainerslog.service.TrainingService;
 @RequestMapping("/trainerslog/api/v1/training")
 @Tag(name = "Контроллер тренировки", description =
         "Контроллер для управления тренировками которые проводят тренеры федерации айкидо")
-//@RolesAllowed("DEFAULT")
+@RolesAllowed({"ADMIN", "COACH"})
 public class TrainingController {
     TrainingService trainingService;
 
+    @Operation(
+            summary = "Создание тренировки"
+    )
     @PostMapping("/createTraining")
     public TrainingCreateResponse createTraining(@RequestBody @Valid TrainingDTO trainingDTO) {
         return trainingService.createTraining(trainingDTO);
     }
 
+    //todo - cascade
+    @Operation(
+            summary = "Удаление тренировки"
+    )
     @DeleteMapping("/deleteTraining")
     public ResponseEntity<?> deleteTraining(@RequestBody @Valid TrainingDTO trainingDTO) {
         trainingService.deleteTraining(trainingDTO);

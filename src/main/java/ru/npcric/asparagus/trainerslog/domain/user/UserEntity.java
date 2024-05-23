@@ -8,9 +8,7 @@ import org.hibernate.annotations.Type;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
@@ -24,18 +22,17 @@ public class UserEntity extends BaseEntity implements UserDetails {
     String password;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    List<UserRole> authorities;
+    Set<UserRole> authorities;
     boolean accountNonExpired;
     boolean credentialsNonExpired;
     boolean enabled;
     boolean accountNonLocked;
 
-    //нужно спросить на счет связи потому что user не получится удалить
     public static UserEntity from(Context context) {
         UserEntity user = new UserEntity();
         user.username = context.username();
         user.password = context.password;
-        List<UserRole> defaultRole = new ArrayList<>();
+        Set<UserRole> defaultRole = new HashSet<>();
         defaultRole.add(UserRole.DEFAULT);
         user.authorities = defaultRole;
         user.accountNonExpired = true;
@@ -54,10 +51,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         UserEntity user = (UserEntity) o;
-
-
         return id != null && id.equals(user.getId());
     }
 

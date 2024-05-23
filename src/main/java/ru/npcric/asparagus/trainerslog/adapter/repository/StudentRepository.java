@@ -12,12 +12,13 @@ import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
     StudentEntity findByFullName(@NotBlank String name);
     List<StudentEntity> findAllByUser_UsernameIn(List<String> studentUsernames);
-    StudentEntity findByUser_Username(String username);
+    Optional<StudentEntity> findByUser_Username(String username);
 
     @Transactional
     @Modifying

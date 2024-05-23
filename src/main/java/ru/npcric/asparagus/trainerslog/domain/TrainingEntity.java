@@ -1,10 +1,7 @@
 package ru.npcric.asparagus.trainerslog.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 
@@ -12,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name = "training")

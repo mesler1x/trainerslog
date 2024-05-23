@@ -2,6 +2,7 @@ package ru.npcric.asparagus.trainerslog.adapter.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -24,19 +25,18 @@ import ru.npcric.asparagus.trainerslog.service.GroupService;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping("/trainerslog/api/v1/group")
 @Tag(name = "Контроллер группы", description = "Контроллер для управления группами в филиалах")
-//@RolesAllowed("DEFAULT")
+@RolesAllowed({"ADMIN", "COACH"})
 public class GroupController {
     GroupService groupService;
 
-    //@RolesAllowed("COACH")
-    //todo - поменять на просто create
+
     @Operation(
             summary = "Создание группы тренером",
             description = "Создание группы, авторизованным тренером"
     )
     @PostMapping("/createGroup")
     public ResponseEntity<GroupFullResponse> createGroup(@RequestBody @Valid GroupDTO groupDTO,
-                                                        @AuthenticationPrincipal UserEntity coach) {
+                                                         @AuthenticationPrincipal UserEntity coach) {
         return ResponseEntity.ok().body(groupService.createGroup(groupDTO, coach));
     }
 
@@ -54,7 +54,7 @@ public class GroupController {
             summary = "Обновление тренера группы"
     )
     @PutMapping("/updateGroup")
-    public ResponseEntity<GroupAndCoachNameResponse> updateCoachOfGroup(@RequestBody UpdateCoachInGroupRequest request){
+    public ResponseEntity<GroupAndCoachNameResponse> updateCoachOfGroup(@RequestBody UpdateCoachInGroupRequest request) {
         return ResponseEntity.ok().body(groupService.updateCoachOfGroup(request));
     }
 }
