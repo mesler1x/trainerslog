@@ -28,16 +28,18 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class SecurityConfig {
-    // временное решение, позже переделать
+
     public static String[] PERMITTED_URI = {
             "/trainerslog/api/v1/public/**",
             "/trainerslog/api/v1/coach/getCoachesInFilial",
             "/trainerslog/api/v1/filial/getAll",
             "/trainerslog/api/v1/user/getCurrent"
     };
+
     public static String[] ADMIN_URI = {
             "/**"
     };
+
     public static String[] STUDENT_URI = {
             "/trainerslog/api/v1/attendance/markAttendance/attendance/monthlyAttendance",
             "/trainerslog/api/v1/cheque/add",
@@ -45,8 +47,8 @@ public class SecurityConfig {
             "/trainerslog/api/v1/coach/getCoachesInFilial",
             "/trainerslog/api/v1/student/getStudentsInGroup",
             "/trainerslog/api/v1/student/deleteStudentFromGroup"
-
     };
+
     public static String[] COACH_URI = {
             "/trainerslog/api/v1/attendance/markAttendance",
             "/trainerslog/api/v1/attendance/markAttendance/attendance",
@@ -61,12 +63,7 @@ public class SecurityConfig {
             "/trainerslog/api/v1/student/addStudentInExistingGroup",
             "/trainerslog/api/v1/student/getStudentsInGroup",
             "/trainerslog/api/v1/ticket/updateToPaid",
-            "/trainerslog/api/v1/training/**",
-            ""
-
-
-
-
+            "/trainerslog/api/v1/training/**"
     };
 
 
