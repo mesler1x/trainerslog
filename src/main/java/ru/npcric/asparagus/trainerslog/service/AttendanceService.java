@@ -12,7 +12,6 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.attendance.GroupA
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.attendance.AttendanceForGroupResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.attendance.AttendanceResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.attendance.MonthlyAttendanceResponse;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupFullResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.errors.UserNotFoundException;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 import ru.npcric.asparagus.trainerslog.domain.TrainingEntity;

@@ -22,7 +22,7 @@ public class TrainingEntity extends BaseEntity {
     @JoinColumn(name = "sgroup_id")
     GroupEntity group;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "attendance",// посещяемость
+    @JoinTable(name = "attendance",
             joinColumns = @JoinColumn(name = "training_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"))
     List<StudentEntity> studentEntityList;
