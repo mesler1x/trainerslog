@@ -25,10 +25,8 @@ import ru.npcric.asparagus.trainerslog.service.GroupService;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping("/trainerslog/api/v1/group")
 @Tag(name = "Контроллер группы", description = "Контроллер для управления группами в филиалах")
-@RolesAllowed({"ADMIN", "COACH"})
 public class GroupController {
     GroupService groupService;
-
 
     @Operation(
             summary = "Создание группы тренером",

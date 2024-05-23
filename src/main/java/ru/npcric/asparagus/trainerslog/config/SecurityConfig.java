@@ -30,16 +30,43 @@ import java.util.List;
 public class SecurityConfig {
     // временное решение, позже переделать
     public static String[] PERMITTED_URI = {
-            "/**"
+            "/trainerslog/api/v1/public/**",
+            "/trainerslog/api/v1/coach/getCoachesInFilial",
+            "/trainerslog/api/v1/filial/getAll",
+            "/trainerslog/api/v1/user/getCurrent"
     };
     public static String[] ADMIN_URI = {
             "/**"
     };
     public static String[] STUDENT_URI = {
-            "/**"
+            "/trainerslog/api/v1/attendance/markAttendance/attendance/monthlyAttendance",
+            "/trainerslog/api/v1/cheque/add",
+            "/trainerslog/api/v1/cheque/delete",
+            "/trainerslog/api/v1/coach/getCoachesInFilial",
+            "/trainerslog/api/v1/student/getStudentsInGroup",
+            "/trainerslog/api/v1/student/deleteStudentFromGroup"
+
     };
     public static String[] COACH_URI = {
-            "/**"
+            "/trainerslog/api/v1/attendance/markAttendance",
+            "/trainerslog/api/v1/attendance/markAttendance/attendance",
+            "/trainerslog/api/v1/attendance/markAttendance/attendance/monthlyAttendance",
+            "/trainerslog/api/v1/cheque/get",
+            "/trainerslog/api/v1/coach/getCoachesInFilial",
+            "/trainerslog/api/v1/coach/getAllCoaches",
+            "/trainerslog/api/v1/coach/getCoachGroups",
+            "/trainerslog/api/v1/coach/getAllCoachStudents",
+            "/trainerslog/api/v1/group/createGroup",
+            "/trainerslog/api/v1/group/deleteGroup",
+            "/trainerslog/api/v1/student/addStudentInExistingGroup",
+            "/trainerslog/api/v1/student/getStudentsInGroup",
+            "/trainerslog/api/v1/ticket/updateToPaid",
+            "/trainerslog/api/v1/training/**",
+            ""
+
+
+
+
     };
 
 

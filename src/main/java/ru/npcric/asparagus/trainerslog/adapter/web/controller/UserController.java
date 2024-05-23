@@ -34,7 +34,7 @@ public class UserController {
     @Operation(
             summary = "Просмотр аутентифицированного пользователя"
     )
-    @RolesAllowed({"DEFAULT","ADMIN","COACH"})
+
     @GetMapping("/getCurrent")
     public UserResponse getAuth() {
         return userService.getCurrentUser();

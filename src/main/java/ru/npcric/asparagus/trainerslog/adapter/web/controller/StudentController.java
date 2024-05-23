@@ -49,7 +49,7 @@ public class StudentController {
     @Operation(
             summary = "Просмотр всех студентов по имени группы"
     )
-    @RolesAllowed({"COACH","ADMIN"})
+    @RolesAllowed({"COACH","ADMIN", "STUDENT"})
     @GetMapping("/getStudentsInGroup")
     public ResponseEntity<StudentsInGroupResponse> getStudentsInGroup(@RequestParam("groupName") String groupNameRequest) {
         return ResponseEntity.ok().body(studentService.getStudentsInGroup(groupNameRequest));
