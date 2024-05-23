@@ -6,14 +6,11 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.attendance.AttendanceDTO;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.training.TrainingDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.attendance.GroupAndDateRequest;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.attendance.AttendanceForGroupResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.attendance.AttendanceResponse;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.training.TrainingCreateResponse;
 import ru.npcric.asparagus.trainerslog.service.AttendanceService;
 
 @RestController
@@ -28,5 +25,10 @@ public class AttendanceController {
     @PostMapping("/markAttendance")
     public ResponseEntity<AttendanceResponse> markAttendance(@RequestBody @Valid AttendanceDTO attendanceDTO) {
         return ResponseEntity.ok().body(attendanceService.markAttendance(attendanceDTO));
+    }
+
+    @GetMapping("/attendance")
+    public AttendanceForGroupResponse getAttendanceForGroup(@RequestBody GroupAndDateRequest groupAndDateRequest) {
+        return attendanceService.findStudentsByGroupAndDate(groupAndDateRequest);
     }
 }

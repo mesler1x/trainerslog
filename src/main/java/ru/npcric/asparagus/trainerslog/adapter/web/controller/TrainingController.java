@@ -25,8 +25,8 @@ public class TrainingController {
     TrainingService trainingService;
 
     @PostMapping("/createTraining")
-    public ResponseEntity<TrainingCreateResponse> createTraining(@RequestBody @Valid TrainingDTO trainingDTO) {
-        return ResponseEntity.ok().body(trainingService.createTraining(trainingDTO));
+    public TrainingCreateResponse createTraining(@RequestBody @Valid TrainingDTO trainingDTO) {
+        return trainingService.createTraining(trainingDTO);
     }
 
     @DeleteMapping("/deleteTraining")

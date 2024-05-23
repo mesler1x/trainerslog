@@ -9,12 +9,7 @@ import ru.npcric.asparagus.trainerslog.adapter.repository.TrainingRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.training.TrainingDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.training.TrainingCreateResponse;
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
-import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 import ru.npcric.asparagus.trainerslog.domain.TrainingEntity;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
