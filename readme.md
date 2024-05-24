@@ -2,6 +2,8 @@
 ## Запуск проекта локально
 •```git clone https://github.com/mesler1x/trainerslog.git```
 
+•```cd trainerslog```
+
 •```docker compose up -d```
 
 ## О проекте
