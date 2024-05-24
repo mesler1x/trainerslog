@@ -1,10 +1,7 @@
 package ru.npcric.asparagus.trainerslog.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 
@@ -12,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name = "training")
@@ -24,7 +22,7 @@ public class TrainingEntity extends BaseEntity {
     @JoinColumn(name = "sgroup_id")
     GroupEntity group;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "attendance",// посещяемость
+    @JoinTable(name = "attendance",
             joinColumns = @JoinColumn(name = "training_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"))
     List<StudentEntity> studentEntityList;

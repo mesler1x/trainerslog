@@ -2,6 +2,7 @@ package ru.npcric.asparagus.trainerslog.adapter.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -25,11 +26,10 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping("/trainerslog/api/v1/coach")
 @Tag(name = "Контроллер тренера", description = "Контроллер для управления тренерами федерации айкидо")
-//@RolesAllowed("DEFAULT")
 public class CoachController {
     CoachService coachService;
 
-    //@RolesAllowed("ADMIN")
+    @RolesAllowed("ADMIN")
     @Operation(
             summary = "Создание тренера",
             description = "Создание тренера по приходящему username " +
@@ -85,6 +85,7 @@ public class CoachController {
                     "все группы тренера после этого ссылаются на null и " +
                     "все студенты аналогично перестают иметь тренера"
     )
+    @RolesAllowed("ADMIN")
     @DeleteMapping("/deleteCoach")
     public ResponseEntity<?> deleteCoach(@RequestParam String username) {
         coachService.deleteCoach(username);

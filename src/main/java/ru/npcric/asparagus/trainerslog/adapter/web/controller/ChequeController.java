@@ -2,6 +2,7 @@ package ru.npcric.asparagus.trainerslog.adapter.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.RolesAllowed;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -21,11 +22,11 @@ import ru.npcric.asparagus.trainerslog.service.ChequeService;
 public class ChequeController {
     ChequeService chequeService;
 
-    //@RolesAllowed("STUDENT")
     @Operation(
             summary = "Создание нового чека",
             description = "Добавление новой ссылки на чек студенту"
     )
+    @RolesAllowed("STUDENT")
     @PatchMapping("/add")
     public StudentWithChequesResponse addNewCheque(@AuthenticationPrincipal UserEntity user, @RequestParam String link) {
         return chequeService.addNewChequeToStudent(user, link);
@@ -33,11 +34,12 @@ public class ChequeController {
 
     @Operation(summary = "Получает все чеки студента", description = "Получает чеки студента по его username")
     @GetMapping("/get")
+    @RolesAllowed("COACH")
     public StudentWithChequesResponse getChequesFromStudent(@RequestParam String username) {
         return chequeService.getChequesByUsername(username);
     }
 
-    //@RolesAllowed("STUDENT")
+    @RolesAllowed("STUDENT")
     @Operation(summary = "Удаляет чек пользователя", description = "Удаляет чек пользователя")
     @PatchMapping("/delete")
     public StudentWithChequesResponse deleteCheque(@AuthenticationPrincipal UserEntity user, @RequestParam String link) {

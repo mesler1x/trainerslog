@@ -2,6 +2,7 @@ package ru.npcric.asparagus.trainerslog.adapter.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,11 +23,10 @@ import java.util.List;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequestMapping("/trainerslog/api/v1/filial")
 @Tag(name = "Контроллер филиалов", description = "Контроллер для управления филиалами федерации айкидо")
-//@RolesAllowed("DEFAULT")
 public class FilialController {
     FilialService filialService;
 
-    //@RolesAllowed("ADMIN")
+    @RolesAllowed("ADMIN")
     @Operation(
             summary = "Создание нового филиала",
             description = "Создание нового филиала администрацией федерации айкидо"
@@ -49,6 +49,7 @@ public class FilialController {
             summary = "Удаление филиала по его адресу",
             description = "Филиалы тренеров, учеников после удаления их филиала будут ссылаться на null"
     )
+    @RolesAllowed("ADMIN")
     @DeleteMapping("/deleteByAddress")
     public ResponseEntity<?> deleteFilialByAddress(@RequestParam("address") String address){
         filialService.deleteFilialByAddress(address);

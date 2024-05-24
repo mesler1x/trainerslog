@@ -12,12 +12,14 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentDT
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentCreateResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentWithGroupSmallResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentsInGroupResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.errors.UserNotFoundException;
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 import ru.npcric.asparagus.trainerslog.service.factory.StudentFactory;
 import ru.npcric.asparagus.trainerslog.service.mapper.StudentMapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -43,8 +45,10 @@ public class StudentService {
         String groupName = request.groupName();
 
         GroupEntity group = groupRepository.findByGroupName(groupName);
-        StudentEntity studentEntity = studentRepository.findByUser_Username(studentUserName);
+        Optional<StudentEntity> student = studentRepository.findByUser_Username(studentUserName);
 
+        if (student.isEmpty()) throw new UserNotFoundException(studentUserName);
+        StudentEntity studentEntity = student.get();
         studentEntity.setGroup(group);
         group.getStudents().add(studentEntity);
 
@@ -59,6 +63,8 @@ public class StudentService {
     }
 
     public void deleteStudentFromGroup(String studentUsername) {
-        studentRepository.findByUser_Username(studentUsername).setGroup(null);
+        Optional<StudentEntity> student =  studentRepository.findByUser_Username(studentUsername);
+        if (student.isEmpty()) throw new UserNotFoundException(studentUsername);
+        student.get().setGroup(null);
     }
 }

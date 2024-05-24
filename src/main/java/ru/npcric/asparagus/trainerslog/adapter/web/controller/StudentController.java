@@ -2,6 +2,7 @@ package ru.npcric.asparagus.trainerslog.adapter.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +24,13 @@ import ru.npcric.asparagus.trainerslog.service.StudentService;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping("/trainerslog/api/v1/student")
 @Tag(name = "Контроллер ученика", description = "Контроллер для управления учениками федерации айкидо")
-//@RolesAllowed("DEFAULT")
 public class StudentController {
     StudentService studentService;
 
     @Operation(
             summary = "Создание студента"
     )
+    @RolesAllowed("ADMIN")
     @PostMapping("/create")
     public ResponseEntity<StudentCreateResponse> createStudent(@RequestBody @Valid StudentDTO studentDTO) {
         return ResponseEntity.ok().body(studentService.createStudent(studentDTO));
@@ -39,6 +40,7 @@ public class StudentController {
     @Operation(
             summary = "Добавление студента в существующую группу"
     )
+    @RolesAllowed({"COACH","ADMIN"})
     @PatchMapping("/addStudentInExistingGroup")
     public ResponseEntity<StudentWithGroupSmallResponse> addStudentInExistingGroup(@RequestBody AddStudentInGroupRequest request) {
         return ResponseEntity.ok().body(studentService.addStudentInGroup(request));
@@ -47,6 +49,7 @@ public class StudentController {
     @Operation(
             summary = "Просмотр всех студентов по имени группы"
     )
+    @RolesAllowed({"COACH","ADMIN", "STUDENT"})
     @GetMapping("/getStudentsInGroup")
     public ResponseEntity<StudentsInGroupResponse> getStudentsInGroup(@RequestParam("groupName") String groupNameRequest) {
         return ResponseEntity.ok().body(studentService.getStudentsInGroup(groupNameRequest));
@@ -56,6 +59,7 @@ public class StudentController {
             summary = "Удаление студента из группы",
             description = "При удалении студента в базе данных у этого пользователя удаляется роль студента"
     )
+    @RolesAllowed({"COACH","ADMIN"})
     @DeleteMapping("/deleteStudentFromGroup")
     public ResponseEntity<?> deleteStudentFromGroup(@RequestParam("studentUsername") String studentUsername) {
         studentService.deleteStudentFromGroup(studentUsername);

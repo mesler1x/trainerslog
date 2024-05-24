@@ -17,7 +17,7 @@ import static jakarta.persistence.GenerationType.*;
 public abstract class BaseEntity {
     @Id
     @SequenceGenerator(name = "MY_SEQ", sequenceName = "MY_SEQ",
-            allocationSize = 1, initialValue = 20)
+            allocationSize = 1, initialValue = 50)
     @GeneratedValue(strategy = SEQUENCE, generator = "MY_SEQ")
     Long id;
 

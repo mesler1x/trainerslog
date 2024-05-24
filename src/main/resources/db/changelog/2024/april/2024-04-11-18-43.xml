@@ -9,7 +9,7 @@
     <changeSet id="2024-04-11-18-43" author="MeslerRA" context="test">
         <comment>INITIALIZE</comment>
 
-        <createSequence sequenceName="MY_SEQ" incrementBy="1" startValue="20"/>
+        <createSequence sequenceName="MY_SEQ" incrementBy="1" startValue="50"/>
 
         <createTable tableName="user_info">
             <column name="id" type="bigint">
