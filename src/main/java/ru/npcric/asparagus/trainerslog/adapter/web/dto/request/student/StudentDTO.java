@@ -20,7 +20,7 @@ public record StudentDTO(@Nullable TicketDTO ticketDTO,
                          @NotNull(message = "Дата рождения студента не может быть пустой")
                          LocalDate birthDate,
                          @Positive(message = "Кю не может быть отрицательным")
-                         @Nullable
+                         @NotNull
                          Integer q,// уровень владения айкидо
                          @NotBlank
                          @Pattern(regexp = "\\+79\\d{9}",

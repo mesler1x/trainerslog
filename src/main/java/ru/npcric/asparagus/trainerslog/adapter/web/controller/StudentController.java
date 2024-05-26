@@ -65,4 +65,9 @@ public class StudentController {
         studentService.deleteStudentFromGroup(studentUsername);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/get")
+    public StudentCreateResponse getStudent(@RequestParam("studentUsername") String studentUsername) {
+        return studentService.getStudentByUsername(studentUsername);
+    }
 }

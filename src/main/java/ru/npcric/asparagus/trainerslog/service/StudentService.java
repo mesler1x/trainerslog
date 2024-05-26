@@ -67,4 +67,9 @@ public class StudentService {
         if (student.isEmpty()) throw new UserNotFoundException(studentUsername);
         student.get().setGroup(null);
     }
+
+    //TODO !!!
+    public StudentCreateResponse getStudentByUsername(String studentUsername) {
+        return null;
+    }
 }
