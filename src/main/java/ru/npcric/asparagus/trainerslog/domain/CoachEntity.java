@@ -9,6 +9,7 @@ import org.hibernate.annotations.Type;
 import ru.npcric.asparagus.trainerslog.domain.common.BaseEntity;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -17,8 +18,15 @@ import java.util.List;
 @Entity
 @Table(name = "coach")
 public class CoachEntity extends BaseEntity {
-
     String name;
+    @Column(name = "eemail")
+    String eemail;
+    @Column(name = "phone_number")
+    String phoneNumber;
+    @Column(name = "sex")
+    String sex;
+    @Column(name = "birth_date")
+    LocalDate birthDate;
     @ManyToOne
     FilialEntity filial;
     @OneToMany(mappedBy = "coach")
@@ -28,12 +36,17 @@ public class CoachEntity extends BaseEntity {
 
     public CoachEntity(CoachContext coachContext) {
         name = coachContext.name;
+        eemail = coachContext.eemail;
+        phoneNumber = coachContext.phoneNumber;
+        sex  = coachContext.sex;
+        birthDate = coachContext.birthDate;
         filial = coachContext.filial;
         user = coachContext.user;
         groups = null;
     }
 
-    public record CoachContext(String name, FilialEntity filial, UserEntity user) {
+    public record CoachContext(String name, String eemail, String phoneNumber,
+                               String sex, LocalDate birthDate, FilialEntity filial, UserEntity user) {
 
     }
 }

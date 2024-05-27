@@ -42,7 +42,8 @@ public class CoachFactory {
         userEntity.getAuthorities().remove(UserRole.DEFAULT);
         FilialEntity filialEntity = filialRepository.findByAddress(filialDTO.address());
 
-        CoachEntity.CoachContext context = new CoachEntity.CoachContext(coachDTO.name(), filialEntity, userEntity);
+        CoachEntity.CoachContext context = new CoachEntity.CoachContext(coachDTO.name(), coachDTO.email(),
+                coachDTO.phoneNumber(), coachDTO.sex(), coachDTO.birthDate(), filialEntity, userEntity);
         return context;
     }
 }

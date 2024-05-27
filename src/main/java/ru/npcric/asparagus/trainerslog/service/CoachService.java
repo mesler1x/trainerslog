@@ -9,10 +9,13 @@ import ru.npcric.asparagus.trainerslog.adapter.repository.CoachRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.FilialRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.GroupRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachUpdateRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupIdAndNameResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentCreateResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentWithGroupSmallResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.errors.UserNotFoundException;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.FilialEntity;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
@@ -22,6 +25,7 @@ import ru.npcric.asparagus.trainerslog.service.factory.CoachFactory;
 import ru.npcric.asparagus.trainerslog.service.mapper.CoachMapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,8 +42,8 @@ public class CoachService {
         CoachEntity coachEntity = new CoachEntity(coachContext);
         CoachEntity coachEntityWithId = coachRepository.save(coachEntity);
         return new CoachFullResponse(coachEntityWithId.getId(),
-                coachEntityWithId.getName(),
-                coachDTO.filialDTO(), coachDTO.username());
+                coachEntityWithId.getName(), coachEntityWithId.getEemail(), coachEntityWithId.getPhoneNumber(),
+                coachEntityWithId.getSex(), coachEntityWithId.getBirthDate(), coachDTO.filialDTO(), coachDTO.username());
     }
 
     public AllCoachesInFilialResponse getCoachesInFilial(FilialDTO filialDTO) {
@@ -73,6 +77,28 @@ public class CoachService {
         return new CoachStudentsResponse(coachEntity.getName(),
                 groupsResponse
                 );
+    }
+
+    public CoachFullResponse getCoachByUsername(String coachUsername) {
+        CoachEntity coach = coachRepository.findByUser_Username(coachUsername);
+        FilialEntity filialEntity = coach.getFilial();
+        return new CoachFullResponse(coach.getId(), coach.getName(), coach.getEemail(), coach.getPhoneNumber(),
+                coach.getSex(), coach.getBirthDate(), new FilialDTO(filialEntity.getFilialName(), filialEntity.getAddress()),
+                coachUsername);
+    }
+
+    public CoachFullResponse updateCoachInfo(CoachUpdateRequest request){
+        CoachEntity coachEntity = coachRepository.findByUser_Username(request.username());
+        if(request.newName() != null) coachEntity.setName(request.newName());
+        if(request.newBirthDate() != null) coachEntity.setBirthDate(request.newBirthDate());
+        if(request.newPhoneNumber() != null) coachEntity.setPhoneNumber(request.newPhoneNumber());
+        if(request.newEmailAddress() != null) coachEntity.setEemail(request.newEmailAddress());
+        CoachEntity newCoachEntity = coachRepository.save(coachEntity);
+        FilialEntity filialEntity = coachEntity.getFilial();
+
+        return new CoachFullResponse(newCoachEntity.getId(), newCoachEntity.getName(), newCoachEntity.getEemail(),
+                newCoachEntity.getPhoneNumber(), newCoachEntity.getSex(), newCoachEntity.getBirthDate(),
+                new FilialDTO(filialEntity.getFilialName(), filialEntity.getAddress()), request.username());
     }
 
 
