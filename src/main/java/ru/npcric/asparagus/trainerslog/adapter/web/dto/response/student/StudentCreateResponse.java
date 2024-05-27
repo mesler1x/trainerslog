@@ -16,6 +16,8 @@ public record StudentCreateResponse(Long id,
 
                                     String parentPhoneNumber,
 
-                                    String parentFullName
+                                    String parentFullName,
+
+                                    String eemail
 ) {
 }

@@ -49,6 +49,9 @@ public class StudentEntity extends BaseEntity {
     @Column(columnDefinition = "jsonb", name = "link_to_cheques")
     List<String> linkToCheques;
 
+    @Column(name = "eemail")
+    String eemail;
+
     public StudentEntity(StudentContext context) {
         ticket = context.ticket;
         fullName = context.fullName;
@@ -61,6 +64,7 @@ public class StudentEntity extends BaseEntity {
         group = null;
         user = context.user;
         linkToCheques = null;
+        eemail = context.eemail;
     }
 
     public record StudentContext(
@@ -72,6 +76,7 @@ public class StudentEntity extends BaseEntity {
             String phoneNumber,
             String parentPhoneNumber,
             String parentFullName,
+            String eemail,
             UserEntity user
     ) {
     }
