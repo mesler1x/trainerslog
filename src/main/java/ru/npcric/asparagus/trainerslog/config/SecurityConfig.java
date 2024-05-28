@@ -37,7 +37,7 @@ public class SecurityConfig {
     };
 
     public static String[] ADMIN_URI = {
-            "/**"
+            "/**",
     };
 
     public static String[] STUDENT_URI = {

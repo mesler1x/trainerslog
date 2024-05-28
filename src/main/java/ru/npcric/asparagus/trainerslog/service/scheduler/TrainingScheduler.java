@@ -39,6 +39,7 @@ public class TrainingScheduler {
             TrainingEntity newTraining = new TrainingEntity();
             newTraining.setGroup(trainingEntity.getGroup());
             newTraining.setDate(trainingEntity.getDate().plusWeeks(1));
+            newTraining.setEndDate(trainingEntity.getEndDate().plusWeeks(1));
             trainingRepository.save(newTraining);
         }
 

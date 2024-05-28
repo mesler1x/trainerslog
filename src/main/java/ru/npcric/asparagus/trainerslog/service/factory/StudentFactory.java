@@ -47,6 +47,8 @@ public class StudentFactory {
                 studentDTO.q(),
                 studentDTO.phoneNumber(),
                 studentDTO.parentPhoneNumber(),
-                studentDTO.parentFullName(), userEntity);
+                studentDTO.parentFullName(),
+                studentDTO.eemail(),
+                userEntity);
     }
 }

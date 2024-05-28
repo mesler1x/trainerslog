@@ -18,6 +18,10 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TrainingEntity extends BaseEntity {
     LocalDateTime date;
+    @Column(name = "end_date")
+    LocalDateTime endDate;
+    @Column(name = "comment")
+    String comment;
     @ManyToOne
     @JoinColumn(name = "sgroup_id")
     GroupEntity group;

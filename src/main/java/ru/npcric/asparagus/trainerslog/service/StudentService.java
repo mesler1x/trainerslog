@@ -9,6 +9,7 @@ import ru.npcric.asparagus.trainerslog.adapter.repository.GroupRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.StudentRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.AddStudentInGroupRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentUpdateRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentCreateResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentWithGroupSmallResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentsInGroupResponse;
@@ -70,6 +71,20 @@ public class StudentService {
 
     //TODO !!!
     public StudentCreateResponse getStudentByUsername(String studentUsername) {
-        return null;
+        Optional<StudentEntity> student = studentRepository.findByUser_Username(studentUsername);
+        if(student.isEmpty()) throw new UserNotFoundException(studentUsername);
+        return studentMapper.entityToResponse(student.get());
+    }
+
+    public StudentCreateResponse updateStudentInfo(StudentUpdateRequest request){
+        Optional<StudentEntity> student = studentRepository.findByUser_Username(request.username());
+        if(student.isEmpty()) throw new UserNotFoundException(request.username());
+        StudentEntity studentEntity = student.get();
+        if(request.newFullName() != null) studentEntity.setFullName(request.newFullName());
+        if(request.newBirthdate() != null) studentEntity.setBirthDate(request.newBirthdate());
+        if(request.newParentPhoneNumber() != null) studentEntity.setParentPhoneNumber(request.newParentPhoneNumber());
+        if(request.eemail() != null) studentEntity.setEemail(request.eemail());
+        StudentEntity studentEntityWithId = studentRepository.save(studentEntity);
+        return studentMapper.entityToResponse(studentEntityWithId);
     }
 }

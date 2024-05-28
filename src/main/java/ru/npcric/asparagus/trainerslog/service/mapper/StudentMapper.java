@@ -16,7 +16,9 @@ public class StudentMapper {
                 studentEntity.getQ(),
                 studentEntity.getPhoneNumber(),
                 studentEntity.getParentPhoneNumber(),
-                studentEntity.getParentFullName());
+                studentEntity.getParentFullName(),
+                studentEntity.getEemail());
+
     }
     public StudentWithGroupSmallResponse entityToSmallResponse(StudentEntity studentEntity){
         return new StudentWithGroupSmallResponse(studentEntity.getId(), studentEntity.getFullName(), studentEntity.getGroup().getGroupName());

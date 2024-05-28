@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2024-05-27-14-10" author="YurkovAO" context="test">
+        <comment>add new columns for training</comment>
+        <addColumn tableName="training">
+            <column name="end_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="comment" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+
+        <addColumn tableName="coach">
+            <column name="eemail" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="phone_number" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sex" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birth_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+
+        <addColumn tableName="student">
+            <column name="eemail" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+
+
+    </changeSet>
+</databaseChangeLog>

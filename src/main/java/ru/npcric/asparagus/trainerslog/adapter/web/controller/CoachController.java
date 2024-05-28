@@ -13,8 +13,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDTO;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachUpdateRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.*;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentCreateResponse;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.CoachService;
 
@@ -90,5 +92,22 @@ public class CoachController {
     public ResponseEntity<?> deleteCoach(@RequestParam String username) {
         coachService.deleteCoach(username);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RolesAllowed({"ADMIN", "COACH", "STUDENT"})
+    @GetMapping("/get")
+    public CoachFullResponse getCoach(@RequestParam("coachUsername") String coachUsername) {
+        return coachService.getCoachByUsername(coachUsername);
+    }
+
+    @RolesAllowed({"COACH"})
+    @GetMapping("/getByAuth")
+    public CoachFullResponse getStudentByAuth(@AuthenticationPrincipal UserEntity userCoach) {
+        return coachService.getCoachByUsername(userCoach.getUsername());
+    }
+
+    @PatchMapping("/updateCoachInfo")
+    public CoachFullResponse updateCoachInfo(@RequestBody @Valid CoachUpdateRequest coachUpdateRequest) {
+        return coachService.updateCoachInfo(coachUpdateRequest);
     }
 }
