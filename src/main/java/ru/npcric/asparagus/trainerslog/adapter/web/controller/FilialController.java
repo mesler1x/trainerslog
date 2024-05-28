@@ -26,7 +26,6 @@ import java.util.List;
 public class FilialController {
     FilialService filialService;
 
-    @RolesAllowed("ADMIN")
     @Operation(
             summary = "Создание нового филиала",
             description = "Создание нового филиала администрацией федерации айкидо"
@@ -49,7 +48,6 @@ public class FilialController {
             summary = "Удаление филиала по его адресу",
             description = "Филиалы тренеров, учеников после удаления их филиала будут ссылаться на null"
     )
-    @RolesAllowed("ADMIN")
     @DeleteMapping("/deleteByAddress")
     public ResponseEntity<?> deleteFilialByAddress(@RequestParam("address") String address){
         filialService.deleteFilialByAddress(address);

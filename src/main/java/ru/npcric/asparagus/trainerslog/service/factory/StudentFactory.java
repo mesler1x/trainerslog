@@ -29,14 +29,14 @@ public class StudentFactory {
 
 
         if (user.isEmpty()) throw new UserNotFoundException(studentDTO.username());
-        else if(user.get().getAuthorities().contains(UserRole.STUDENT)){
+        else if(user.get().getAuthorities().contains(UserRole.ROLE_STUDENT)){
             throw new AlreadyExistException("Student");
         }
         TicketEntity ticketEntity = ticketService.createTicketForNewStudent();
         UserEntity userEntity = user.get();
 
-        userEntity.getAuthorities().add(UserRole.STUDENT);
-        userEntity.getAuthorities().remove(UserRole.DEFAULT);
+        userEntity.getAuthorities().add(UserRole.ROLE_STUDENT);
+        userEntity.getAuthorities().remove(UserRole.ROLE_DEFAULT);
 
         //todo - засунуть в маппер
         return new StudentEntity.StudentContext(
@@ -48,7 +48,7 @@ public class StudentFactory {
                 studentDTO.phoneNumber(),
                 studentDTO.parentPhoneNumber(),
                 studentDTO.parentFullName(),
-                studentDTO.eemail(),
+                studentDTO.email(),
                 userEntity);
     }
 }

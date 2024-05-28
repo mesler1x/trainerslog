@@ -19,7 +19,7 @@ import java.util.List;
 @Table(name = "coach")
 public class CoachEntity extends BaseEntity {
     String name;
-    @Column(name = "eemail")
+    @Column(name = "email")
     String eemail;
     @Column(name = "phone_number")
     String phoneNumber;

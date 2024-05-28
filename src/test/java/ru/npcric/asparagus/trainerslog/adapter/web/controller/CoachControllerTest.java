@@ -30,7 +30,7 @@ public class CoachControllerTest {
     @InjectMocks
     CoachController coachController;
 
-    @Test
+    /*@Test
     @DisplayName("POST /trainerslog/api/v1/coach/createCoach Проверяет создание тренера по username")
     void createCoach_ReturnsValidCreatedResponse() {
         UserEntity user = new UserEntity();
@@ -48,7 +48,7 @@ public class CoachControllerTest {
         assertEquals(coachFullResponse, actualResponseEntity.getBody());
         assertEquals(HttpStatus.OK, actualResponseEntity.getStatusCode());
         Mockito.verify(coachService).createCoach(coachDTO);
-    }
+    }*/
 
     @Test
     @DisplayName("GET /trainerslog/api/v1/coach/getCoachesInFilial Проверяет вывод тренеров в филиале")

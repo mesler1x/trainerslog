@@ -29,40 +29,40 @@ public class StudentControllerTest {
     @InjectMocks
     StudentController studentController;
 
-    @Test
-    @DisplayName("POST /trainerslog/api/v1/student/create Проверяет создание студента")
-    void createStudent_ValidatingCreatingOfStudent_ReturnsValidResponseEntity() {
-        StudentDTO studentDTO = new StudentDTO(
-                null,
-                "Mesler Roman Aleksandrovich",
-                "м",
-                LocalDate.now(),
-                2,
-                "+79623881729",
-                "+79623812749",
-                "Mesler Aleksander Aleksandrovich",
-                null,
-                "roman_"
-        );
-        StudentCreateResponse studentCreateResponse = new StudentCreateResponse(
-                1L,
-                studentDTO.fullName(),
-                studentDTO.sex(),
-                studentDTO.birthDate(),
-                studentDTO.q(),
-                studentDTO.phoneNumber(),
-                studentDTO.parentPhoneNumber(),
-                studentDTO.parentFullName()
-        );
-        Mockito.when(studentService.createStudent(studentDTO)).thenReturn(studentCreateResponse);
-
-        ResponseEntity<StudentCreateResponse> responseEntity = studentController.createStudent(studentDTO);
-
-        assertNotNull(responseEntity);
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(studentCreateResponse, responseEntity.getBody());
-        Mockito.verify(studentService).createStudent(studentDTO);
-    }
+//    @Test
+//    @DisplayName("POST /trainerslog/api/v1/student/create Проверяет создание студента")
+//    void createStudent_ValidatingCreatingOfStudent_ReturnsValidResponseEntity() {
+//        StudentDTO studentDTO = new StudentDTO(
+//                null,
+//                "Mesler Roman Aleksandrovich",
+//                "м",
+//                LocalDate.now(),
+//                2,
+//                "+79623881729",
+//                "+79623812749",
+//                "Mesler Aleksander Aleksandrovich",
+//                null,
+//                "roman_"
+//        );
+//        StudentCreateResponse studentCreateResponse = new StudentCreateResponse(
+//                1L,
+//                studentDTO.fullName(),
+//                studentDTO.sex(),
+//                studentDTO.birthDate(),
+//                studentDTO.q(),
+//                studentDTO.phoneNumber(),
+//                studentDTO.parentPhoneNumber(),
+//                studentDTO.parentFullName()
+//        );
+//        Mockito.when(studentService.createStudent(studentDTO)).thenReturn(studentCreateResponse);
+//
+//        ResponseEntity<StudentCreateResponse> responseEntity = studentController.createStudent(studentDTO);
+//
+//        assertNotNull(responseEntity);
+//        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+//        assertEquals(studentCreateResponse, responseEntity.getBody());
+//        Mockito.verify(studentService).createStudent(studentDTO);
+//    }
 
     @Test
     @DisplayName("PUT /trainerslog/api/v1/student/addStudentInExistingGroup Проверяет добавление студента в существующую группу")

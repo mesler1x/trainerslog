@@ -19,7 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/trainerslog/api/v1/user")
 @Tag(name = "Контроллер пользователей")
-@RolesAllowed("ADMIN")
 public class UserController {
     UserService userService;
 
@@ -34,7 +33,6 @@ public class UserController {
     @Operation(
             summary = "Просмотр аутентифицированного пользователя"
     )
-
     @GetMapping("/getCurrent")
     public UserResponse getAuth() {
         return userService.getCurrentUser();

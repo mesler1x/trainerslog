@@ -74,7 +74,7 @@ public class GroupService {
         groupRepository.deleteByGroupName(groupName);
     }
 
-    //todo - добавить тренера в существующую группу в которой тренера уволили (null coach) --> точно тут реализовывать?
+
     public GroupAndCoachNameResponse updateCoachOfGroup(UpdateCoachInGroupRequest request) {
         String coachUsername = request.username();
         String groupName = request.groupName();

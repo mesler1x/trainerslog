@@ -3,8 +3,6 @@ package ru.npcric.asparagus.trainerslog.service.factory;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import ru.npcric.asparagus.trainerslog.adapter.repository.FilialRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.UserRepository;
@@ -33,13 +31,13 @@ public class CoachFactory {
 
         Optional<UserEntity> user = userRepository.findByUsername(username);
         if (user.isEmpty()) throw new UserNotFoundException(username);
-        else if(user.get().getAuthorities().contains(UserRole.COACH)){
+        else if(user.get().getAuthorities().contains(UserRole.ROLE_COACH)){
             throw new AlreadyExistException("Coach");
         }
 
         UserEntity userEntity = user.get();
-        userEntity.getAuthorities().add(UserRole.COACH);
-        userEntity.getAuthorities().remove(UserRole.DEFAULT);
+        userEntity.getAuthorities().add(UserRole.ROLE_COACH);
+        userEntity.getAuthorities().remove(UserRole.ROLE_DEFAULT);
         FilialEntity filialEntity = filialRepository.findByAddress(filialDTO.address());
 
         CoachEntity.CoachContext context = new CoachEntity.CoachContext(coachDTO.name(), coachDTO.email(),

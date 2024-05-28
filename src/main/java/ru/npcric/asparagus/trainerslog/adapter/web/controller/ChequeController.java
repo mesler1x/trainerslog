@@ -26,7 +26,6 @@ public class ChequeController {
             summary = "Создание нового чека",
             description = "Добавление новой ссылки на чек студенту"
     )
-    @RolesAllowed("STUDENT")
     @PatchMapping("/add")
     public StudentWithChequesResponse addNewCheque(@AuthenticationPrincipal UserEntity user, @RequestParam String link) {
         return chequeService.addNewChequeToStudent(user, link);
@@ -34,12 +33,10 @@ public class ChequeController {
 
     @Operation(summary = "Получает все чеки студента", description = "Получает чеки студента по его username")
     @GetMapping("/get")
-    @RolesAllowed("COACH")
     public StudentWithChequesResponse getChequesFromStudent(@RequestParam String username) {
         return chequeService.getChequesByUsername(username);
     }
 
-    @RolesAllowed("STUDENT")
     @Operation(summary = "Удаляет чек пользователя", description = "Удаляет чек пользователя")
     @PatchMapping("/delete")
     public StudentWithChequesResponse deleteCheque(@AuthenticationPrincipal UserEntity user, @RequestParam String link) {

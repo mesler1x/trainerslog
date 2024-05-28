@@ -24,14 +24,13 @@ import java.util.List;
 
 @Validated
 @RestController
+@RequestMapping("/trainerslog/api/v1/coach/")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequestMapping("/trainerslog/api/v1/coach")
 @Tag(name = "Контроллер тренера", description = "Контроллер для управления тренерами федерации айкидо")
 public class CoachController {
     CoachService coachService;
 
-    @RolesAllowed("ADMIN")
     @Operation(
             summary = "Создание тренера",
             description = "Создание тренера по приходящему username " +
@@ -87,25 +86,31 @@ public class CoachController {
                     "все группы тренера после этого ссылаются на null и " +
                     "все студенты аналогично перестают иметь тренера"
     )
-    @RolesAllowed("ADMIN")
     @DeleteMapping("/deleteCoach")
     public ResponseEntity<?> deleteCoach(@RequestParam String username) {
         coachService.deleteCoach(username);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RolesAllowed({"ADMIN", "COACH", "STUDENT"})
+    @Operation(
+            summary = "Получение данных тренера по его username"
+    )
     @GetMapping("/get")
     public CoachFullResponse getCoach(@RequestParam("coachUsername") String coachUsername) {
         return coachService.getCoachByUsername(coachUsername);
     }
 
-    @RolesAllowed({"COACH"})
+    @Operation(
+            summary = "Получение данных тренера по его авторизации"
+    )
     @GetMapping("/getByAuth")
     public CoachFullResponse getStudentByAuth(@AuthenticationPrincipal UserEntity userCoach) {
         return coachService.getCoachByUsername(userCoach.getUsername());
     }
 
+    @Operation(
+            summary = "Обновление полей тренера"
+    )
     @PatchMapping("/updateCoachInfo")
     public CoachFullResponse updateCoachInfo(@RequestBody @Valid CoachUpdateRequest coachUpdateRequest) {
         return coachService.updateCoachInfo(coachUpdateRequest);

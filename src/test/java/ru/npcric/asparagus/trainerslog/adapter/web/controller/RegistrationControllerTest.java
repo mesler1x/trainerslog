@@ -41,7 +41,7 @@ public class RegistrationControllerTest {
     void registration_PasswordEncrypted_ReturnsValidOkResponse() {
         //given
         String password = passwordEncoder.encode("hard_password");
-        var registerResponse = new RegistrationResponse("sample_user", password, List.of("DEFAULT"));
+        var registerResponse = new RegistrationResponse("sample_user", password, List.of("ROLE_DEFAULT"));
         var registerRequest = new RegistrationRequest("sample_user","hard_password");
         Mockito.doReturn(registerResponse).when(this.registrationService).registerUser(registerRequest);
 

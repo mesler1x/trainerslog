@@ -28,7 +28,6 @@ public class AttendanceController {
     @Operation(
             summary = "Отметка ученика на занятии в указанное время"
     )
-    @RolesAllowed({"ADMIN", "COACH"})
     @PostMapping("/markAttendance")
     public ResponseEntity<AttendanceResponse> markAttendance(@RequestBody @Valid AttendanceDTO attendanceDTO) {
         return ResponseEntity.ok().body(attendanceService.markAttendance(attendanceDTO));
@@ -37,16 +36,17 @@ public class AttendanceController {
     @Operation(
             summary = "Получение посещаемости группы в указанное время"
     )
-    @RolesAllowed({"ADMIN", "COACH"})
     @GetMapping("/attendance")
     public AttendanceForGroupResponse getAttendanceForGroup(@RequestBody GroupAndDateRequest groupAndDateRequest) {
         return attendanceService.findStudentsByGroupAndDate(groupAndDateRequest);
     }
 
-    @RolesAllowed({"COACH","ADMIN","STUDENT"})
+    @Operation(
+            summary = "Получение посещаемости студента за последние 30 дней",
+            description = "Возвращает даты занятий на которых он БЫЛ за последние 30 дней"
+    )
     @GetMapping("/monthlyAttendance")
     public MonthlyAttendanceResponse getMonthlyAttendance(@RequestParam String username) {
         return attendanceService.getMonthlyAttendanceByUsername(username);
     }
-
 }

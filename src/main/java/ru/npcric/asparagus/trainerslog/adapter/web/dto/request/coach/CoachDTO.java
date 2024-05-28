@@ -13,8 +13,7 @@ public record CoachDTO(@NotBlank(message = "ФИО тренера не може�
                        @Size(min = 5, max = 40, message = "ФИО тренера не может быть меньше 5 или 40 символов")
                        @PeopleNameConstraint
                        String name,
-                       @Pattern(regexp = "^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$",
-                               message = "Некоректный ввод email")
+
                        String email,
                        @NotBlank
                        @Pattern(regexp = "\\+79\\d{9}",

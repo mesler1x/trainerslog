@@ -7,15 +7,12 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.CoachRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.FilialRepository;
-import ru.npcric.asparagus.trainerslog.adapter.repository.GroupRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachUpdateRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupIdAndNameResponse;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentCreateResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentWithGroupSmallResponse;
-import ru.npcric.asparagus.trainerslog.adapter.web.errors.UserNotFoundException;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.FilialEntity;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
@@ -25,7 +22,6 @@ import ru.npcric.asparagus.trainerslog.service.factory.CoachFactory;
 import ru.npcric.asparagus.trainerslog.service.mapper.CoachMapper;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +32,6 @@ public class CoachService {
     CoachFactory coachFactory;
     FilialRepository filialRepository;
 
-    //@RolesAllowed("ADMIN") включить при настройке security
     public CoachFullResponse createCoach(CoachDTO coachDTO) {
         CoachEntity.CoachContext coachContext = coachFactory.createContext(coachDTO);
         CoachEntity coachEntity = new CoachEntity(coachContext);
@@ -89,10 +84,10 @@ public class CoachService {
 
     public CoachFullResponse updateCoachInfo(CoachUpdateRequest request){
         CoachEntity coachEntity = coachRepository.findByUser_Username(request.username());
-        if(request.newName() != null) coachEntity.setName(request.newName());
-        if(request.newBirthDate() != null) coachEntity.setBirthDate(request.newBirthDate());
-        if(request.newPhoneNumber() != null) coachEntity.setPhoneNumber(request.newPhoneNumber());
-        if(request.newEmailAddress() != null) coachEntity.setEemail(request.newEmailAddress());
+        coachEntity.setName(request.newName());
+        coachEntity.setBirthDate(request.newBirthDate());
+        coachEntity.setPhoneNumber(request.newPhoneNumber());
+        coachEntity.setEemail(request.newEmailAddress());
         CoachEntity newCoachEntity = coachRepository.save(coachEntity);
         FilialEntity filialEntity = coachEntity.getFilial();
 
@@ -109,7 +104,7 @@ public class CoachService {
         coachRepository.updateGroupsSetTrainerToNull(coachId);
 
         coachRepository.deleteById(coachId);
-        user.getAuthorities().remove(UserRole.COACH);
-        user.getAuthorities().add(UserRole.DEFAULT);
+        user.getAuthorities().remove(UserRole.ROLE_COACH);
+        user.getAuthorities().add(UserRole.ROLE_DEFAULT);
     }
 }

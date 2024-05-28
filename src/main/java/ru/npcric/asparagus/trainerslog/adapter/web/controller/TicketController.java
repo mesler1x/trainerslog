@@ -26,7 +26,6 @@ public class TicketController {
             summary = "Обновляет абонемент каждый месяц",
             description = "Обновление абонемента на дефолтный, 1000р - задолженность"
     )
-    @RolesAllowed("ADMIN")
     @PatchMapping("/monthlyUpdate")
     public ResponseEntity<?> monthlyUpdateTicketForStudent(@RequestBody TicketValidationRequest ticketValidationRequest) {
         ticketService.updateValidTicketToDefault(ticketValidationRequest);
@@ -36,7 +35,6 @@ public class TicketController {
     @Operation(
             summary = "Обновление абонемента, при его оплате"
     )
-    @RolesAllowed({"ADMIN","COACH"})
     @PatchMapping("/updateToPaid")
     public ResponseEntity<?> updateTicketToPaid(@RequestBody TicketValidationRequest ticketValidationRequest) {
         ticketService.updateToPaidTicket(ticketValidationRequest);

@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -68,7 +67,7 @@ public class UserService implements UserDetailsService {
 
     public UserResponse addAdminRoleToExistingUser(String username) {
         UserEntity user = (UserEntity) loadUserByUsername(username);
-        user.getAuthorities().add(UserRole.ADMIN);
+        user.getAuthorities().add(UserRole.ROLE_ADMIN);
         return new UserResponse(user.getUsername(), user.getAuthorities().stream().map(Enum::name).toList());
     }
 }

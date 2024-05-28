@@ -33,7 +33,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
         user.username = context.username();
         user.password = context.password;
         Set<UserRole> defaultRole = new HashSet<>();
-        defaultRole.add(UserRole.DEFAULT);
+        defaultRole.add(UserRole.ROLE_DEFAULT);
         user.authorities = defaultRole;
         user.accountNonExpired = true;
         user.credentialsNonExpired = true;

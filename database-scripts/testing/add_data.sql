@@ -3,19 +3,19 @@ INSERT INTO public.user_info
 VALUES(1, 'roma', '$2a$10$t4gytZdXG/yppKRHouVPEOT/gEpFIY3pP8yp.IyI3RcK9Q80T/Y9a', '["COACH"]'::jsonb, true, true, true, true);
 INSERT INTO public.user_info
 (id, username, "password", authorities, account_non_expired, account_non_locked, credentials_non_expired, enabled)
-VALUES(37, 'student1', '$2a$10$y7eYB8a830StPp4CbjeNi.Mf5iMm1pDQrCMhtv9IRHQ6dKvKrqdHm', '["STUDENT"]'::jsonb, true, true, true, true);
+VALUES(37, 'student1', '$2a$10$y7eYB8a830StPp4CbjeNi.Mf5iMm1pDQrCMhtv9IRHQ6dKvKrqdHm', '["ROLE_STUDENT"]'::jsonb, true, true, true, true);
 INSERT INTO public.user_info
 (id, username, "password", authorities, account_non_expired, account_non_locked, credentials_non_expired, enabled)
-VALUES(38, 'student2', '$2a$10$bmCWwJGMtqhQZka09g8bbu0KEBSCWlEfBhQs9yVIYcyrmQXXHaDd6', '["STUDENT"]'::jsonb, true, true, true, true);
+VALUES(38, 'student2', '$2a$10$bmCWwJGMtqhQZka09g8bbu0KEBSCWlEfBhQs9yVIYcyrmQXXHaDd6', '["ROLE_STUDENT"]'::jsonb, true, true, true, true);
 INSERT INTO public.user_info
 (id, username, "password", authorities, account_non_expired, account_non_locked, credentials_non_expired, enabled)
-VALUES(39, 'student3', '$2a$10$YtgTjuAQH1QCVe0p0snW6.8j4rpGUkceA1qk8DjkfyrjaCmZpybIm', '["STUDENT"]'::jsonb, true, true, true, true);
+VALUES(39, 'student3', '$2a$10$YtgTjuAQH1QCVe0p0snW6.8j4rpGUkceA1qk8DjkfyrjaCmZpybIm', '["ROLE_STUDENT"]'::jsonb, true, true, true, true);
 INSERT INTO public.user_info
 (id, username, "password", authorities, account_non_expired, account_non_locked, credentials_non_expired, enabled)
-VALUES(40, 'student4', '$2a$10$b6JprSsvdsvr2eMDVFFUs.Dz/nt8kAluHDf.pJjQ6LgmKTJSXZwme', '["STUDENT"]'::jsonb, true, true, true, true);
+VALUES(40, 'student4', '$2a$10$b6JprSsvdsvr2eMDVFFUs.Dz/nt8kAluHDf.pJjQ6LgmKTJSXZwme', '["ROLE_STUDENT"]'::jsonb, true, true, true, true);
 INSERT INTO public.user_info
 (id, username, "password", authorities, account_non_expired, account_non_locked, credentials_non_expired, enabled)
-VALUES(41, 'student5', '$2a$10$1rh42iM3o5CqaZQ24Sv.PeaSU1HZNifiWkw2Z.40igV8FE8DmtjAi', '["DEFAULT"]'::jsonb, true, true, true, true);
+VALUES(41, 'student5', '$2a$10$1rh42iM3o5CqaZQ24Sv.PeaSU1HZNifiWkw2Z.40igV8FE8DmtjAi', '["ROLE_DEFAULT"]'::jsonb, true, true, true, true);
 
 
 INSERT INTO public.filial

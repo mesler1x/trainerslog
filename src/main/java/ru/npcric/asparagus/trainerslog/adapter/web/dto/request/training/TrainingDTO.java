@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record TrainingDTO(@NotNull String groupName,
-                          @NotNull LocalDateTime date,
-                          @NotNull LocalDateTime endDate,
+                          @NotNull(message = "start date не может быть null") LocalDateTime date,
+                          @NotNull(message = "end date не может быть null") LocalDateTime endDate,
                           String comment) {
 }

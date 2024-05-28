@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -36,8 +37,9 @@ public class SecurityConfig {
             "/trainerslog/api/v1/user/getCurrent"
     };
 
+
     public static String[] ADMIN_URI = {
-            "/**",
+        "/**"
     };
 
     public static String[] STUDENT_URI = {
@@ -63,7 +65,11 @@ public class SecurityConfig {
             "/trainerslog/api/v1/student/addStudentInExistingGroup",
             "/trainerslog/api/v1/student/getStudentsInGroup",
             "/trainerslog/api/v1/ticket/updateToPaid",
-            "/trainerslog/api/v1/training/**"
+            "/trainerslog/api/v1/training/createTraining",
+            "/trainerslog/api/v1/training/deleteTraining",
+            "/trainerslog/api/v1/training/getGroupTrainingsForWeek",
+            "/trainerslog/api/v1/training/getGroupTrainingsForWeek/updateTrainingTime",
+            "/trainerslog/api/v1/training/getGroupTrainingsForWeek/updateTrainingComment"
     };
 
 
@@ -80,11 +86,11 @@ public class SecurityConfig {
                         .requestMatchers(PERMITTED_URI)
                         .permitAll()
                         .requestMatchers(COACH_URI)
-                        .hasAuthority(UserRole.COACH.name())
+                        .hasAuthority(UserRole.ROLE_COACH.name())
                         .requestMatchers(ADMIN_URI)
-                        .hasAuthority(UserRole.ADMIN.name())
+                        .hasAuthority(UserRole.ROLE_ADMIN.name())
                         .requestMatchers(STUDENT_URI)
-                        .hasAuthority(UserRole.STUDENT.name())
+                        .hasAuthority(UserRole.ROLE_STUDENT.name())
                 ).httpBasic(
                         Customizer.withDefaults()
                 ).build();

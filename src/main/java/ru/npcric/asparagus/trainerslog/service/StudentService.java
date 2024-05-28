@@ -69,7 +69,7 @@ public class StudentService {
         student.get().setGroup(null);
     }
 
-    //TODO !!!
+
     public StudentCreateResponse getStudentByUsername(String studentUsername) {
         Optional<StudentEntity> student = studentRepository.findByUser_Username(studentUsername);
         if(student.isEmpty()) throw new UserNotFoundException(studentUsername);
@@ -80,10 +80,12 @@ public class StudentService {
         Optional<StudentEntity> student = studentRepository.findByUser_Username(request.username());
         if(student.isEmpty()) throw new UserNotFoundException(request.username());
         StudentEntity studentEntity = student.get();
-        if(request.newFullName() != null) studentEntity.setFullName(request.newFullName());
-        if(request.newBirthdate() != null) studentEntity.setBirthDate(request.newBirthdate());
-        if(request.newParentPhoneNumber() != null) studentEntity.setParentPhoneNumber(request.newParentPhoneNumber());
-        if(request.eemail() != null) studentEntity.setEemail(request.eemail());
+
+        studentEntity.setFullName(request.newFullName());
+        studentEntity.setBirthDate(request.newBirthdate());
+        studentEntity.setParentPhoneNumber(request.newParentPhoneNumber());
+        studentEntity.setEemail(request.email());
+
         StudentEntity studentEntityWithId = studentRepository.save(studentEntity);
         return studentMapper.entityToResponse(studentEntityWithId);
     }

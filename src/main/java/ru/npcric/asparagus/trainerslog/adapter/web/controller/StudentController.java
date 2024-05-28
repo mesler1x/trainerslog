@@ -33,7 +33,6 @@ public class StudentController {
     @Operation(
             summary = "Создание студента"
     )
-    //@RolesAllowed("ADMIN")
     @PostMapping("/create")
     public ResponseEntity<StudentCreateResponse> createStudent(@RequestBody @Valid StudentDTO studentDTO) {
         return ResponseEntity.ok().body(studentService.createStudent(studentDTO));
@@ -43,7 +42,6 @@ public class StudentController {
     @Operation(
             summary = "Добавление студента в существующую группу"
     )
-    @RolesAllowed({"COACH","ADMIN"})
     @PatchMapping("/addStudentInExistingGroup")
     public ResponseEntity<StudentWithGroupSmallResponse> addStudentInExistingGroup(@RequestBody AddStudentInGroupRequest request) {
         return ResponseEntity.ok().body(studentService.addStudentInGroup(request));
@@ -52,7 +50,6 @@ public class StudentController {
     @Operation(
             summary = "Просмотр всех студентов по имени группы"
     )
-    @RolesAllowed({"COACH","ADMIN", "STUDENT"})
     @GetMapping("/getStudentsInGroup")
     public ResponseEntity<StudentsInGroupResponse> getStudentsInGroup(@RequestParam("groupName") String groupNameRequest) {
         return ResponseEntity.ok().body(studentService.getStudentsInGroup(groupNameRequest));
@@ -62,25 +59,31 @@ public class StudentController {
             summary = "Удаление студента из группы",
             description = "При удалении студента в базе данных у этого пользователя удаляется роль студента"
     )
-    @RolesAllowed({"COACH","ADMIN"})
     @DeleteMapping("/deleteStudentFromGroup")
     public ResponseEntity<?> deleteStudentFromGroup(@RequestParam("studentUsername") String studentUsername) {
         studentService.deleteStudentFromGroup(studentUsername);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RolesAllowed({"ADMIN", "COACH", "STUDENT"})
+    @Operation(
+            summary = "Получение данных студента по его username"
+    )
     @GetMapping("/get")
     public StudentCreateResponse getStudent(@RequestParam("studentUsername") String studentUsername) {
         return studentService.getStudentByUsername(studentUsername);
     }
 
-    @RolesAllowed({"STUDENT"})
+    @Operation(
+            summary = "Получение студента по его авторизации"
+    )
     @GetMapping("/getByAuth")
     public StudentCreateResponse getStudentByAuth(@AuthenticationPrincipal UserEntity userStudent) {
         return studentService.getStudentByUsername(userStudent.getUsername());
     }
 
+    @Operation(
+            summary = "Обновление полей студента"
+    )
     @PatchMapping("/updateStudentInfo")
     public StudentCreateResponse updateStudentInfo(@RequestBody @Valid StudentUpdateRequest request){
         return studentService.updateStudentInfo(request);

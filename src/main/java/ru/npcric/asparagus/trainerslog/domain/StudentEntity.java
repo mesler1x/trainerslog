@@ -49,7 +49,7 @@ public class StudentEntity extends BaseEntity {
     @Column(columnDefinition = "jsonb", name = "link_to_cheques")
     List<String> linkToCheques;
 
-    @Column(name = "eemail")
+    @Column(name = "email")
     String eemail;
 
     public StudentEntity(StudentContext context) {

@@ -9,17 +9,17 @@ import ru.npcric.asparagus.trainerslog.adapter.web.validation.PeopleNameConstrai
 
 import java.time.LocalDate;
 
-public record CoachUpdateRequest (@Nullable
+public record CoachUpdateRequest (@NotNull
                                   @Size(min = 5, max = 40, message = "ФИО тренера не может быть меньше 5 или 40 символов")
                                   @PeopleNameConstraint
                                   String newName,
-                                  @Nullable
+                                  @NotNull
                                   LocalDate newBirthDate,
-                                  @Nullable
+                                  @NotNull
                                   @Pattern(regexp = "\\+79\\d{9}",
                                           message = "Номер телефона должен быть в формате: +79623881729")
                                   String newPhoneNumber,
-                                  @Nullable
+                                  @NotNull
                                   @Pattern(regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
                                           message = "Некоректный ввод email")
                                   String newEmailAddress,

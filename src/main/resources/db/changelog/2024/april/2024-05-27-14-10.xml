@@ -17,7 +17,7 @@
         </addColumn>
 
         <addColumn tableName="coach">
-            <column name="eemail" type="varchar(255)">
+            <column name="email" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
             <column name="phone_number" type="varchar(255)">
@@ -32,7 +32,7 @@
         </addColumn>
 
         <addColumn tableName="student">
-            <column name="eemail" type="varchar(255)">
+            <column name="email" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
         </addColumn>

@@ -39,7 +39,7 @@ public record StudentDTO(@Nullable TicketDTO ticketDTO,
                          @NotNull
                          @Pattern(regexp = "^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$",
                                  message = "Некоректный ввод email")
-                         String eemail,
+                         String email,
                          String username
 ) {
 }
