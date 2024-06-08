@@ -5,14 +5,17 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+import ru.npcric.asparagus.trainerslog.adapter.repository.GroupRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.StudentRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.TrainingRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.attendance.AttendanceDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.attendance.GroupAndDateRequest;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.training.TrainingDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.attendance.AttendanceForGroupResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.attendance.AttendanceResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.attendance.MonthlyAttendanceResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.errors.UserNotFoundException;
+import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 import ru.npcric.asparagus.trainerslog.domain.TrainingEntity;
 
@@ -28,6 +31,7 @@ import java.util.Optional;
 public class AttendanceService {
     StudentRepository studentRepository;
     TrainingRepository trainingRepository;
+    GroupRepository groupRepository;
 
     public AttendanceResponse markAttendance(AttendanceDTO attendanceDTO) {
         StudentEntity student = studentRepository.findByFullName(attendanceDTO.studentName());
@@ -37,12 +41,28 @@ public class AttendanceService {
         return new AttendanceResponse(student.getId(), training.getId());
     }
 
-    public AttendanceForGroupResponse findStudentsByGroupAndDate(GroupAndDateRequest groupAndDateRequest) {
-        TrainingEntity trainingEntity = trainingRepository.findByDate(groupAndDateRequest.dateTime());
-        List<StudentEntity> studentEntityList = trainingEntity.getStudentEntityList();
-
-        return new AttendanceForGroupResponse(
-                studentEntityList.stream().map(StudentEntity::getFullName).toList());
+    public List<AttendanceForGroupResponse> findStudentsByGroupAndDate(GroupAndDateRequest groupAndDateRequest) {
+        List<AttendanceForGroupResponse> attendanceForGroupResponses = new ArrayList<>();
+        GroupEntity groupEntity = groupRepository.findByGroupName(groupAndDateRequest.groupName());
+        List<StudentEntity> students = groupEntity.getStudents();
+        List<TrainingEntity> trainingEntities = new ArrayList<>();
+        for(TrainingEntity trainingEntity : groupEntity.getTrainingEntities()){
+            LocalDateTime trainingDate = trainingEntity.getDate();
+            if(trainingDate.isAfter(groupAndDateRequest.mondayDateTime())
+                    && trainingDate.isBefore(groupAndDateRequest.mondayDateTime().plusWeeks(1))){
+                trainingEntities.add(trainingEntity);
+            }
+        }
+        for(TrainingEntity trainingEntity : trainingEntities){
+            List<String> studentNames = new ArrayList<>();
+            for(StudentEntity student : students){
+                if(student.getTrainingEntityList().contains(trainingEntity)){
+                    studentNames.add(student.getFullName());
+                }
+            }
+            attendanceForGroupResponses.add(new AttendanceForGroupResponse(trainingEntity.getDate(), studentNames));
+        }
+        return attendanceForGroupResponses;
     }
 
     public MonthlyAttendanceResponse getMonthlyAttendanceByUsername(String username) {
