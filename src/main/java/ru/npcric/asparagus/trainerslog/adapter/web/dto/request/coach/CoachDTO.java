@@ -10,7 +10,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.validation.PeopleNameConstrai
 import java.time.LocalDate;
 
 public record CoachDTO(@NotBlank(message = "ФИО тренера не может быть пустым")
-                       @Size(min = 5, max = 40, message = "ФИО тренера не может быть меньше 5 или 40 символов")
+                       @Size(min = 5, max = 100, message = "ФИО тренера не может быть меньше 5 или 100 символов")
                        @PeopleNameConstraint
                        String name,
 

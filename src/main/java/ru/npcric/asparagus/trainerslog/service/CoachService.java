@@ -82,8 +82,8 @@ public class CoachService {
                 coachUsername);
     }
 
-    public CoachFullResponse updateCoachInfo(CoachUpdateRequest request){
-        CoachEntity coachEntity = coachRepository.findByUser_Username(request.username());
+    public CoachFullResponse updateCoachInfo(CoachUpdateRequest request, UserEntity userCoach){
+        CoachEntity coachEntity = coachRepository.findByUser_Username(userCoach.getUsername());
         coachEntity.setName(request.newName());
         coachEntity.setBirthDate(request.newBirthDate());
         coachEntity.setPhoneNumber(request.newPhoneNumber());
@@ -93,7 +93,7 @@ public class CoachService {
 
         return new CoachFullResponse(newCoachEntity.getId(), newCoachEntity.getName(), newCoachEntity.getEemail(),
                 newCoachEntity.getPhoneNumber(), newCoachEntity.getSex(), newCoachEntity.getBirthDate(),
-                new FilialDTO(filialEntity.getFilialName(), filialEntity.getAddress()), request.username());
+                new FilialDTO(filialEntity.getFilialName(), filialEntity.getAddress()), userCoach.getUsername());
     }
 
 
