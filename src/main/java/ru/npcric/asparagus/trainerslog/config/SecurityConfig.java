@@ -34,7 +34,7 @@ public class SecurityConfig {
             "/trainerslog/api/v1/public/**",
             "/trainerslog/api/v1/coach/getCoachesInFilial",
             "/trainerslog/api/v1/filial/getAll",
-            "/trainerslog/api/v1/user/getCurrent"
+            "/trainerslog/api/v1/user/getCurrent",
     };
 
 
@@ -42,34 +42,49 @@ public class SecurityConfig {
         "/**"
     };
 
-    public static String[] STUDENT_URI = {
-            "/trainerslog/api/v1/attendance/markAttendance/attendance/monthlyAttendance",
-            "/trainerslog/api/v1/cheque/add",
-            "/trainerslog/api/v1/cheque/delete",
+    public static String[] STUDENT_COACH_COMMON = {
+            "/trainerslog/api/v1/attendance/markAttendance",
+            "/trainerslog/api/v1/attendance/monthlyAttendance",
             "/trainerslog/api/v1/coach/getCoachesInFilial",
             "/trainerslog/api/v1/student/getStudentsInGroup",
-            "/trainerslog/api/v1/student/deleteStudentFromGroup"
+    };
+
+    public static String[] STUDENT_URI = {
+            "/trainerslog/api/v1/cheque/add",
+            "/trainerslog/api/v1/cheque/getByAuth",
+            "/trainerslog/api/v1/cheque/delete",
+            "/trainerslog/api/v1/student/getByAuth",
+            "/trainerslog/api/v1/student/updateStudentInfo",
     };
 
     public static String[] COACH_URI = {
-            "/trainerslog/api/v1/attendance/markAttendance",
-            "/trainerslog/api/v1/attendance/markAttendance/attendance",
-            "/trainerslog/api/v1/attendance/markAttendance/attendance/monthlyAttendance",
+            "/trainerslog/api/v1/cheque/confirm",
             "/trainerslog/api/v1/cheque/get",
-            "/trainerslog/api/v1/coach/getCoachesInFilial",
+
+            "/trainerslog/api/v1/student/deleteStudentFromGroup",
+            "/trainerslog/api/v1/student/get",
+            "/trainerslog/api/v1/student/addStudentInExistingGroup",
+            "/trainerslog/api/v1/student/getStudentsInGroup",
+            "/trainerslog/api/v1/student/getStudentsInGroupWithDebts",
+
             "/trainerslog/api/v1/coach/getAllCoaches",
             "/trainerslog/api/v1/coach/getCoachGroups",
             "/trainerslog/api/v1/coach/getAllCoachStudents",
+            "/trainerslog/api/v1/coach/updateCoachInfo",
+            "/trainerslog/api/v1/coach/getByAuth",
+
             "/trainerslog/api/v1/group/createGroup",
             "/trainerslog/api/v1/group/deleteGroup",
-            "/trainerslog/api/v1/student/addStudentInExistingGroup",
-            "/trainerslog/api/v1/student/getStudentsInGroup",
+
+
             "/trainerslog/api/v1/ticket/updateToPaid",
             "/trainerslog/api/v1/training/createTraining",
             "/trainerslog/api/v1/training/deleteTraining",
             "/trainerslog/api/v1/training/getGroupTrainingsForWeek",
             "/trainerslog/api/v1/training/getGroupTrainingsForWeek/updateTrainingTime",
-            "/trainerslog/api/v1/training/getGroupTrainingsForWeek/updateTrainingComment"
+            "/trainerslog/api/v1/training/getGroupTrainingsForWeek/updateTrainingComment",
+
+            "/trainerslog/api/v1/attendance/getGroupWeekAttendance"
     };
 
 
@@ -85,12 +100,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(c -> c
                         .requestMatchers(PERMITTED_URI)
                         .permitAll()
+                        .requestMatchers(STUDENT_COACH_COMMON)
+                        .hasAnyAuthority(UserRole.ROLE_STUDENT.name(), UserRole.ROLE_COACH.name(), UserRole.ROLE_ADMIN.name())
+                        .requestMatchers(STUDENT_URI)
+                        .hasAnyAuthority(UserRole.ROLE_STUDENT.name(), UserRole.ROLE_ADMIN.name())
                         .requestMatchers(COACH_URI)
-                        .hasAuthority(UserRole.ROLE_COACH.name())
+                        .hasAnyAuthority(UserRole.ROLE_COACH.name(), UserRole.ROLE_ADMIN.name())
                         .requestMatchers(ADMIN_URI)
                         .hasAuthority(UserRole.ROLE_ADMIN.name())
-                        .requestMatchers(STUDENT_URI)
-                        .hasAuthority(UserRole.ROLE_STUDENT.name())
+
                 ).httpBasic(
                         Customizer.withDefaults()
                 ).build();
