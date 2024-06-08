@@ -10,15 +10,18 @@ import ru.npcric.asparagus.trainerslog.adapter.repository.StudentRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.AddStudentInGroupRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentUpdateRequest;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentCreateResponse;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentWithGroupSmallResponse;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentsInGroupResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.cheque.ChequeFullResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.errors.UserNotFoundException;
+import ru.npcric.asparagus.trainerslog.domain.ChequeEntity;
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
+import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.factory.StudentFactory;
+import ru.npcric.asparagus.trainerslog.service.mapper.ChequeMapper;
 import ru.npcric.asparagus.trainerslog.service.mapper.StudentMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +34,7 @@ public class StudentService {
     StudentFactory studentFactory;
     StudentMapper studentMapper;
     GroupRepository groupRepository;
+    ChequeMapper chequeMapper;
 
     public StudentCreateResponse createStudent(StudentDTO studentDTO) {
         StudentEntity.StudentContext context = studentFactory.createContext(studentDTO);
@@ -56,11 +60,15 @@ public class StudentService {
 
         return studentMapper.entityToSmallResponse(studentEntity);
     }
-    public StudentsInGroupResponse getStudentsInGroup(String groupName) {
+    public GroupInfoResponse getStudentsInGroup(String groupName) {
+        List<StudentsInGroupResponse> studentsWithInfo = new ArrayList<>();
         GroupEntity groupEntity = groupRepository.findByGroupName(groupName);
-        List<String> studentNames = groupEntity.getStudents().stream().map(StudentEntity::getFullName).toList();
-        String groupCoach = groupEntity.getCoach().getName();
-        return new StudentsInGroupResponse(groupName, groupCoach, studentNames);
+        List<StudentEntity> studentNames = groupEntity.getStudents();
+        for(StudentEntity studentEntity : studentNames) {
+            studentsWithInfo.add(new StudentsInGroupResponse(studentEntity.getFullName(), studentEntity.getBirthDate(),
+                    studentEntity.getAge(), studentEntity.getParentPhoneNumber()));
+        }
+        return new GroupInfoResponse(studentsWithInfo);
     }
 
     public void deleteStudentFromGroup(String studentUsername) {
@@ -76,17 +84,33 @@ public class StudentService {
         return studentMapper.entityToResponse(student.get());
     }
 
-    public StudentCreateResponse updateStudentInfo(StudentUpdateRequest request){
-        Optional<StudentEntity> student = studentRepository.findByUser_Username(request.username());
-        if(student.isEmpty()) throw new UserNotFoundException(request.username());
+    public StudentCreateResponse updateStudentInfo(StudentUpdateRequest request, UserEntity userStudent){
+        Optional<StudentEntity> student = studentRepository.findByUser_Username(userStudent.getUsername());
+        if(student.isEmpty()) throw new UserNotFoundException(userStudent.getUsername());
         StudentEntity studentEntity = student.get();
 
         studentEntity.setFullName(request.newFullName());
-        studentEntity.setBirthDate(request.newBirthdate());
+        studentEntity.setBirthDate(request.newBirthDate());
         studentEntity.setParentPhoneNumber(request.newParentPhoneNumber());
-        studentEntity.setEemail(request.email());
+        studentEntity.setEemail(request.newEmail());
 
         StudentEntity studentEntityWithId = studentRepository.save(studentEntity);
         return studentMapper.entityToResponse(studentEntityWithId);
+    }
+
+    public List<StudentDebtResponse> getStudentsInGroupWithDebts(String groupName){
+        List<StudentDebtResponse> responses = new ArrayList<>();
+        GroupEntity group = groupRepository.findByGroupName(groupName);
+        List<StudentEntity> students = group.getStudents();
+        for(StudentEntity studentEntity : students) {
+            int debt = (studentEntity.getBalance() < 0) ? studentEntity.getBalance() * (-1) : 0;
+            List<ChequeFullResponse> chequeFullResponses = new ArrayList<>();
+            List<ChequeEntity> chequeEntities = studentEntity.getChequeEntities();
+            for(ChequeEntity cheque: chequeEntities){
+                chequeFullResponses.add(chequeMapper.entityToFullResponse(cheque, debt, studentEntity.getBalance()));
+            }
+            responses.add(new StudentDebtResponse(studentEntity.getFullName(), debt, chequeFullResponses));
+        }
+        return responses;
     }
 }

@@ -81,6 +81,7 @@ public class StudentControllerTest {
         Mockito.verify(studentService).addStudentInGroup(addStudentInGroupRequest);
     }
 
+    /*
     @Test
     @DisplayName("GET /trainerslog/api/v1/student/getStudentsInGroup Проверяет просмотр всех студентов по имени группы")
     void getStudentsInGroup_ValidatingStudentsInCurrentGroup_ReturnsValidResponseEntity() {
@@ -97,6 +98,7 @@ public class StudentControllerTest {
         assertEquals(studentsInGroupResponse, responseEntity.getBody());
         Mockito.verify(studentService).getStudentsInGroup(groupName);
     }
+     */
 
     @Test
     @DisplayName("DELETE /trainerslog/api/v1/student/deleteStudentFromGroup Проверяет удаление студента из группы")

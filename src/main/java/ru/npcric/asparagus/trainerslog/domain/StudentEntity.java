@@ -45,12 +45,14 @@ public class StudentEntity extends BaseEntity {
     @JoinColumn(name = "user_id")
     UserEntity user;
 
-    @Type(JsonType.class)
-    @Column(columnDefinition = "jsonb", name = "link_to_cheques")
-    List<String> linkToCheques;
-
     @Column(name = "email")
     String eemail;
+
+    @Column(name = "balance")
+    Integer balance;
+
+    @OneToMany(mappedBy = "student")
+    List<ChequeEntity> chequeEntities;
 
     public StudentEntity(StudentContext context) {
         ticket = context.ticket;
@@ -63,7 +65,8 @@ public class StudentEntity extends BaseEntity {
         parentFullName = context.parentFullName;
         group = null;
         user = context.user;
-        linkToCheques = null;
+        balance = 0;
+        chequeEntities = null;
         eemail = context.eemail;
     }
 

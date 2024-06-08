@@ -8,11 +8,11 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
 public record StudentUpdateRequest (@NotNull
-                                    @Size(min = 5, max = 40, message = "ФИО студента не может быть меньше 5 или 40 символов")
+                                    @Size(min = 5, max = 100, message = "ФИО студента не может быть меньше 5 или 100 символов")
                                     String newFullName,
 
                                     @NotNull
-                                    LocalDate newBirthdate,
+                                    LocalDate newBirthDate,
                                     @NotNull
                                     @Pattern(regexp = "\\+79\\d{9}",
                                             message = "Номер телефона родителя должен быть в формате: +79623881729")
@@ -20,6 +20,5 @@ public record StudentUpdateRequest (@NotNull
                                     @NotNull
                                     @Pattern(regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
                                             message = "Некоректный ввод email")
-                                    String email,
-                                    String username) {
+                                    String newEmail) {
 }

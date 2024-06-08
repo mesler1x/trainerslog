@@ -13,11 +13,11 @@ public class StudentMapper {
                 studentEntity.getFullName(),
                 studentEntity.getSex(),
                 studentEntity.getBirthDate(),
-                studentEntity.getQ(),
                 studentEntity.getPhoneNumber(),
                 studentEntity.getParentPhoneNumber(),
                 studentEntity.getParentFullName(),
-                studentEntity.getEemail());
+                studentEntity.getEemail(),
+                studentEntity.getBalance());
 
     }
     public StudentWithGroupSmallResponse entityToSmallResponse(StudentEntity studentEntity){
