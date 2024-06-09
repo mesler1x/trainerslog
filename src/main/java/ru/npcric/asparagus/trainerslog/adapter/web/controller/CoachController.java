@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -112,7 +113,7 @@ public class CoachController {
             summary = "Обновление полей тренера"
     )
     @PatchMapping("/updateCoachInfo")
-    public CoachFullResponse updateCoachInfo(@RequestBody @Valid CoachUpdateRequest coachUpdateRequest) {
-        return coachService.updateCoachInfo(coachUpdateRequest);
+    public CoachFullResponse updateCoachInfo(@AuthenticationPrincipal UserEntity userCoach, @RequestBody @Valid CoachUpdateRequest coachUpdateRequest) {
+        return coachService.updateCoachInfo(coachUpdateRequest, userCoach);
     }
 }

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public record StudentDTO(@Nullable TicketDTO ticketDTO,
                          @NotBlank(message = "ФИО студента не может быть пустым")
-                         @Size(min = 5, max = 40, message = "ФИО студента не может быть меньше 5 или 40 символов")
+                         @Size(min = 5, max = 100, message = "ФИО студента не может быть меньше 5 или 100 символов")
                          @PeopleNameConstraint
                          String fullName,
                          @NotBlank(message = "Пол студента не может быть пустым")
@@ -37,8 +37,6 @@ public record StudentDTO(@Nullable TicketDTO ticketDTO,
                          @Nullable
                          GroupDTO group,
                          @NotNull
-                         @Pattern(regexp = "^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$",
-                                 message = "Некоректный ввод email")
                          String email,
                          String username
 ) {

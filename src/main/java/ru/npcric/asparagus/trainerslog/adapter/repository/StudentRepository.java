@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
+import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,6 +21,7 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
     StudentEntity findByFullName(@NotBlank String name);
     List<StudentEntity> findAllByUser_UsernameIn(List<String> studentUsernames);
     Optional<StudentEntity> findByUser_Username(String username);
+    StudentEntity findByUser(UserEntity user);
 
     @Transactional
     @Modifying

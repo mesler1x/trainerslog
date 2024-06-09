@@ -10,14 +10,14 @@ public record StudentCreateResponse(Long id,
 
                                     LocalDate birthDate,
 
-                                    Integer q,
-
                                     String phoneNumber,
 
                                     String parentPhoneNumber,
 
                                     String parentFullName,
 
-                                    String eemail
+                                    String eemail,
+
+                                    Integer balance
 ) {
 }

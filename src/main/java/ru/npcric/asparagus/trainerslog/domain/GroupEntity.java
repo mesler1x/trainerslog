@@ -23,7 +23,7 @@ public class GroupEntity extends BaseEntity {
     CoachEntity coach;
     @OneToMany(mappedBy = "group")
     List<StudentEntity> students;
-    @OneToMany(mappedBy = "group")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "group")
     List<TrainingEntity> trainingEntities;
 
     public GroupEntity(GroupContext groupContext) {

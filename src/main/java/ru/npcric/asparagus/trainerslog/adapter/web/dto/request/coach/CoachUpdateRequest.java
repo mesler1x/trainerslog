@@ -10,7 +10,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.validation.PeopleNameConstrai
 import java.time.LocalDate;
 
 public record CoachUpdateRequest (@NotNull
-                                  @Size(min = 5, max = 40, message = "ФИО тренера не может быть меньше 5 или 40 символов")
+                                  @Size(min = 5, max = 100, message = "ФИО тренера не может быть меньше 5 или 100 символов")
                                   @PeopleNameConstraint
                                   String newName,
                                   @NotNull
@@ -22,6 +22,5 @@ public record CoachUpdateRequest (@NotNull
                                   @NotNull
                                   @Pattern(regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
                                           message = "Некоректный ввод email")
-                                  String newEmailAddress,
-                                  String username) {
+                                  String newEmailAddress) {
 }

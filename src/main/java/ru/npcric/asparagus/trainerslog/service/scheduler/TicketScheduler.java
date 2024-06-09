@@ -40,6 +40,8 @@ public class TicketScheduler {
         log.info("Scheduler updateAllTicketsStatus start");
         List<StudentEntity> students = studentRepository.findStudentsWithExpiredTickets(LocalDate.now());
         for (StudentEntity student : students) {
+            int studentBalance = student.getBalance();
+            student.setBalance(student.getBalance() - ticketService.INITIAL_COST);
             TicketEntity ticket = student.getTicket();
             TicketEntity newTicket = ticketService.getDefaultTicket();
             student.setTicket(newTicket);

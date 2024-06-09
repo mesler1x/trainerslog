@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.AddStudentInGroupRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentUpdateRequest;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentCreateResponse;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentWithGroupSmallResponse;
-import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentsInGroupResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.*;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.StudentService;
+
+import java.util.List;
 
 @Validated
 @RestController
@@ -51,9 +51,18 @@ public class StudentController {
             summary = "Просмотр всех студентов по имени группы"
     )
     @GetMapping("/getStudentsInGroup")
-    public ResponseEntity<StudentsInGroupResponse> getStudentsInGroup(@RequestParam("groupName") String groupNameRequest) {
-        return ResponseEntity.ok().body(studentService.getStudentsInGroup(groupNameRequest));
+    public GroupInfoResponse getStudentsInGroup(@RequestParam("groupName") String groupNameRequest) {
+        return studentService.getStudentsInGroup(groupNameRequest);
     }
+
+    @Operation(
+            summary = "Просмотр задолженностей всех студентов группы",
+            description = "Возвращает сумму долга и отправленные чеки для каждого ученика")
+    @GetMapping("/getStudentsInGroupWithDebts")
+    public List<StudentDebtResponse> getStudentsInGroupWithDebts(@RequestParam String groupName){
+        return studentService.getStudentsInGroupWithDebts(groupName);
+    }
+
 
     @Operation(
             summary = "Удаление студента из группы",
@@ -85,7 +94,7 @@ public class StudentController {
             summary = "Обновление полей студента"
     )
     @PatchMapping("/updateStudentInfo")
-    public StudentCreateResponse updateStudentInfo(@RequestBody @Valid StudentUpdateRequest request){
-        return studentService.updateStudentInfo(request);
+    public StudentCreateResponse updateStudentInfo(@AuthenticationPrincipal UserEntity userStudent, @RequestBody @Valid StudentUpdateRequest request){
+        return studentService.updateStudentInfo(request, userStudent);
     }
 }

@@ -16,6 +16,8 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.attendance.Atten
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.attendance.MonthlyAttendanceResponse;
 import ru.npcric.asparagus.trainerslog.service.AttendanceService;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
@@ -34,10 +36,11 @@ public class AttendanceController {
     }
 
     @Operation(
-            summary = "Получение посещаемости группы в указанное время"
+            summary = "Получение посещаемости группы в за неделю",
+            description = "Возвращает даты занятий группы и список студентов для каждой даты, которые были на данной тренировке"
     )
-    @GetMapping("/attendance")
-    public AttendanceForGroupResponse getAttendanceForGroup(@RequestBody GroupAndDateRequest groupAndDateRequest) {
+    @GetMapping("/getGroupWeekAttendance")
+    public List<AttendanceForGroupResponse> getWeekAttendanceForGroup(@RequestBody GroupAndDateRequest groupAndDateRequest) {
         return attendanceService.findStudentsByGroupAndDate(groupAndDateRequest);
     }
 
@@ -49,4 +52,6 @@ public class AttendanceController {
     public MonthlyAttendanceResponse getMonthlyAttendance(@RequestParam String username) {
         return attendanceService.getMonthlyAttendanceByUsername(username);
     }
+
+
 }
