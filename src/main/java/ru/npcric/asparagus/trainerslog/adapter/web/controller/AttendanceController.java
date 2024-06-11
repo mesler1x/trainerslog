@@ -36,7 +36,7 @@ public class AttendanceController {
     }
 
     @Operation(
-            summary = "Получение посещаемости группы в за неделю",
+            summary = "Получение посещаемости группы за неделю",
             description = "Возвращает даты занятий группы и список студентов для каждой даты, которые были на данной тренировке"
     )
     @GetMapping("/getGroupWeekAttendance")

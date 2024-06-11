@@ -18,6 +18,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.coach.CoachUpdate
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentCreateResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.user.UsernameResponse;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.CoachService;
 
@@ -115,5 +116,13 @@ public class CoachController {
     @PatchMapping("/updateCoachInfo")
     public CoachFullResponse updateCoachInfo(@AuthenticationPrincipal UserEntity userCoach, @RequestBody @Valid CoachUpdateRequest coachUpdateRequest) {
         return coachService.updateCoachInfo(coachUpdateRequest, userCoach);
+    }
+
+    @Operation(
+            summary = "Получение username пользователя по имени тренера"
+    )
+    @GetMapping("/getUsernameOfCoach")
+    public UsernameResponse getUsernameOfCoach(@RequestParam("coachFullName") String coachFullName) {
+        return coachService.getUsernameOfCoach(coachFullName);
     }
 }

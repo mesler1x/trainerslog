@@ -12,6 +12,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentDT
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentUpdateRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.cheque.ChequeFullResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.*;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.user.UsernameResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.errors.UserNotFoundException;
 import ru.npcric.asparagus.trainerslog.domain.ChequeEntity;
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
@@ -112,5 +113,10 @@ public class StudentService {
             responses.add(new StudentDebtResponse(studentEntity.getFullName(), debt, chequeFullResponses));
         }
         return responses;
+    }
+
+    public UsernameResponse getUsernameOfStudent(String studentFullName) {
+        StudentEntity student = studentRepository.findByFullName(studentFullName);
+        return new UsernameResponse(student.getUser().getUsername());
     }
 }
