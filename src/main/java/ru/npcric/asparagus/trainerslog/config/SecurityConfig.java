@@ -47,6 +47,7 @@ public class SecurityConfig {
             "/trainerslog/api/v1/attendance/monthlyAttendance",
             "/trainerslog/api/v1/coach/getCoachesInFilial",
             "/trainerslog/api/v1/student/getStudentsInGroup",
+            "/trainerslog/api/v1/student/getUsernameOfStudent",
     };
 
     public static String[] STUDENT_URI = {
@@ -67,11 +68,13 @@ public class SecurityConfig {
             "/trainerslog/api/v1/student/getStudentsInGroup",
             "/trainerslog/api/v1/student/getStudentsInGroupWithDebts",
 
+
             "/trainerslog/api/v1/coach/getAllCoaches",
             "/trainerslog/api/v1/coach/getCoachGroups",
             "/trainerslog/api/v1/coach/getAllCoachStudents",
             "/trainerslog/api/v1/coach/updateCoachInfo",
             "/trainerslog/api/v1/coach/getByAuth",
+            "/trainerslog/api/v1/coach/getUsernameOfCoach",
 
             "/trainerslog/api/v1/group/createGroup",
             "/trainerslog/api/v1/group/deleteGroup",
