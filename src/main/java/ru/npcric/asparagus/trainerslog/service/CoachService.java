@@ -13,6 +13,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.filial.FilialDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.coach.*;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.group.GroupIdAndNameResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.StudentWithGroupSmallResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.user.UsernameResponse;
 import ru.npcric.asparagus.trainerslog.domain.CoachEntity;
 import ru.npcric.asparagus.trainerslog.domain.FilialEntity;
 import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
@@ -106,5 +107,10 @@ public class CoachService {
         coachRepository.deleteById(coachId);
         user.getAuthorities().remove(UserRole.ROLE_COACH);
         user.getAuthorities().add(UserRole.ROLE_DEFAULT);
+    }
+
+    public UsernameResponse getUsernameOfCoach (String coachFullName){
+        CoachEntity coachEntity = coachRepository.findByName(coachFullName);
+        return new UsernameResponse(coachEntity.getUser().getUsername());
     }
 }

@@ -16,6 +16,7 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.AddStuden
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.student.StudentUpdateRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.student.*;
+import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.user.UsernameResponse;
 import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 import ru.npcric.asparagus.trainerslog.service.StudentService;
 
@@ -96,5 +97,13 @@ public class StudentController {
     @PatchMapping("/updateStudentInfo")
     public StudentCreateResponse updateStudentInfo(@AuthenticationPrincipal UserEntity userStudent, @RequestBody @Valid StudentUpdateRequest request){
         return studentService.updateStudentInfo(request, userStudent);
+    }
+
+    @Operation(
+            summary = "Получение username пользователя по имени студента"
+    )
+    @GetMapping("/getUsernameOfStudent")
+    public UsernameResponse getUsernameOfStudent(@RequestParam("studentFullName") String studentFullName) {
+        return studentService.getUsernameOfStudent(studentFullName);
     }
 }
