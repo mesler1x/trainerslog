@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ru.npcric.asparagus.trainerslog.adapter.repository.GroupRepository;
+import ru.npcric.asparagus.trainerslog.adapter.repository.StudentRepository;
 import ru.npcric.asparagus.trainerslog.adapter.repository.TrainingRepository;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.training.TrainingDTO;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.training.TrainingUpdateCommentRequest;
@@ -12,12 +13,16 @@ import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.training.Training
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.request.training.TrainingsForWeekRequest;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.training.TrainingCreateResponse;
 import ru.npcric.asparagus.trainerslog.adapter.web.dto.response.training.TrainingsForWeekResponse;
+import ru.npcric.asparagus.trainerslog.adapter.web.errors.UserNotFoundException;
 import ru.npcric.asparagus.trainerslog.domain.GroupEntity;
+import ru.npcric.asparagus.trainerslog.domain.StudentEntity;
 import ru.npcric.asparagus.trainerslog.domain.TrainingEntity;
+import ru.npcric.asparagus.trainerslog.domain.user.UserEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +30,7 @@ import java.util.List;
 public class TrainingService {
     GroupRepository groupRepository;
     TrainingRepository trainingRepository;
+    StudentRepository studentRepository;
     // todo - тренер начинает тренировку и отмечает учеников по именам
 
     public TrainingCreateResponse createTraining(TrainingDTO trainingDTO) {
@@ -69,6 +75,13 @@ public class TrainingService {
         return new TrainingCreateResponse(newTrainingEntity.getId(), newTrainingEntity.getGroup().getGroupName(),
                 newTrainingEntity.getDate(), newTrainingEntity.getEndDate(), newTrainingEntity
                 .getComment());
+    }
+
+    public TrainingsForWeekResponse getStudentTrainingsForWeek(UserEntity userEntity, LocalDateTime mondayDate){
+        Optional<StudentEntity> studentEnt = studentRepository.findByUser_Username(userEntity.getUsername());
+        if(studentEnt.isEmpty()) throw new UserNotFoundException(userEntity.getUsername());
+        StudentEntity studentEntity = studentEnt.get();
+        return getGroupTrainingsForWeek(new TrainingsForWeekRequest(studentEntity.getGroup().getGroupName(), mondayDate));
     }
 
     public void deleteTraining(TrainingDTO trainingDTO){

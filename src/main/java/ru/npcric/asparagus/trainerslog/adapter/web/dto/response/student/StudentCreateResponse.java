@@ -18,6 +18,10 @@ public record StudentCreateResponse(Long id,
 
                                     String eemail,
 
-                                    Integer balance
+                                    Integer balance,
+
+                                    String groupName,
+
+                                    String coachFullName
 ) {
 }

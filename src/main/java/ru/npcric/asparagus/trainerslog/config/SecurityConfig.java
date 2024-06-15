@@ -30,6 +30,7 @@ import java.util.List;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class SecurityConfig {
 
+
     public static String[] PERMITTED_URI = {
             "/trainerslog/api/v1/public/**",
             "/trainerslog/api/v1/coach/getCoachesInFilial",
@@ -56,6 +57,7 @@ public class SecurityConfig {
             "/trainerslog/api/v1/cheque/delete",
             "/trainerslog/api/v1/student/getByAuth",
             "/trainerslog/api/v1/student/updateStudentInfo",
+            "/trainerslog/api/v1/training/getStudentTrainingsForWeek"
     };
 
     public static String[] COACH_URI = {
